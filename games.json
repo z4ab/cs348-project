@@ -1,0 +1,3144 @@
+﻿{
+    "value":  [
+                  {
+                      "id":  2025,
+                      "external_games":  [
+                                             {
+                                                 "id":  133852,
+                                                 "uid":  "25622"
+                                             },
+                                             {
+                                                 "id":  13919,
+                                                 "uid":  "48700"
+                                             },
+                                             {
+                                                 "id":  2183048,
+                                                 "uid":  "9PFZC53PVTDB"
+                                             },
+                                             {
+                                                 "id":  210718,
+                                                 "uid":  "BQXN1S3V3FN9"
+                                             },
+                                             {
+                                                 "id":  77607,
+                                                 "uid":  "1207666913"
+                                             },
+                                             {
+                                                 "id":  2175135,
+                                                 "uid":  "209608"
+                                             },
+                                             {
+                                                 "id":  245290,
+                                                 "uid":  "23166"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  5,
+                                         "name":  "Shooter"
+                                     },
+                                     {
+                                         "id":  12,
+                                         "name":  "Role-playing (RPG)"
+                                     },
+                                     {
+                                         "id":  13,
+                                         "name":  "Simulator"
+                                     },
+                                     {
+                                         "id":  15,
+                                         "name":  "Strategy"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  4316,
+                                                     "company":  {
+                                                                     "id":  947,
+                                                                     "name":  "Taleworlds"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  4315,
+                                                     "company":  {
+                                                                     "id":  517,
+                                                                     "name":  "Paradox Interactive"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Mount \u0026 Blade: Warband",
+                      "platforms":  [
+                                        {
+                                            "id":  48,
+                                            "name":  "PlayStation 4"
+                                        },
+                                        {
+                                            "id":  3,
+                                            "name":  "Linux"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  14,
+                                            "name":  "Mac"
+                                        },
+                                        {
+                                            "id":  49,
+                                            "name":  "Xbox One"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  136160,
+                                                "date":  1473984000,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  55036,
+                                                "date":  1473984000,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  402972,
+                                                "date":  1269993600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  402973,
+                                                "date":  1269993600,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            },
+                                            {
+                                                "id":  402974,
+                                                "date":  1269993600,
+                                                "platform":  {
+                                                                 "id":  3,
+                                                                 "name":  "Linux"
+                                                             }
+                                            },
+                                            {
+                                                "id":  130308,
+                                                "date":  1473984000,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  1928,
+                      "external_games":  [
+                                             {
+                                                 "id":  2161181,
+                                                 "uid":  "66acd000-77fe-1000-9115-d802494707df"
+                                             },
+                                             {
+                                                 "id":  825218,
+                                                 "uid":  "com.aspyr.fahrenheit"
+                                             },
+                                             {
+                                                 "id":  154738,
+                                                 "uid":  "2494"
+                                             },
+                                             {
+                                                 "id":  2225061,
+                                                 "uid":  "221705"
+                                             },
+                                             {
+                                                 "id":  77110,
+                                                 "uid":  "1207658979"
+                                             },
+                                             {
+                                                 "id":  343233,
+                                                 "uid":  "2297"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  4181,
+                                                     "company":  {
+                                                                     "id":  261,
+                                                                     "name":  "Quantic Dream"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  237543,
+                                                     "company":  {
+                                                                     "id":  2406,
+                                                                     "name":  "Atari, Inc."
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Indigo Prophecy",
+                      "platforms":  [
+                                        {
+                                            "id":  11,
+                                            "name":  "Xbox"
+                                        },
+                                        {
+                                            "id":  48,
+                                            "name":  "PlayStation 4"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  8,
+                                            "name":  "PlayStation 2"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  946081,
+                                                "date":  1127174400,
+                                                "platform":  {
+                                                                 "id":  8,
+                                                                 "name":  "PlayStation 2"
+                                                             }
+                                            },
+                                            {
+                                                "id":  946083,
+                                                "date":  1470787200,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  946084,
+                                                "date":  1470700800,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  946085,
+                                                "date":  1126828800,
+                                                "platform":  {
+                                                                 "id":  11,
+                                                                 "name":  "Xbox"
+                                                             }
+                                            },
+                                            {
+                                                "id":  946079,
+                                                "date":  1127174400,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  946080,
+                                                "date":  1126828800,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  946082,
+                                                "date":  1126828800,
+                                                "platform":  {
+                                                                 "id":  8,
+                                                                 "name":  "PlayStation 2"
+                                                             }
+                                            },
+                                            {
+                                                "id":  946086,
+                                                "date":  1127174400,
+                                                "platform":  {
+                                                                 "id":  11,
+                                                                 "name":  "Xbox"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  20863,
+                      "external_games":  [
+                                             {
+                                                 "id":  1930678,
+                                                 "uid":  "B00ZOET7BU"
+                                             },
+                                             {
+                                                 "id":  1998022,
+                                                 "uid":  "B07DDYDJ12"
+                                             },
+                                             {
+                                                 "id":  1997693,
+                                                 "uid":  "B07DDYDJ12"
+                                             },
+                                             {
+                                                 "id":  2082560,
+                                                 "uid":  "C299QVC2BSJF"
+                                             },
+                                             {
+                                                 "id":  2175824,
+                                                 "uid":  "228538"
+                                             },
+                                             {
+                                                 "id":  2975697,
+                                                 "uid":  "269359534"
+                                             },
+                                             {
+                                                 "id":  2960712,
+                                                 "uid":  "amzn1.adg.product.3b943501-5438-42de-a0ae-ff94bca2dce3"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  5,
+                                         "name":  "Shooter"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  329539,
+                                                     "company":  {
+                                                                     "id":  3130,
+                                                                     "name":  "Zenimax Europe"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  329541,
+                                                     "company":  {
+                                                                     "id":  16565,
+                                                                     "name":  "Bethesda Softworks"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  329540,
+                                                     "company":  {
+                                                                     "id":  19,
+                                                                     "name":  "Arkane Studios"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 }
+                                             ],
+                      "name":  "Dishonored: Definitive Edition",
+                      "platforms":  [
+                                        {
+                                            "id":  48,
+                                            "name":  "PlayStation 4"
+                                        },
+                                        {
+                                            "id":  49,
+                                            "name":  "Xbox One"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  134581,
+                                                "date":  1440460800,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  101525,
+                                                "date":  1440633600,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  101526,
+                                                "date":  1440633600,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  55633,
+                                                "date":  1440720000,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  5892,
+                      "external_games":  [
+                                             {
+                                                 "id":  127102,
+                                                 "uid":  "32940"
+                                             },
+                                             {
+                                                 "id":  211020,
+                                                 "uid":  "BXSPZM4KZS5F"
+                                             },
+                                             {
+                                                 "id":  2225048,
+                                                 "uid":  "204609"
+                                             },
+                                             {
+                                                 "id":  78184,
+                                                 "uid":  "1207660003"
+                                             },
+                                             {
+                                                 "id":  12756,
+                                                 "uid":  "231160"
+                                             },
+                                             {
+                                                 "id":  245637,
+                                                 "uid":  "29637"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  8,
+                                         "name":  "Platform"
+                                     },
+                                     {
+                                         "id":  9,
+                                         "name":  "Puzzle"
+                                     },
+                                     {
+                                         "id":  15,
+                                         "name":  "Strategy"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     },
+                                     {
+                                         "id":  32,
+                                         "name":  "Indie"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  25627,
+                                                     "company":  {
+                                                                     "id":  2580,
+                                                                     "name":  "Facepalm Games"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  25628,
+                                                     "company":  {
+                                                                     "id":  4065,
+                                                                     "name":  "Curve Studios"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  129855,
+                                                     "company":  {
+                                                                     "id":  5048,
+                                                                     "name":  "Curve Digital"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "The Swapper",
+                      "platforms":  [
+                                        {
+                                            "id":  9,
+                                            "name":  "PlayStation 3"
+                                        },
+                                        {
+                                            "id":  48,
+                                            "name":  "PlayStation 4"
+                                        },
+                                        {
+                                            "id":  3,
+                                            "name":  "Linux"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  14,
+                                            "name":  "Mac"
+                                        },
+                                        {
+                                            "id":  41,
+                                            "name":  "Wii U"
+                                        },
+                                        {
+                                            "id":  46,
+                                            "name":  "PlayStation Vita"
+                                        },
+                                        {
+                                            "id":  49,
+                                            "name":  "Xbox One"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  32942,
+                                                "date":  1407283200,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  144325,
+                                                "date":  1415232000,
+                                                "platform":  {
+                                                                 "id":  41,
+                                                                 "name":  "Wii U"
+                                                             }
+                                            },
+                                            {
+                                                "id":  32938,
+                                                "date":  1433462400,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  32936,
+                                                "date":  1407196800,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  136381,
+                                                "date":  1433462400,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  32943,
+                                                "date":  1415232000,
+                                                "platform":  {
+                                                                 "id":  41,
+                                                                 "name":  "Wii U"
+                                                             }
+                                            },
+                                            {
+                                                "id":  576682,
+                                                "date":  1392681600,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            },
+                                            {
+                                                "id":  576683,
+                                                "date":  1369872000,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  576681,
+                                                "date":  1392681600,
+                                                "platform":  {
+                                                                 "id":  3,
+                                                                 "name":  "Linux"
+                                                             }
+                                            },
+                                            {
+                                                "id":  32937,
+                                                "date":  1407196800,
+                                                "platform":  {
+                                                                 "id":  46,
+                                                                 "name":  "PlayStation Vita"
+                                                             }
+                                            },
+                                            {
+                                                "id":  32939,
+                                                "date":  1427932800,
+                                                "platform":  {
+                                                                 "id":  41,
+                                                                 "name":  "Wii U"
+                                                             }
+                                            },
+                                            {
+                                                "id":  32941,
+                                                "date":  1407283200,
+                                                "platform":  {
+                                                                 "id":  46,
+                                                                 "name":  "PlayStation Vita"
+                                                             }
+                                            },
+                                            {
+                                                "id":  32935,
+                                                "date":  1407196800,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  32940,
+                                                "date":  1407283200,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  625,
+                      "external_games":  [
+                                             {
+                                                 "id":  1930358,
+                                                 "uid":  "B07D3FW4JK"
+                                             },
+                                             {
+                                                 "id":  190125,
+                                                 "uid":  "UCXbM1z03aLa29-MdEu1WbRw"
+                                             },
+                                             {
+                                                 "id":  138156,
+                                                 "uid":  "20777"
+                                             },
+                                             {
+                                                 "id":  213306,
+                                                 "uid":  "xbox36066acd000-77fe-1000-9115-d8024156081c"
+                                             },
+                                             {
+                                                 "id":  1934551,
+                                                 "uid":  "B00CORLGW8"
+                                             },
+                                             {
+                                                 "id":  2162688,
+                                                 "uid":  "66acd000-77fe-1000-9115-d8024156081c"
+                                             },
+                                             {
+                                                 "id":  3223296,
+                                                 "uid":  "B001AWBYNE"
+                                             },
+                                             {
+                                                 "id":  245427,
+                                                 "uid":  "19006"
+                                             },
+                                             {
+                                                 "id":  14797,
+                                                 "uid":  "10090"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  5,
+                                         "name":  "Shooter"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  19970,
+                                                     "company":  {
+                                                                     "id":  428,
+                                                                     "name":  "Treyarch"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  163217,
+                                                     "company":  {
+                                                                     "id":  19,
+                                                                     "name":  "Arkane Studios"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  320565,
+                                                     "company":  {
+                                                                     "id":  66,
+                                                                     "name":  "Activision"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Call of Duty: World at War",
+                      "platforms":  [
+                                        {
+                                            "id":  9,
+                                            "name":  "PlayStation 3"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  12,
+                                            "name":  "Xbox 360"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  575741,
+                                                "date":  1226361600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  575742,
+                                                "date":  1226620800,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  575743,
+                                                "date":  1226361600,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  575744,
+                                                "date":  1226620800,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  575746,
+                                                "date":  1226620800,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  575745,
+                                                "date":  1226361600,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  9727,
+                      "external_games":  [
+                                             {
+                                                 "id":  267062,
+                                                 "uid":  "1056646304"
+                                             },
+                                             {
+                                                 "id":  1708303,
+                                                 "uid":  "UCFGfUMlNOpg4q7m24lFq1rw"
+                                             },
+                                             {
+                                                 "id":  116942,
+                                                 "uid":  "44072"
+                                             },
+                                             {
+                                                 "id":  245184,
+                                                 "uid":  "458224"
+                                             },
+                                             {
+                                                 "id":  11603,
+                                                 "uid":  "282140"
+                                             },
+                                             {
+                                                 "id":  2627360,
+                                                 "uid":  "4c0ccb5098414557a12a921d8c17acb2"
+                                             },
+                                             {
+                                                 "id":  2176358,
+                                                 "uid":  "204320"
+                                             },
+                                             {
+                                                 "id":  2082396,
+                                                 "uid":  "C23M2TC1ZFPJ"
+                                             },
+                                             {
+                                                 "id":  78048,
+                                                 "uid":  "1439487606"
+                                             },
+                                             {
+                                                 "id":  2565055,
+                                                 "uid":  "89a31253-ce85-44a4-be30-536c9c088e77"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  9,
+                                         "name":  "Puzzle"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     },
+                                     {
+                                         "id":  32,
+                                         "name":  "Indie"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  69640,
+                                                     "company":  {
+                                                                     "id":  4602,
+                                                                     "name":  "BlitWorks"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  96455,
+                                                     "company":  {
+                                                                     "id":  36,
+                                                                     "name":  "Frictional Games"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Soma",
+                      "platforms":  [
+                                        {
+                                            "id":  48,
+                                            "name":  "PlayStation 4"
+                                        },
+                                        {
+                                            "id":  3,
+                                            "name":  "Linux"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  14,
+                                            "name":  "Mac"
+                                        },
+                                        {
+                                            "id":  49,
+                                            "name":  "Xbox One"
+                                        },
+                                        {
+                                            "id":  130,
+                                            "name":  "Nintendo Switch"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  128985,
+                                                "date":  1512086400,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  128980,
+                                                "date":  1442880000,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  105652,
+                                                "date":  1442880000,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  128986,
+                                                "date":  1512086400,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  461213,
+                                                "date":  1452556800,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            },
+                                            {
+                                                "id":  769101,
+                                                "date":  1753315200,
+                                                "platform":  {
+                                                                 "id":  130,
+                                                                 "name":  "Nintendo Switch"
+                                                             }
+                                            },
+                                            {
+                                                "id":  105651,
+                                                "date":  1442880000,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  412850,
+                                                "date":  1442793600,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            },
+                                            {
+                                                "id":  412851,
+                                                "date":  1442793600,
+                                                "platform":  {
+                                                                 "id":  3,
+                                                                 "name":  "Linux"
+                                                             }
+                                            },
+                                            {
+                                                "id":  412849,
+                                                "date":  1442793600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  1910,
+                      "external_games":  [
+                                             {
+                                                 "id":  120584,
+                                                 "uid":  "40089"
+                                             },
+                                             {
+                                                 "id":  188945,
+                                                 "uid":  "UC7gz-6SjdYIMe0nYu3NQgtw"
+                                             },
+                                             {
+                                                 "id":  2612655,
+                                                 "uid":  "ad666bba-e06f-4d9d-b702-0f5d09b4f03e"
+                                             },
+                                             {
+                                                 "id":  210757,
+                                                 "uid":  "BP3GH4D3HP2H"
+                                             },
+                                             {
+                                                 "id":  12619,
+                                                 "uid":  "238320"
+                                             },
+                                             {
+                                                 "id":  2624016,
+                                                 "uid":  "f7f8ddcaa61b4d20a7e1a7283f0e94a4"
+                                             },
+                                             {
+                                                 "id":  77686,
+                                                 "uid":  "1207660064"
+                                             },
+                                             {
+                                                 "id":  2175920,
+                                                 "uid":  "203196"
+                                             },
+                                             {
+                                                 "id":  245085,
+                                                 "uid":  "73586"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     },
+                                     {
+                                         "id":  32,
+                                         "name":  "Indie"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  96570,
+                                                     "company":  {
+                                                                     "id":  1380,
+                                                                     "name":  "Red Barrels"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Outlast",
+                      "platforms":  [
+                                        {
+                                            "id":  48,
+                                            "name":  "PlayStation 4"
+                                        },
+                                        {
+                                            "id":  3,
+                                            "name":  "Linux"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  14,
+                                            "name":  "Mac"
+                                        },
+                                        {
+                                            "id":  49,
+                                            "name":  "Xbox One"
+                                        },
+                                        {
+                                            "id":  130,
+                                            "name":  "Nintendo Switch"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  136189,
+                                                "date":  1403136000,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  124151,
+                                                "date":  1427760000,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            },
+                                            {
+                                                "id":  124149,
+                                                "date":  1403136000,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  124147,
+                                                "date":  1391472000,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  375906,
+                                                "date":  1519689600,
+                                                "platform":  {
+                                                                 "id":  130,
+                                                                 "name":  "Nintendo Switch"
+                                                             }
+                                            },
+                                            {
+                                                "id":  124146,
+                                                "date":  1378252800,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  124150,
+                                                "date":  1427760000,
+                                                "platform":  {
+                                                                 "id":  3,
+                                                                 "name":  "Linux"
+                                                             }
+                                            },
+                                            {
+                                                "id":  124148,
+                                                "date":  1391558400,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  837,
+                      "external_games":  [
+                                             {
+                                                 "id":  141223,
+                                                 "uid":  "17357"
+                                             },
+                                             {
+                                                 "id":  2718642,
+                                                 "uid":  "36b91659f81c4d2ab6b18c591b811614"
+                                             },
+                                             {
+                                                 "id":  77776,
+                                                 "uid":  "1207659082"
+                                             },
+                                             {
+                                                 "id":  246868,
+                                                 "uid":  "15921"
+                                             },
+                                             {
+                                                 "id":  14685,
+                                                 "uid":  "13500"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  8,
+                                         "name":  "Platform"
+                                     },
+                                     {
+                                         "id":  25,
+                                         "name":  "Hack and slash/Beat \u0027em up"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  269496,
+                                                     "company":  {
+                                                                     "id":  38,
+                                                                     "name":  "Ubisoft Montreal"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  269497,
+                                                     "company":  {
+                                                                     "id":  104,
+                                                                     "name":  "Ubisoft Entertainment"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Prince of Persia: Warrior Within",
+                      "platforms":  [
+                                        {
+                                            "id":  11,
+                                            "name":  "Xbox"
+                                        },
+                                        {
+                                            "id":  21,
+                                            "name":  "Nintendo GameCube"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  39,
+                                            "name":  "iOS"
+                                        },
+                                        {
+                                            "id":  8,
+                                            "name":  "PlayStation 2"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  601662,
+                                                "date":  1227225600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  145940,
+                                                "date":  1102032000,
+                                                "platform":  {
+                                                                 "id":  21,
+                                                                 "name":  "Nintendo GameCube"
+                                                             }
+                                            },
+                                            {
+                                                "id":  66993,
+                                                "date":  1275523200,
+                                                "platform":  {
+                                                                 "id":  39,
+                                                                 "name":  "iOS"
+                                                             }
+                                            },
+                                            {
+                                                "id":  232769,
+                                                "date":  1102032000,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  232768,
+                                                "date":  1102032000,
+                                                "platform":  {
+                                                                 "id":  8,
+                                                                 "name":  "PlayStation 2"
+                                                             }
+                                            },
+                                            {
+                                                "id":  601661,
+                                                "date":  1101772800,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  601664,
+                                                "date":  1129161600,
+                                                "platform":  {
+                                                                 "id":  8,
+                                                                 "name":  "PlayStation 2"
+                                                             }
+                                            },
+                                            {
+                                                "id":  601665,
+                                                "date":  1101772800,
+                                                "platform":  {
+                                                                 "id":  11,
+                                                                 "name":  "Xbox"
+                                                             }
+                                            },
+                                            {
+                                                "id":  601663,
+                                                "date":  1101772800,
+                                                "platform":  {
+                                                                 "id":  8,
+                                                                 "name":  "PlayStation 2"
+                                                             }
+                                            },
+                                            {
+                                                "id":  601660,
+                                                "date":  1101772800,
+                                                "platform":  {
+                                                                 "id":  21,
+                                                                 "name":  "Nintendo GameCube"
+                                                             }
+                                            },
+                                            {
+                                                "id":  601666,
+                                                "date":  1102032000,
+                                                "platform":  {
+                                                                 "id":  11,
+                                                                 "name":  "Xbox"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  126,
+                      "external_games":  [
+                                             {
+                                                 "id":  155982,
+                                                 "uid":  "1119"
+                                             },
+                                             {
+                                                 "id":  190090,
+                                                 "uid":  "UCWpw3two5p6vje1tQ6RC_DQ"
+                                             },
+                                             {
+                                                 "id":  245852,
+                                                 "uid":  "1041"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  12,
+                                         "name":  "Role-playing (RPG)"
+                                     },
+                                     {
+                                         "id":  25,
+                                         "name":  "Hack and slash/Beat \u0027em up"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  6011,
+                                                     "company":  {
+                                                                     "id":  59,
+                                                                     "name":  "Blizzard North"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  6010,
+                                                     "company":  {
+                                                                     "id":  51,
+                                                                     "name":  "Blizzard Entertainment"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Diablo II",
+                      "platforms":  [
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  14,
+                                            "name":  "Mac"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  22585,
+                                                "date":  962323200,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  22586,
+                                                "date":  964569600,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            },
+                                            {
+                                                "id":  22584,
+                                                "date":  962236800,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  22587,
+                                                "date":  978220800,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  1254,
+                      "external_games":  [
+                                             {
+                                                 "id":  2162830,
+                                                 "uid":  "66acd000-77fe-1000-9115-d80243430824"
+                                             },
+                                             {
+                                                 "id":  127324,
+                                                 "uid":  "32686"
+                                             },
+                                             {
+                                                 "id":  213451,
+                                                 "uid":  "xbox36066acd000-77fe-1000-9115-d80243430824"
+                                             },
+                                             {
+                                                 "id":  3225621,
+                                                 "uid":  "B00AYXLQE2"
+                                             },
+                                             {
+                                                 "id":  3225620,
+                                                 "uid":  "B00B99QFKK"
+                                             },
+                                             {
+                                                 "id":  12937,
+                                                 "uid":  "220440"
+                                             },
+                                             {
+                                                 "id":  245673,
+                                                 "uid":  "12004"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  9,
+                                         "name":  "Puzzle"
+                                     },
+                                     {
+                                         "id":  25,
+                                         "name":  "Hack and slash/Beat \u0027em up"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  56754,
+                                                     "company":  {
+                                                                     "id":  774,
+                                                                     "name":  "QLOC"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  3732,
+                                                     "company":  {
+                                                                     "id":  795,
+                                                                     "name":  "Ninja Theory"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  3733,
+                                                     "company":  {
+                                                                     "id":  37,
+                                                                     "name":  "Capcom"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "DmC: Devil May Cry",
+                      "platforms":  [
+                                        {
+                                            "id":  9,
+                                            "name":  "PlayStation 3"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  12,
+                                            "name":  "Xbox 360"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  372893,
+                                                "date":  1358208000,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  372894,
+                                                "date":  1358380800,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  410710,
+                                                "date":  1358985600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  373051,
+                                                "date":  1358208000,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  372895,
+                                                "date":  1358208000,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  372896,
+                                                "date":  1358208000,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  372897,
+                                                "date":  1358380800,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  372899,
+                                                "date":  1359072000,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  372900,
+                                                "date":  1362009600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  3603,
+                      "external_games":  [
+                                             {
+                                                 "id":  189524,
+                                                 "uid":  "UClBEMpgGpMQaBXa27MKiSFA"
+                                             },
+                                             {
+                                                 "id":  137462,
+                                                 "uid":  "21586"
+                                             },
+                                             {
+                                                 "id":  1927903,
+                                                 "uid":  "509510"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  25,
+                                         "name":  "Hack and slash/Beat \u0027em up"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  42808,
+                                                     "company":  {
+                                                                     "id":  428,
+                                                                     "name":  "Treyarch"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  42809,
+                                                     "company":  {
+                                                                     "id":  367,
+                                                                     "name":  "Gray Matter Interactive"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  9315,
+                                                     "company":  {
+                                                                     "id":  90,
+                                                                     "name":  "Neversoft Entertainment"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  42810,
+                                                     "company":  {
+                                                                     "id":  223,
+                                                                     "name":  "Edge of Reality"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  212578,
+                                                     "company":  {
+                                                                     "id":  66,
+                                                                     "name":  "Activision"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  217439,
+                                                     "company":  {
+                                                                     "id":  73,
+                                                                     "name":  "Aspyr Media"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  225588,
+                                                     "company":  {
+                                                                     "id":  812,
+                                                                     "name":  "Gradiente"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  217440,
+                                                     "company":  {
+                                                                     "id":  378,
+                                                                     "name":  "Westlake Interactive"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  364406,
+                                                     "company":  {
+                                                                     "id":  5836,
+                                                                     "name":  "Success"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Spider-Man",
+                      "platforms":  [
+                                        {
+                                            "id":  4,
+                                            "name":  "Nintendo 64"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  14,
+                                            "name":  "Mac"
+                                        },
+                                        {
+                                            "id":  7,
+                                            "name":  "PlayStation"
+                                        },
+                                        {
+                                            "id":  23,
+                                            "name":  "Dreamcast"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  904007,
+                                                "date":  987638400,
+                                                "platform":  {
+                                                                 "id":  23,
+                                                                 "name":  "Dreamcast"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904008,
+                                                "date":  993772800,
+                                                "platform":  {
+                                                                 "id":  23,
+                                                                 "name":  "Dreamcast"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904009,
+                                                "date":  1012348800,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904010,
+                                                "date":  1011830400,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904011,
+                                                "date":  978220800,
+                                                "platform":  {
+                                                                 "id":  4,
+                                                                 "name":  "Nintendo 64"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904012,
+                                                "date":  974764800,
+                                                "platform":  {
+                                                                 "id":  4,
+                                                                 "name":  "Nintendo 64"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904013,
+                                                "date":  1000684800,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904014,
+                                                "date":  1001030400,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904015,
+                                                "date":  968976000,
+                                                "platform":  {
+                                                                 "id":  7,
+                                                                 "name":  "PlayStation"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904016,
+                                                "date":  967593600,
+                                                "platform":  {
+                                                                 "id":  7,
+                                                                 "name":  "PlayStation"
+                                                             }
+                                            },
+                                            {
+                                                "id":  904017,
+                                                "date":  988243200,
+                                                "platform":  {
+                                                                 "id":  7,
+                                                                 "name":  "PlayStation"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  1270,
+                      "external_games":  [
+                                             {
+                                                 "id":  213387,
+                                                 "uid":  "xbox36066acd000-77fe-1000-9115-d802545107e6"
+                                             },
+                                             {
+                                                 "id":  3222210,
+                                                 "uid":  "B001D7T2VC"
+                                             },
+                                             {
+                                                 "id":  3225135,
+                                                 "uid":  "B01ALLK0T8"
+                                             },
+                                             {
+                                                 "id":  137970,
+                                                 "uid":  "20991"
+                                             },
+                                             {
+                                                 "id":  3232765,
+                                                 "uid":  "B001CSME0I"
+                                             },
+                                             {
+                                                 "id":  321679,
+                                                 "uid":  "50620"
+                                             },
+                                             {
+                                                 "id":  2082087,
+                                                 "uid":  "BTXC0RGTT3XN"
+                                             },
+                                             {
+                                                 "id":  2162745,
+                                                 "uid":  "66acd000-77fe-1000-9115-d802545107e6"
+                                             },
+                                             {
+                                                 "id":  2136359,
+                                                 "uid":  "darksiders"
+                                             },
+                                             {
+                                                 "id":  245970,
+                                                 "uid":  "19170"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  12,
+                                         "name":  "Role-playing (RPG)"
+                                     },
+                                     {
+                                         "id":  25,
+                                         "name":  "Hack and slash/Beat \u0027em up"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  3542,
+                                                     "company":  {
+                                                                     "id":  825,
+                                                                     "name":  "Vigil Games"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  3541,
+                                                     "company":  {
+                                                                     "id":  197,
+                                                                     "name":  "THQ"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Darksiders",
+                      "platforms":  [
+                                        {
+                                            "id":  9,
+                                            "name":  "PlayStation 3"
+                                        },
+                                        {
+                                            "id":  3,
+                                            "name":  "Linux"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  12,
+                                            "name":  "Xbox 360"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  190347,
+                                                "date":  1285200000,
+                                                "platform":  {
+                                                                 "id":  3,
+                                                                 "name":  "Linux"
+                                                             }
+                                            },
+                                            {
+                                                "id":  102368,
+                                                "date":  1268870400,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  63222,
+                                                "date":  1268870400,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  102366,
+                                                "date":  1262649600,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  102367,
+                                                "date":  1262908800,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  63217,
+                                                "date":  1285200000,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  63218,
+                                                "date":  1262649600,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  63220,
+                                                "date":  1262908800,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  1269,
+                      "external_games":  [
+                                             {
+                                                 "id":  1184756,
+                                                 "uid":  "UCSYvpJa-xKaKlR5TuopD34g"
+                                             },
+                                             {
+                                                 "id":  129854,
+                                                 "uid":  "29941"
+                                             },
+                                             {
+                                                 "id":  3232767,
+                                                 "uid":  "B0056WJA6M"
+                                             },
+                                             {
+                                                 "id":  3232785,
+                                                 "uid":  "B0056WJA30"
+                                             },
+                                             {
+                                                 "id":  2519962,
+                                                 "uid":  "1430901285"
+                                             },
+                                             {
+                                                 "id":  213388,
+                                                 "uid":  "xbox36066acd000-77fe-1000-9115-d80254510896"
+                                             },
+                                             {
+                                                 "id":  2162744,
+                                                 "uid":  "66acd000-77fe-1000-9115-d80254510896"
+                                             },
+                                             {
+                                                 "id":  2025018,
+                                                 "uid":  "50650"
+                                             },
+                                             {
+                                                 "id":  247163,
+                                                 "uid":  "26986"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  12,
+                                         "name":  "Role-playing (RPG)"
+                                     },
+                                     {
+                                         "id":  25,
+                                         "name":  "Hack and slash/Beat \u0027em up"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  46283,
+                                                     "company":  {
+                                                                     "id":  825,
+                                                                     "name":  "Vigil Games"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  46285,
+                                                     "company":  {
+                                                                     "id":  1217,
+                                                                     "name":  "Spike Chunsoft"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  46284,
+                                                     "company":  {
+                                                                     "id":  197,
+                                                                     "name":  "THQ"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Darksiders II",
+                      "platforms":  [
+                                        {
+                                            "id":  9,
+                                            "name":  "PlayStation 3"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  41,
+                                            "name":  "Wii U"
+                                        },
+                                        {
+                                            "id":  12,
+                                            "name":  "Xbox 360"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  68529,
+                                                "date":  1353196800,
+                                                "platform":  {
+                                                                 "id":  41,
+                                                                 "name":  "Wii U"
+                                                             }
+                                            },
+                                            {
+                                                "id":  102370,
+                                                "date":  1344902400,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  68656,
+                                                "date":  1354147200,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  68531,
+                                                "date":  1354233600,
+                                                "platform":  {
+                                                                 "id":  41,
+                                                                 "name":  "Wii U"
+                                                             }
+                                            },
+                                            {
+                                                "id":  68652,
+                                                "date":  1344902400,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  68657,
+                                                "date":  1354147200,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  102369,
+                                                "date":  1345507200,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  68530,
+                                                "date":  1354233600,
+                                                "platform":  {
+                                                                 "id":  41,
+                                                                 "name":  "Wii U"
+                                                             }
+                                            },
+                                            {
+                                                "id":  68655,
+                                                "date":  1345507200,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  68654,
+                                                "date":  1345507200,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  68651,
+                                                "date":  1344902400,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  9196,
+                      "external_games":  [
+                                             {
+                                                 "id":  112494,
+                                                 "uid":  "48661"
+                                             },
+                                             {
+                                                 "id":  9154,
+                                                 "uid":  "354140"
+                                             },
+                                             {
+                                                 "id":  245703,
+                                                 "uid":  "488818"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  13,
+                                         "name":  "Simulator"
+                                     },
+                                     {
+                                         "id":  15,
+                                         "name":  "Strategy"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     },
+                                     {
+                                         "id":  32,
+                                         "name":  "Indie"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  206922,
+                                                     "company":  {
+                                                                     "id":  8653,
+                                                                     "name":  "Scottgames"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Five Nights at Freddy\u0027s 3",
+                      "platforms":  [
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  478284,
+                                                "date":  1425254400,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  3802,
+                      "external_games":  [
+                                             {
+                                                 "id":  126912,
+                                                 "uid":  "33149"
+                                             },
+                                             {
+                                                 "id":  214070,
+                                                 "uid":  "xbox36066acd000-77fe-1000-9115-d8024b4d07e6"
+                                             },
+                                             {
+                                                 "id":  2223258,
+                                                 "uid":  "9P3V6RHQ82TP"
+                                             },
+                                             {
+                                                 "id":  2161766,
+                                                 "uid":  "66acd000-77fe-1000-9115-d8024b4d07e6"
+                                             },
+                                             {
+                                                 "id":  2135917,
+                                                 "uid":  "risen-2-dark-waters"
+                                             },
+                                             {
+                                                 "id":  77872,
+                                                 "uid":  "1207663193"
+                                             },
+                                             {
+                                                 "id":  14079,
+                                                 "uid":  "40390"
+                                             },
+                                             {
+                                                 "id":  247018,
+                                                 "uid":  "29822"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  12,
+                                         "name":  "Role-playing (RPG)"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  16013,
+                                                     "company":  {
+                                                                     "id":  1377,
+                                                                     "name":  "Uber Entertainment"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  16012,
+                                                     "company":  {
+                                                                     "id":  423,
+                                                                     "name":  "Deep Silver"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  16011,
+                                                     "company":  {
+                                                                     "id":  1056,
+                                                                     "name":  "Piranha Bytes"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 }
+                                             ],
+                      "name":  "Risen 2: Dark Waters",
+                      "platforms":  [
+                                        {
+                                            "id":  9,
+                                            "name":  "PlayStation 3"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  12,
+                                            "name":  "Xbox 360"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  16248,
+                                                "date":  1344470400,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  16246,
+                                                "date":  1343692800,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  16241,
+                                                "date":  1335225600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  16249,
+                                                "date":  1362009600,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  105284,
+                                                "date":  1343692800,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  105285,
+                                                "date":  1343952000,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  16247,
+                                                "date":  1343952000,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  16244,
+                                                "date":  1344470400,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  16245,
+                                                "date":  1362009600,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  2698,
+                      "external_games":  [
+                                             {
+                                                 "id":  188983,
+                                                 "uid":  "UC9AIdiwOpofrbhAO9qSfElw"
+                                             },
+                                             {
+                                                 "id":  143461,
+                                                 "uid":  "14896"
+                                             },
+                                             {
+                                                 "id":  248270,
+                                                 "uid":  "13666"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  10,
+                                         "name":  "Racing"
+                                     },
+                                     {
+                                         "id":  12,
+                                         "name":  "Role-playing (RPG)"
+                                     },
+                                     {
+                                         "id":  14,
+                                         "name":  "Sport"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  6458,
+                                                     "company":  {
+                                                                     "id":  432,
+                                                                     "name":  "Beenox"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  6456,
+                                                     "company":  {
+                                                                     "id":  90,
+                                                                     "name":  "Neversoft Entertainment"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  180131,
+                                                     "company":  {
+                                                                     "id":  66,
+                                                                     "name":  "Activision"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Tony Hawk\u0027s Underground",
+                      "platforms":  [
+                                        {
+                                            "id":  11,
+                                            "name":  "Xbox"
+                                        },
+                                        {
+                                            "id":  21,
+                                            "name":  "Nintendo GameCube"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  8,
+                                            "name":  "PlayStation 2"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  22734,
+                                                "date":  1069372800,
+                                                "platform":  {
+                                                                 "id":  8,
+                                                                 "name":  "PlayStation 2"
+                                                             }
+                                            },
+                                            {
+                                                "id":  144452,
+                                                "date":  1067299200,
+                                                "platform":  {
+                                                                 "id":  21,
+                                                                 "name":  "Nintendo GameCube"
+                                                             }
+                                            },
+                                            {
+                                                "id":  144453,
+                                                "date":  1068768000,
+                                                "platform":  {
+                                                                 "id":  21,
+                                                                 "name":  "Nintendo GameCube"
+                                                             }
+                                            },
+                                            {
+                                                "id":  22729,
+                                                "date":  1104451200,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  22731,
+                                                "date":  1067212800,
+                                                "platform":  {
+                                                                 "id":  8,
+                                                                 "name":  "PlayStation 2"
+                                                             }
+                                            },
+                                            {
+                                                "id":  22736,
+                                                "date":  1085011200,
+                                                "platform":  {
+                                                                 "id":  11,
+                                                                 "name":  "Xbox"
+                                                             }
+                                            },
+                                            {
+                                                "id":  22730,
+                                                "date":  1067212800,
+                                                "platform":  {
+                                                                 "id":  11,
+                                                                 "name":  "Xbox"
+                                                             }
+                                            },
+                                            {
+                                                "id":  22735,
+                                                "date":  1085616000,
+                                                "platform":  {
+                                                                 "id":  8,
+                                                                 "name":  "PlayStation 2"
+                                                             }
+                                            },
+                                            {
+                                                "id":  22737,
+                                                "date":  1069372800,
+                                                "platform":  {
+                                                                 "id":  11,
+                                                                 "name":  "Xbox"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  80,
+                      "external_games":  [
+                                             {
+                                                 "id":  147480,
+                                                 "uid":  "10473"
+                                             },
+                                             {
+                                                 "id":  189935,
+                                                 "uid":  "UCTD-AZx2r5IT4SQ74cNtDNA"
+                                             },
+                                             {
+                                                 "id":  245440,
+                                                 "uid":  "9611"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  12,
+                                         "name":  "Role-playing (RPG)"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  14532,
+                                                     "company":  {
+                                                                     "id":  908,
+                                                                     "name":  "CD Projekt RED"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  237484,
+                                                     "company":  {
+                                                                     "id":  2406,
+                                                                     "name":  "Atari, Inc."
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "The Witcher",
+                      "platforms":  [
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  14,
+                                            "name":  "Mac"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  19957,
+                                                "date":  1193702400,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  19958,
+                                                "date":  1194566400,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  19956,
+                                                "date":  1193356800,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  19959,
+                                                "date":  1207872000,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  19960,
+                                                "date":  1333584000,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  26128,
+                      "external_games":  [
+                                             {
+                                                 "id":  112629,
+                                                 "uid":  "48525"
+                                             },
+                                             {
+                                                 "id":  188783,
+                                                 "uid":  "UC0ZaS_5yBDIQIw3zkACbrvw"
+                                             },
+                                             {
+                                                 "id":  247459,
+                                                 "uid":  "490100"
+                                             },
+                                             {
+                                                 "id":  2063717,
+                                                 "uid":  "1599340"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  12,
+                                         "name":  "Role-playing (RPG)"
+                                     },
+                                     {
+                                         "id":  25,
+                                         "name":  "Hack and slash/Beat \u0027em up"
+                                     },
+                                     {
+                                         "id":  31,
+                                         "name":  "Adventure"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  116793,
+                                                     "company":  {
+                                                                     "id":  31043,
+                                                                     "name":  "Smilegate RPG"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  116794,
+                                                     "company":  {
+                                                                     "id":  19123,
+                                                                     "name":  "Tripod Studio"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  162337,
+                                                     "company":  {
+                                                                     "id":  2748,
+                                                                     "name":  "GameOn"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  162336,
+                                                     "company":  {
+                                                                     "id":  9728,
+                                                                     "name":  "Amazon Game Studios"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  162338,
+                                                     "company":  {
+                                                                     "id":  7903,
+                                                                     "name":  "My.com"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 }
+                                             ],
+                      "name":  "Lost Ark",
+                      "platforms":  [
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  307257,
+                                                "date":  1572134400,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  329653,
+                                                "date":  1644537600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  307256,
+                                                "date":  1600819200,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  337736,
+                                                "date":  1644537600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  932027,
+                                                "date":  1575417600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  10047,
+                      "external_games":  [
+                                             {
+                                                 "id":  2027920,
+                                                 "uid":  "214931"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  5,
+                                         "name":  "Shooter"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  120437,
+                                                     "company":  {
+                                                                     "id":  8,
+                                                                     "name":  "2K Games"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  120438,
+                                                     "company":  {
+                                                                     "id":  21,
+                                                                     "name":  "Irrational Games"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  185032,
+                                                     "company":  {
+                                                                     "id":  794,
+                                                                     "name":  "Virtuos"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 }
+                                             ],
+                      "name":  "BioShock Infinite: Burial at Sea - Episode 1",
+                      "platforms":  [
+                                        {
+                                            "id":  9,
+                                            "name":  "PlayStation 3"
+                                        },
+                                        {
+                                            "id":  48,
+                                            "name":  "PlayStation 4"
+                                        },
+                                        {
+                                            "id":  3,
+                                            "name":  "Linux"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  14,
+                                            "name":  "Mac"
+                                        },
+                                        {
+                                            "id":  12,
+                                            "name":  "Xbox 360"
+                                        },
+                                        {
+                                            "id":  49,
+                                            "name":  "Xbox One"
+                                        },
+                                        {
+                                            "id":  130,
+                                            "name":  "Nintendo Switch"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  231654,
+                                                "date":  1384214400,
+                                                "platform":  {
+                                                                 "id":  12,
+                                                                 "name":  "Xbox 360"
+                                                             }
+                                            },
+                                            {
+                                                "id":  231653,
+                                                "date":  1384214400,
+                                                "platform":  {
+                                                                 "id":  14,
+                                                                 "name":  "Mac"
+                                                             }
+                                            },
+                                            {
+                                                "id":  231659,
+                                                "date":  1473897600,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  231661,
+                                                "date":  1590710400,
+                                                "platform":  {
+                                                                 "id":  130,
+                                                                 "name":  "Nintendo Switch"
+                                                             }
+                                            },
+                                            {
+                                                "id":  231658,
+                                                "date":  1473724800,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  231657,
+                                                "date":  1473724800,
+                                                "platform":  {
+                                                                 "id":  48,
+                                                                 "name":  "PlayStation 4"
+                                                             }
+                                            },
+                                            {
+                                                "id":  231660,
+                                                "date":  1473897600,
+                                                "platform":  {
+                                                                 "id":  49,
+                                                                 "name":  "Xbox One"
+                                                             }
+                                            },
+                                            {
+                                                "id":  231652,
+                                                "date":  1384214400,
+                                                "platform":  {
+                                                                 "id":  9,
+                                                                 "name":  "PlayStation 3"
+                                                             }
+                                            },
+                                            {
+                                                "id":  677519,
+                                                "date":  1384214400,
+                                                "platform":  {
+                                                                 "id":  3,
+                                                                 "name":  "Linux"
+                                                             }
+                                            },
+                                            {
+                                                "id":  677520,
+                                                "date":  1384214400,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            }
+                                        ]
+                  },
+                  {
+                      "id":  1333,
+                      "external_games":  [
+                                             {
+                                                 "id":  136940,
+                                                 "uid":  "22195"
+                                             },
+                                             {
+                                                 "id":  2272077,
+                                                 "uid":  "amzn1.adg.product.ae0ccbbb-4cf5-4f0e-abf3-aedf3f1c89b8"
+                                             },
+                                             {
+                                                 "id":  377310,
+                                                 "uid":  "20155"
+                                             }
+                                         ],
+                      "genres":  [
+                                     {
+                                         "id":  13,
+                                         "name":  "Simulator"
+                                     },
+                                     {
+                                         "id":  14,
+                                         "name":  "Sport"
+                                     },
+                                     {
+                                         "id":  33,
+                                         "name":  "Arcade"
+                                     }
+                                 ],
+                      "involved_companies":  [
+                                                 {
+                                                     "id":  251408,
+                                                     "company":  {
+                                                                     "id":  82,
+                                                                     "name":  "Atari"
+                                                                 },
+                                                     "developer":  true,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  263584,
+                                                     "company":  {
+                                                                     "id":  263,
+                                                                     "name":  "Namco"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  263583,
+                                                     "company":  {
+                                                                     "id":  2406,
+                                                                     "name":  "Atari, Inc."
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  264198,
+                                                     "company":  {
+                                                                     "id":  2519,
+                                                                     "name":  "Sears"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  359399,
+                                                     "company":  {
+                                                                     "id":  71590,
+                                                                     "name":  "Hunter Electronics"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  359400,
+                                                     "company":  {
+                                                                     "id":  65069,
+                                                                     "name":  "Azerion casual"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  359401,
+                                                     "company":  {
+                                                                     "id":  71591,
+                                                                     "name":  "Eyepax"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 },
+                                                 {
+                                                     "id":  359402,
+                                                     "company":  {
+                                                                     "id":  32459,
+                                                                     "name":  "TOPICS Entertainment"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  true
+                                                 },
+                                                 {
+                                                     "id":  359403,
+                                                     "company":  {
+                                                                     "id":  13722,
+                                                                     "name":  "Digital Eclipse Software"
+                                                                 },
+                                                     "developer":  false,
+                                                     "publisher":  false
+                                                 }
+                                             ],
+                      "name":  "Pong",
+                      "platforms":  [
+                                        {
+                                            "id":  52,
+                                            "name":  "Arcade"
+                                        },
+                                        {
+                                            "id":  6,
+                                            "name":  "PC (Microsoft Windows)"
+                                        },
+                                        {
+                                            "id":  377,
+                                            "name":  "Plug \u0026 Play"
+                                        },
+                                        {
+                                            "id":  55,
+                                            "name":  "Legacy Mobile Device"
+                                        }
+                                    ],
+                      "release_dates":  [
+                                            {
+                                                "id":  835675,
+                                                "date":  91843200,
+                                                "platform":  {
+                                                                 "id":  52,
+                                                                 "name":  "Arcade"
+                                                             }
+                                            },
+                                            {
+                                                "id":  835676,
+                                                "date":  126144000,
+                                                "platform":  {
+                                                                 "id":  52,
+                                                                 "name":  "Arcade"
+                                                             }
+                                            },
+                                            {
+                                                "id":  835681,
+                                                "date":  1079049600,
+                                                "platform":  {
+                                                                 "id":  6,
+                                                                 "name":  "PC (Microsoft Windows)"
+                                                             }
+                                            },
+                                            {
+                                                "id":  835679,
+                                                "date":  186624000,
+                                                "platform":  {
+                                                                 "id":  377,
+                                                                 "name":  "Plug \u0026 Play"
+                                                             }
+                                            },
+                                            {
+                                                "id":  835677,
+                                                "date":  144547200,
+                                                "platform":  {
+                                                                 "id":  52,
+                                                                 "name":  "Arcade"
+                                                             }
+                                            },
+                                            {
+                                                "id":  835678,
+                                                "date":  212976000,
+                                                "platform":  {
+                                                                 "id":  52,
+                                                                 "name":  "Arcade"
+                                                             }
+                                            },
+                                            {
+                                                "id":  835680,
+                                                "date":  1604966400,
+                                                "platform":  {
+                                                                 "id":  55,
+                                                                 "name":  "Legacy Mobile Device"
+                                                             }
+                                            },
+                                            {
+                                                "id":  935134,
+                                                "date":  126144000,
+                                                "platform":  {
+                                                                 "id":  52,
+                                                                 "name":  "Arcade"
+                                                             }
+                                            },
+                                            {
+                                                "id":  935135,
+                                                "date":  144547200,
+                                                "platform":  {
+                                                                 "id":  52,
+                                                                 "name":  "Arcade"
+                                                             }
+                                            },
+                                            {
+                                                "id":  935136,
+                                                "date":  147225600,
+                                                "platform":  {
+                                                                 "id":  52,
+                                                                 "name":  "Arcade"
+                                                             }
+                                            },
+                                            {
+                                                "id":  935137,
+                                                "date":  220838400,
+                                                "platform":  {
+                                                                 "id":  377,
+                                                                 "name":  "Plug \u0026 Play"
+                                                             }
+                                            },
+                                            {
+                                                "id":  935138,
+                                                "date":  220838400,
+                                                "platform":  {
+                                                                 "id":  377,
+                                                                 "name":  "Plug \u0026 Play"
+                                                             }
+                                            }
+                                        ]
+                  }
+              ],
+    "Count":  20
+}
