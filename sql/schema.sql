@@ -18,7 +18,8 @@ CREATE TABLE game (
   steam_app_id      INT          UNIQUE,                -- NULL if not on Steam
   steam_owners_low  INT,                                -- SteamSpy owner range, NULL if not on Steam
   steam_owners_high INT,
-  CHECK (steam_owners_low <= steam_owners_high)
+  CHECK (steam_owners_low <= steam_owners_high),
+  CHECK ((steam_owners_low IS NULL) = (steam_owners_high IS NULL))
 );
 
 CREATE TABLE platform (
@@ -67,9 +68,8 @@ CREATE TABLE game_company (
 );
 
 CREATE TABLE app_user (
-  user_id   INT         NOT NULL PRIMARY KEY,
-  username  VARCHAR(30) NOT NULL UNIQUE,
-  joined_at DATETIME    NOT NULL
+  user_id  INT         NOT NULL PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE
 );
 
 -- Platforms a user owns, used to filter the release calendar.
@@ -84,13 +84,12 @@ CREATE TABLE user_platform (
 CREATE TABLE library_entry (
   user_id      INT          NOT NULL,
   game_id      INT          NOT NULL,
-  status       VARCHAR(10)  NOT NULL,
-  hours_played DECIMAL(6,1) NOT NULL DEFAULT 0,
+  status       ENUM('backlog', 'playing', 'completed') NOT NULL,
+  hours_played DECIMAL(7,1) NOT NULL DEFAULT 0,
   added_at     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (user_id, game_id),
   FOREIGN KEY (user_id) REFERENCES app_user (user_id),
   FOREIGN KEY (game_id) REFERENCES game (game_id),
-  CHECK (status IN ('backlog', 'playing', 'completed')),
   CHECK (hours_played >= 0)
 );
 
@@ -99,7 +98,7 @@ CREATE TABLE review (
   user_id    INT      NOT NULL,
   game_id    INT      NOT NULL,
   score      TINYINT,
-  body       TEXT,
+  body       VARCHAR(2000),
   created_at DATETIME NOT NULL,
   PRIMARY KEY (user_id, game_id),
   FOREIGN KEY (user_id) REFERENCES app_user (user_id),

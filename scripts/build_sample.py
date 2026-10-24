@@ -134,7 +134,7 @@ def build_users(game_rows, gp_rows):
     base = datetime(2026, 9, 1, 12, 0)
     names = ["pixelpanda", "speedrunsam", "backlogbeth", "couchcoop", "retro_rita",
              "noscope_ned", "cozygamer", "lorehunter"]
-    users = [[i + 1, n, (base + timedelta(days=i)).strftime("%Y-%m-%d %H:%M:%S")] for i, n in enumerate(names)]
+    users = [[i + 1, n] for i, n in enumerate(names)]
 
     # Owned platforms: sample from the platforms the sample games are on.
     game_platforms = {}
@@ -171,7 +171,7 @@ def build_users(game_rows, gp_rows):
                 created = added + timedelta(days=rng.randint(1, 10))
                 rev_rows.append([uid, gid, score, body, created.strftime("%Y-%m-%d %H:%M:%S")])
 
-    write("app_user", ["user_id", "username", "joined_at"], users)
+    write("app_user", ["user_id", "username"], users)
     write("user_platform", ["user_id", "platform_id"], up_rows)
     write("library_entry", ["user_id", "game_id", "status", "hours_played", "added_at"], lib_rows)
     write("review", ["user_id", "game_id", "score", "body", "created_at"], rev_rows)

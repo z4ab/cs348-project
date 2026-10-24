@@ -1,9 +1,9 @@
-user_id,username,joined_at
-1,pixelpanda,2026-09-01 12:00:00
-2,speedrunsam,2026-09-02 12:00:00
-3,backlogbeth,2026-09-03 12:00:00
-4,couchcoop,2026-09-04 12:00:00
-5,retro_rita,2026-09-05 12:00:00
-6,noscope_ned,2026-09-06 12:00:00
-7,cozygamer,2026-09-07 12:00:00
-8,lorehunter,2026-09-08 12:00:00
+user_id,username
+1,pixelpanda
+2,speedrunsam
+3,backlogbeth
+4,couchcoop
+5,retro_rita
+6,noscope_ned
+7,cozygamer
+8,lorehunter

@@ -73,12 +73,12 @@ Status = Literal["backlog", "playing", "completed"]
 class NewEntry(BaseModel):
     game_id: int
     status: Status
-    hours_played: float = Field(0, ge=0, le=99999.9)
+    hours_played: float = Field(0, ge=0, le=999999.9)
 
 
 class EntryUpdate(BaseModel):
     status: Status
-    hours_played: float = Field(ge=0, le=99999.9)
+    hours_played: float = Field(ge=0, le=999999.9)
 
 
 @app.post("/api/users/{user_id}/library")

@@ -40,7 +40,7 @@ LOAD DATA LOCAL INFILE 'data/sample/game_company.csv' INTO TABLE game_company
 LOAD DATA LOCAL INFILE 'data/sample/app_user.csv' INTO TABLE app_user
   CHARACTER SET utf8mb4 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
   LINES TERMINATED BY '\n' IGNORE 1 LINES
-  (user_id, username, joined_at);
+  (user_id, username);
 
 LOAD DATA LOCAL INFILE 'data/sample/user_platform.csv' INTO TABLE user_platform
   CHARACTER SET utf8mb4 FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
