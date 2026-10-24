@@ -5,9 +5,19 @@ const getJson = (url) => fetch(url).then((r) => {
   return r.json()
 })
 
+// Sends a JSON request and returns the error message to show, or '' on success.
+async function send(method, url, body) {
+  const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+  if (res.ok) return ''
+  const detail = await res.json().then((b) => b.detail, () => res.statusText)
+  return typeof detail === 'string' ? detail : 'Invalid input'
+}
+
+const STATUSES = ['backlog', 'playing', 'completed']
+
 // Feature 1: search games by title, platform and genre.
 function Search({ platforms, genres }) {
-  const [games, setGames] = useState([])
+  const [releases, setReleases] = useState([])
 
   async function search(e) {
     e?.preventDefault()
@@ -15,7 +25,7 @@ function Search({ platforms, genres }) {
     const params = new URLSearchParams({ q: f.q })
     if (f.platform) params.set('platform', f.platform)
     if (f.genre) params.set('genre', f.genre)
-    setGames(await getJson(`/api/games?${params}`))
+    setReleases(await getJson(`/api/search?${params}`))
   }
   useEffect(() => { search() }, [])
 
@@ -34,16 +44,38 @@ function Search({ platforms, genres }) {
         </select>
         <button>Search</button>
       </form>
-      <p>{games.length} games</p>
+      <p>{releases.length} releases</p>
       <table>
-        <thead><tr><th>Title</th><th>First release</th></tr></thead>
-        <tbody>{games.map((g) => <tr key={g.game_id}><td>{g.title}</td><td>{g.first_release ?? '-'}</td></tr>)}</tbody>
+        <thead><tr><th>Title</th><th>Platform</th><th>Release date</th></tr></thead>
+        <tbody>{releases.map((r) => (
+          <tr key={`${r.title}|${r.platform}`}><td>{r.title}</td><td>{r.platform}</td><td>{r.release_date ?? '-'}</td></tr>
+        ))}</tbody>
       </table>
     </section>
   )
 }
 
-// Feature 3: view a user's library and add or update an entry.
+// One library row, with its status and hours editable in place.
+function EntryRow({ entry, onSave }) {
+  const [status, setStatus] = useState(entry.status)
+  const [hours, setHours] = useState(String(entry.hours_played))
+
+  return (
+    <tr>
+      <td>{entry.title}</td>
+      <td>
+        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          {STATUSES.map((s) => <option key={s}>{s}</option>)}
+        </select>
+      </td>
+      <td><input type="number" min="0" step="0.1" value={hours} onChange={(e) => setHours(e.target.value)} /></td>
+      <td>{entry.added_at}</td>
+      <td><button onClick={() => onSave(entry.game_id, status, hours)}>Save</button></td>
+    </tr>
+  )
+}
+
+// Feature 3: view a user's library, add a game, and update an entry.
 function Library({ users, allGames }) {
   const [userId, setUserId] = useState('')
   const [entries, setEntries] = useState([])
@@ -59,17 +91,19 @@ function Library({ users, allGames }) {
     return () => { stale = true }
   }, [userId])
 
-  async function save(e) {
+  async function add(e) {
     e.preventDefault()
     const f = Object.fromEntries(new FormData(e.target))
-    const res = await fetch(`/api/users/${userId}/library`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ game_id: f.game_id, status: f.status, hours_played: f.hours_played || null }),
-    })
-    const detail = res.ok ? '' : await res.json().then((b) => b.detail, () => res.statusText)
-    setError(typeof detail === 'string' ? detail : 'Invalid input')
-    if (res.ok) load(userId)
+    const err = await send('POST', `/api/users/${userId}/library`,
+      { game_id: f.game_id, status: f.status, hours_played: f.hours_played || 0 })
+    setError(err)
+    if (!err) load(userId)
+  }
+
+  async function update(gameId, status, hours) {
+    const err = await send('PUT', `/api/users/${userId}/library/${gameId}`, { status, hours_played: hours })
+    setError(err)
+    if (!err) load(userId)
   }
 
   return (
@@ -82,22 +116,21 @@ function Library({ users, allGames }) {
       {userId && (
         <>
           <table>
-            <thead><tr><th>Title</th><th>Status</th><th>Hours</th><th>Added</th></tr></thead>
+            <thead><tr><th>Title</th><th>Status</th><th>Hours</th><th>Added</th><th></th></tr></thead>
             <tbody>{entries.map((e) => (
-              <tr key={e.game_id}><td>{e.title}</td><td>{e.status}</td><td>{e.hours_played}</td><td>{e.added_at}</td></tr>
+              // The key includes the saved values so the row resets to them after a reload.
+              <EntryRow key={`${e.game_id}|${e.status}|${e.hours_played}`} entry={e} onSave={update} />
             ))}</tbody>
           </table>
-          <form onSubmit={save}>
+          <form onSubmit={add}>
             <select name="game_id" required>
               {allGames.map((g) => <option key={g.game_id} value={g.game_id}>{g.title}</option>)}
             </select>
             <select name="status">
-              <option>backlog</option>
-              <option>playing</option>
-              <option>completed</option>
+              {STATUSES.map((s) => <option key={s}>{s}</option>)}
             </select>
             <input name="hours_played" type="number" min="0" step="0.1" placeholder="hours played" />
-            <button>Add or update</button>
+            <button>Add to library</button>
           </form>
           <p>{error}</p>
         </>

@@ -1,0 +1,21 @@
+# MySQL 8 for the app: database cs348, user cs348_app. Start with `docker compose up -d`.
+services:
+  mysql:
+    image: mysql:8.0
+    # load_sample.sql uses LOAD DATA LOCAL INFILE, which the server disables by default.
+    command: --local-infile=1
+    environment:
+      MYSQL_DATABASE: cs348
+      MYSQL_USER: cs348_app
+      MYSQL_PASSWORD: cs348_pass
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # The repo, so the mysql client in the container can read data/sample/*.csv.
+      - ./:/repo:ro
+    working_dir: /repo
+
+volumes:
+  mysql-data:

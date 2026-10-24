@@ -1,49 +1,84 @@
 -- SQL for the four Milestone 1 features, run over the sample database.
--- Reload the sample first (schema.sql, then load_sample.sql), then from the repo root:
---   mysql -t -u cs348_app -p cs348 < sql/test-sample.sql > sql/test-sample.out
--- Each feature sets its parameters as user variables, then runs the same query the app sends.
+-- Reload the sample first (schema.sql, then load_sample.sql), then run this file (see README).
+-- Features 1, 2 and 4 set their parameters as user variables, then run the query template.
+-- Features 1 and 3 are the queries the app sends.
 
--- Feature 1: Search games
--- Title substring, plus an optional platform and genre (NULL means any).
+-- Feature 1: Game search and filtering
+-- One row per game and platform. Title substring, plus an optional platform and genre (NULL means any).
 
-SELECT 'Feature 1a: title contains "dark"' AS test;
-SET @q = 'dark', @platform = NULL, @genre = NULL;
-SELECT g.game_id, g.title,
-       (SELECT MIN(gp.release_date) FROM game_platform gp WHERE gp.game_id = g.game_id) AS first_release
+SELECT 'Feature 1a: title contains "Soma"' AS test;
+SET @q = 'Soma', @platform = NULL, @genre = NULL;
+SELECT DISTINCT g.title, p.name AS platform, gp.release_date
 FROM game g
+  JOIN game_platform gp ON g.game_id = gp.game_id
+  JOIN platform p ON gp.platform_id = p.platform_id
 WHERE g.title LIKE CONCAT('%', @q, '%')
-  AND (@platform IS NULL OR EXISTS (SELECT 1 FROM game_platform gp
-                                    WHERE gp.game_id = g.game_id AND gp.platform_id = @platform))
-  AND (@genre IS NULL OR EXISTS (SELECT 1 FROM game_genre gg
+  AND (@platform IS NULL OR p.platform_id = @platform)
+  AND (@genre IS NULL OR EXISTS (SELECT * FROM game_genre gg
                                  WHERE gg.game_id = g.game_id AND gg.genre_id = @genre))
-ORDER BY g.title;
+ORDER BY g.title, gp.release_date, platform;
 
 SELECT 'Feature 1b: any title, on PlayStation 4 (48), genre Adventure (31)' AS test;
 SET @q = '', @platform = 48, @genre = 31;
-SELECT g.game_id, g.title,
-       (SELECT MIN(gp.release_date) FROM game_platform gp WHERE gp.game_id = g.game_id) AS first_release
+SELECT DISTINCT g.title, p.name AS platform, gp.release_date
 FROM game g
+  JOIN game_platform gp ON g.game_id = gp.game_id
+  JOIN platform p ON gp.platform_id = p.platform_id
 WHERE g.title LIKE CONCAT('%', @q, '%')
-  AND (@platform IS NULL OR EXISTS (SELECT 1 FROM game_platform gp
-                                    WHERE gp.game_id = g.game_id AND gp.platform_id = @platform))
-  AND (@genre IS NULL OR EXISTS (SELECT 1 FROM game_genre gg
+  AND (@platform IS NULL OR p.platform_id = @platform)
+  AND (@genre IS NULL OR EXISTS (SELECT * FROM game_genre gg
                                  WHERE gg.game_id = g.game_id AND gg.genre_id = @genre))
-ORDER BY g.title;
+ORDER BY g.title, gp.release_date, platform;
 
--- Feature 2: Releases on my platforms
--- Releases on or after a date, on platforms the user owns. The app passes today's date.
+-- Feature 2: Upcoming game releases
+-- Releases on or after a date, on platforms the user owns, leaving out games already in their library.
 
-SELECT 'Feature 2: releases since 2016-01-01 on backlogbeth''s (user 3) platforms' AS test;
-SET @user = 3, @from = '2016-01-01';
+SELECT 'Feature 2: releases since 2016-01-01 on backlogbeth''s platforms, not in their library' AS test;
+SET @user = (SELECT user_id FROM app_user WHERE username = 'backlogbeth'), @from = '2016-01-01';
 SELECT g.title, p.name AS platform, gp.release_date
 FROM user_platform up
-JOIN game_platform gp ON gp.platform_id = up.platform_id
-JOIN game g ON g.game_id = gp.game_id
-JOIN platform p ON p.platform_id = gp.platform_id
-WHERE up.user_id = @user AND gp.release_date >= @from
-ORDER BY gp.release_date, g.title;
+  JOIN platform p ON up.platform_id = p.platform_id
+  JOIN game_platform gp ON p.platform_id = gp.platform_id
+  JOIN game g ON gp.game_id = g.game_id
+WHERE up.user_id = @user
+  AND gp.release_date >= @from
+  AND NOT EXISTS (SELECT * FROM library_entry le
+                  WHERE le.user_id = up.user_id AND le.game_id = g.game_id)
+ORDER BY gp.release_date, g.title, p.name;
 
--- Feature 4: Genre leaderboard
+-- Feature 3: Personal game library management
+-- Each change runs in a transaction that is rolled back, so this file leaves the data unchanged.
+
+SELECT 'Feature 3a: pixelpanda updates Darksiders to playing, 83.0 hours' AS test;
+START TRANSACTION;
+UPDATE library_entry
+SET status = 'playing',
+    hours_played = 83.0
+WHERE user_id = (SELECT user_id FROM app_user WHERE username = 'pixelpanda')
+  AND game_id = (SELECT game_id FROM game WHERE title = 'Darksiders');
+SELECT u.username, g.title, le.status, le.hours_played
+FROM library_entry le
+  JOIN app_user u ON le.user_id = u.user_id
+  JOIN game g ON le.game_id = g.game_id
+WHERE u.username = 'pixelpanda'
+  AND g.title = 'Darksiders';
+ROLLBACK;
+
+SELECT 'Feature 3b: pixelpanda adds Soma to their backlog' AS test;
+START TRANSACTION;
+INSERT INTO library_entry (user_id, game_id, status, hours_played)
+VALUES ((SELECT user_id FROM app_user WHERE username = 'pixelpanda'),
+        (SELECT game_id FROM game WHERE title = 'Soma'),
+        'backlog', 0);
+SELECT u.username, g.title, le.status, le.hours_played
+FROM library_entry le
+  JOIN app_user u ON le.user_id = u.user_id
+  JOIN game g ON le.game_id = g.game_id
+WHERE u.username = 'pixelpanda'
+ORDER BY g.title;
+ROLLBACK;
+
+-- Feature 4: Game ratings and rankings by genre
 -- Games in a genre ranked by total hours our users played, with average review score
 -- and SteamSpy owner range. Hours and scores are aggregated per game before the join
 -- so library entries and reviews do not multiply each other.
@@ -66,27 +101,3 @@ LEFT JOIN play ON play.game_id = g.game_id
 LEFT JOIN score ON score.game_id = g.game_id
 WHERE gg.genre_id = @genre
 ORDER BY total_hours DESC, g.title;
-
--- Feature 3: Add or update a library entry
--- Adding a game already in the library updates its status and hours instead.
--- Runs last because it modifies the data.
-
-SELECT 'Feature 3a: pixelpanda (user 1) adds Soma (9727) to backlog' AS test;
-SET @user = 1, @game = 9727, @status = 'backlog', @hours = 0, @now = '2026-10-23 12:00:00';
-INSERT INTO library_entry (user_id, game_id, status, hours_played, added_at)
-VALUES (@user, @game, @status, COALESCE(@hours, 0), @now) AS new
-ON DUPLICATE KEY UPDATE status = new.status, hours_played = COALESCE(@hours, library_entry.hours_played);
-
-SELECT 'Feature 3b: pixelpanda starts Soma, 4.5 hours played' AS test;
-SET @user = 1, @game = 9727, @status = 'playing', @hours = 4.5, @now = '2026-10-23 18:00:00';
-INSERT INTO library_entry (user_id, game_id, status, hours_played, added_at)
-VALUES (@user, @game, @status, COALESCE(@hours, 0), @now) AS new
-ON DUPLICATE KEY UPDATE status = new.status, hours_played = COALESCE(@hours, library_entry.hours_played);
-
-SELECT 'Feature 3c: pixelpanda''s library' AS test;
-SET @user = 1;
-SELECT g.game_id, g.title, le.status, le.hours_played, le.added_at
-FROM library_entry le
-JOIN game g ON g.game_id = le.game_id
-WHERE le.user_id = @user
-ORDER BY le.added_at DESC;

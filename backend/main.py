@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Literal
 
 import pymysql
@@ -9,8 +8,10 @@ app = FastAPI()
 
 
 def connect():
+    # FOUND_ROWS makes an UPDATE report matched rows, so saving unchanged values is not a "not found".
     return pymysql.connect(host="127.0.0.1", user="cs348_app", password="cs348_pass",
-                           database="cs348", cursorclass=pymysql.cursors.DictCursor, autocommit=True)
+                           database="cs348", cursorclass=pymysql.cursors.DictCursor, autocommit=True,
+                           client_flag=pymysql.constants.CLIENT.FOUND_ROWS)
 
 
 def fetch_all(sql, params=()):
@@ -34,22 +35,28 @@ def list_users():
     return fetch_all("SELECT user_id, username FROM app_user ORDER BY username")
 
 
-# Feature 1: search games by title, with optional platform and genre filters.
 @app.get("/api/games")
+def list_games():
+    return fetch_all("SELECT game_id, title FROM game ORDER BY title")
+
+
+# Feature 1: search games by title, with optional platform and genre filters.
+# One row per game and platform, with that platform's release date.
+@app.get("/api/search")
 def search_games(q: str = "", platform: int | None = None, genre: int | None = None):
     return fetch_all("""
-        SELECT g.game_id, g.title,
-               (SELECT MIN(gp.release_date) FROM game_platform gp WHERE gp.game_id = g.game_id) AS first_release
+        SELECT DISTINCT g.title, p.name AS platform, gp.release_date
         FROM game g
+          JOIN game_platform gp ON g.game_id = gp.game_id
+          JOIN platform p ON gp.platform_id = p.platform_id
         WHERE g.title LIKE CONCAT('%%', %s, '%%')
-          AND (%s IS NULL OR EXISTS (SELECT 1 FROM game_platform gp
-                                     WHERE gp.game_id = g.game_id AND gp.platform_id = %s))
-          AND (%s IS NULL OR EXISTS (SELECT 1 FROM game_genre gg
+          AND (%s IS NULL OR p.platform_id = %s)
+          AND (%s IS NULL OR EXISTS (SELECT * FROM game_genre gg
                                      WHERE gg.game_id = g.game_id AND gg.genre_id = %s))
-        ORDER BY g.title""", (q, platform, platform, genre, genre))
+        ORDER BY g.title, gp.release_date, platform""", (q, platform, platform, genre, genre))
 
 
-# Feature 3: view a user's library, and add or update an entry in it.
+# Feature 3: view a user's library, add a game to it, and update an entry.
 @app.get("/api/users/{user_id}/library")
 def get_library(user_id: int):
     return fetch_all("""
@@ -60,20 +67,39 @@ def get_library(user_id: int):
         ORDER BY le.added_at DESC""", (user_id,))
 
 
-class LibraryEntry(BaseModel):
+Status = Literal["backlog", "playing", "completed"]
+
+
+class NewEntry(BaseModel):
     game_id: int
-    status: Literal["backlog", "playing", "completed"]
-    hours_played: float | None = Field(None, ge=0, le=99999.9)  # None keeps the stored hours
+    status: Status
+    hours_played: float = Field(0, ge=0, le=99999.9)
+
+
+class EntryUpdate(BaseModel):
+    status: Status
+    hours_played: float = Field(ge=0, le=99999.9)
 
 
 @app.post("/api/users/{user_id}/library")
-def save_library_entry(user_id: int, e: LibraryEntry):
+def add_library_entry(user_id: int, e: NewEntry):
     try:
         with connect() as conn, conn.cursor() as cur:
             cur.execute("""
-                INSERT INTO library_entry (user_id, game_id, status, hours_played, added_at)
-                VALUES (%s, %s, %s, COALESCE(%s, 0), %s) AS new
-                ON DUPLICATE KEY UPDATE status = new.status, hours_played = COALESCE(%s, library_entry.hours_played)""",
-                        (user_id, e.game_id, e.status, e.hours_played, datetime.now(), e.hours_played))
-    except pymysql.IntegrityError:
+                INSERT INTO library_entry (user_id, game_id, status, hours_played)
+                VALUES (%s, %s, %s, %s)""", (user_id, e.game_id, e.status, e.hours_played))
+    except pymysql.IntegrityError as err:
+        if err.args[0] == 1062:  # duplicate (user_id, game_id)
+            raise HTTPException(409, "Game is already in this library")
         raise HTTPException(404, "Unknown user or game")
+
+
+@app.put("/api/users/{user_id}/library/{game_id}")
+def update_library_entry(user_id: int, game_id: int, e: EntryUpdate):
+    with connect() as conn, conn.cursor() as cur:
+        cur.execute("""
+            UPDATE library_entry
+            SET status = %s, hours_played = %s
+            WHERE user_id = %s AND game_id = %s""", (e.status, e.hours_played, user_id, game_id))
+        if cur.rowcount == 0:
+            raise HTTPException(404, "Game is not in this library")

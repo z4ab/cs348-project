@@ -86,7 +86,7 @@ CREATE TABLE library_entry (
   game_id      INT          NOT NULL,
   status       VARCHAR(10)  NOT NULL,
   hours_played DECIMAL(6,1) NOT NULL DEFAULT 0,
-  added_at     DATETIME     NOT NULL,
+  added_at     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (user_id, game_id),
   FOREIGN KEY (user_id) REFERENCES app_user (user_id),
   FOREIGN KEY (game_id) REFERENCES game (game_id),

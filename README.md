@@ -2,8 +2,9 @@
 
 MySQL + FastAPI (raw SQL via `pymysql`) + React (Vite).
 
+- `docker-compose.yml`: MySQL 8 with the `cs348` database and `cs348_app` user
 - `sql/`: database scripts
-  - `setup_db.sql`: creates the `cs348` database and `cs348_app` user (run once as root)
+  - `setup_db.sql`: creates the database and user on a MySQL install without Docker (run once as root)
   - `schema.sql`: creates the tables and constraints
   - `load_sample.sql`: loads `data/sample/*.csv`
   - `test-sample.sql`, `test-sample.out`: feature queries and their output on the sample database
@@ -16,13 +17,15 @@ MySQL + FastAPI (raw SQL via `pymysql`) + React (Vite).
 
 ## Create and load the sample database
 
-Needs MySQL 8+ running on `127.0.0.1:3306`. Run from the repository root.
+Needs Docker. Run from the repository root. Port 3306 must be free, so stop any other MySQL server first.
 
 ```bash
-mysql -u root -p < sql/setup_db.sql                                         # once: database, user, local_infile
-mysql -u cs348_app -pcs348_pass cs348 < sql/schema.sql                      # create (or reset) the tables
-mysql --local-infile=1 -u cs348_app -pcs348_pass cs348 < sql/load_sample.sql  # load the CSVs
+docker compose up -d   # first start takes about 30 seconds to initialize the database
+docker compose exec -T mysql mysql -u cs348_app -pcs348_pass cs348 < sql/schema.sql                       # create (or reset) the tables
+docker compose exec -T mysql mysql --local-infile=1 -u cs348_app -pcs348_pass cs348 < sql/load_sample.sql  # load the CSVs
 ```
+
+Without Docker, run `sql/setup_db.sql` once as root on a local MySQL 8 server, then pipe the same files into `mysql` directly (add `--local-infile=1` for `load_sample.sql`).
 
 To rebuild the CSVs, run `python scripts/build_sample.py`. SteamSpy responses are cached, so this needs no network.
 
@@ -31,7 +34,7 @@ To rebuild the CSVs, run `python scripts/build_sample.py`. SteamSpy responses ar
 Reload the sample database (the two commands above), then:
 
 ```bash
-mysql -t -u cs348_app -pcs348_pass cs348 < sql/test-sample.sql > sql/test-sample.out
+docker compose exec -T mysql mysql -t -u cs348_app -pcs348_pass cs348 < sql/test-sample.sql > sql/test-sample.out
 ```
 
 ## Run the app
@@ -60,6 +63,8 @@ Open http://localhost:5173. On macOS/Linux use `.venv/bin/` instead of `.venv/Sc
 | Feature | In the app | In `test-sample.sql` |
 |---|---|---|
 | 1. Search games by title, platform and genre | Yes | Yes |
-| 2. Releases on my platforms since a date | No | Yes |
-| 3. Add or update a library entry, view a library | Yes | Yes |
+| 2. Upcoming releases on my platforms, excluding games in my library | No | Yes |
+| 3. View a library, add a game, update an entry's status and hours | Yes | Yes |
 | 4. Genre leaderboard by hours played, with review score and Steam owners | No | Yes |
+
+Features 1 and 3 are implemented in `backend/main.py` and `frontend/src/App.jsx`.
