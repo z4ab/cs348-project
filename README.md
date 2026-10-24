@@ -65,6 +65,6 @@ Open http://localhost:5173. On macOS/Linux use `.venv/bin/` instead of `.venv/Sc
 | 1. Search games by title, platform and genre | Yes | Yes |
 | 2. Upcoming releases on my platforms, excluding games in my library | No | Yes |
 | 3. View a library, add a game, update an entry's status and hours | Yes | Yes |
-| 4. Genre leaderboard by hours played, with review score and Steam owners | No | Yes |
+| 4. Top-rated games in a genre, by average review score | No | Yes |
 
 Features 1 and 3 are implemented in `backend/main.py` and `frontend/src/App.jsx`.
