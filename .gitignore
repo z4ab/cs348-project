@@ -8,5 +8,5 @@ Maiyya_CS348_F26_Project_Description.pdf
 
 # Raw API pulls and generated production CSVs (regenerate with scripts/, see README)
 data/raw/igdb/
-data/raw/steamspy_all/
+data/raw/steam/
 data/production/
