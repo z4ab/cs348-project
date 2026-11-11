@@ -113,6 +113,9 @@ def main():
                 name, low, high = owners[sid]
                 if norm(name) != norm(title):
                     counts["steam id: Steam name differs from IGDB title (kept)"] += 1
+                if low == high == 0:  # "0 - 0" means the dataset has no estimate, not zero owners
+                    counts["steam id: owner range 0 - 0, owners NULL"] += 1
+                    low = high = NULL
             else:
                 counts["steam id: not in Steam Games Dataset, owners NULL"] += 1
         game_rows.append([g["id"], title, NULL if sid is None else sid, low, high])
