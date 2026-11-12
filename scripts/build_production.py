@@ -5,9 +5,12 @@ Usage: python scripts/build_production.py
 Run scripts/fetch_igdb.py and scripts/fetch_steam_owners.py first. Writes one CSV per table in
 sql/schema.sql and prints a count for every row that was dropped or changed while cleaning.
 The counts are also saved to data/production/build_counts.json.
+User, platform ownership, library and review rows are synthetic, generated with a fixed seed.
 """
 import csv
+import itertools
 import json
+import random
 import re
 from collections import Counter
 from datetime import datetime, timedelta, timezone
@@ -179,9 +182,90 @@ def main():
     write("game_genre", ["game_id", "genre_id"], gg_rows)
     write("game_company", ["game_id", "company_id", "is_developer", "is_publisher"], gc_rows)
 
+    build_users(game_rows, gp_rows)
+
     for key, value in sorted(counts.items()):
         print(f"{value:>9}  {key}")
     (OUT / "build_counts.json").write_text(json.dumps(dict(sorted(counts.items())), indent=1), encoding="utf-8")
+
+
+USERS = 25_000
+SAMPLE_USERS = ["pixelpanda", "speedrunsam", "backlogbeth", "couchcoop", "retro_rita",
+                "noscope_ned", "cozygamer", "lorehunter"]  # kept so the report's sample queries run
+# Chance a user owns each platform (IGDB ids). Chosen from the platforms with the most upcoming
+# releases, so Feature 2 finds rows for most users.
+PLATFORM_ODDS = {6: 0.8, 167: 0.35, 130: 0.35, 169: 0.25, 48: 0.25, 508: 0.15, 49: 0.15,
+                 39: 0.3, 34: 0.3, 14: 0.1, 3: 0.05}
+LIBRARY_START, LIBRARY_END = datetime(2024, 1, 1), datetime(2026, 11, 1)
+COMMENTS = ["Loved it.", "Too short, but worth it.", "Controls feel dated now.",
+            "Great atmosphere, weak ending.", "Could not stop playing.", "Gave up halfway.",
+            "Fun with friends, dull alone.", "The story carried it.", "Too many bugs at launch.",
+            "Best soundtrack in years.", "Grindy after the first few hours.", "A slow start, then great.",
+            "Not my genre, still enjoyed it.", "Performance is rough on my machine.", "Worth the full price."]
+
+
+def build_users(game_rows, gp_rows):
+    """Generates users, their platforms, libraries and reviews with a fixed seed."""
+    rng = random.Random(348)
+
+    adjectives = ["pixel", "retro", "cozy", "speedy", "lucky", "sneaky", "brave", "sleepy", "turbo", "quiet",
+                  "rapid", "salty", "chill", "fuzzy", "neon", "rusty", "silent", "mighty", "lazy", "clever"]
+    nouns = ["panda", "gamer", "knight", "fox", "wizard", "pilot", "ninja", "otter", "raven", "golem",
+             "slime", "ranger", "bard", "rogue", "falcon", "tiger", "wolf", "yeti", "robot", "dragon"]
+    names = list(SAMPLE_USERS)
+    taken = set(names)
+    while len(names) < USERS:
+        name = f"{rng.choice(adjectives)}{rng.choice(nouns)}{rng.randint(1, 9999)}"
+        if name not in taken:
+            taken.add(name)
+            names.append(name)
+    users = [[i + 1, n] for i, n in enumerate(names)]
+
+    up_rows, owned = [], {}
+    for uid, _ in users:
+        mine = {pid for pid, p in PLATFORM_ODDS.items() if rng.random() < p} or {6}
+        owned[uid] = mine
+        up_rows += [[uid, pid] for pid in sorted(mine)]
+
+    # Games that had come out by LIBRARY_END, with their platforms and first release date.
+    released, platforms_of = {}, {}
+    for gid, pid, d in gp_rows:
+        platforms_of.setdefault(gid, set()).add(pid)
+        if d != NULL and d <= LIBRARY_END.date().isoformat():
+            day = datetime.fromisoformat(d)
+            released[gid] = min(released.get(gid, day), day)
+    # Weight by Steam owners so widely owned games show up more often, as in the sample.
+    pool = [r for r in game_rows if r[0] in released]
+    cum = list(itertools.accumulate((r[4] if r[4] != NULL else 20_000) ** 0.5 for r in pool))
+    quality = {}  # each game's average review score, so rankings differ between games
+
+    lib_rows, rev_rows = [], []
+    for uid, _ in users:
+        want = min(int(rng.expovariate(1 / 5.5)), 40)
+        picked, tries = set(), 0
+        while len(picked) < want and tries < want * 50:
+            tries += 1
+            gid = rng.choices(pool, cum_weights=cum)[0][0]
+            if platforms_of[gid] & owned[uid]:  # only games on a platform the user owns
+                picked.add(gid)
+        for gid in sorted(picked):
+            start = max(LIBRARY_START, released[gid])
+            added = (start + rng.random() * (LIBRARY_END - start)).replace(microsecond=0)
+            status = rng.choice(["backlog", "playing", "completed"])
+            hours = 0.0 if status == "backlog" else round(rng.uniform(1, 60 if status == "playing" else 120), 1)
+            lib_rows.append([uid, gid, status, hours, added.strftime("%Y-%m-%d %H:%M:%S")])
+            if status != "backlog" and rng.random() < 0.7:
+                q = quality.setdefault(gid, rng.gauss(7, 1.2))
+                kind = rng.choice(["score", "body", "both"])
+                score = min(10, max(1, round(rng.gauss(q, 1.5)))) if kind != "body" else NULL
+                body = rng.choice(COMMENTS) if kind != "score" else NULL
+                created = min(added + timedelta(days=rng.randint(1, 30)), LIBRARY_END)
+                rev_rows.append([uid, gid, score, body, created.strftime("%Y-%m-%d %H:%M:%S")])
+
+    write("app_user", ["user_id", "username"], users)
+    write("user_platform", ["user_id", "platform_id"], up_rows)
+    write("library_entry", ["user_id", "game_id", "status", "hours_played", "added_at"], lib_rows)
+    write("review", ["user_id", "game_id", "score", "body", "created_at"], rev_rows)
 
 
 if __name__ == "__main__":
