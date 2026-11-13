@@ -55,6 +55,39 @@ def search_games(q: str = "", platform: int | None = None, genre: int | None = N
                                      WHERE gg.game_id = g.game_id AND gg.genre_id = %s))
         ORDER BY g.title, gp.release_date, platform""", (q, platform, platform, genre, genre))
 
+# Feature 2: View upcoming games releases, with a way to filter on platforms that you own.
+# 2a: View all upcoming releases
+@app.get("/api/upcoming")
+def upcoming_games(user_id: int | None = None):
+    if (user_id is None): 
+        return fetch_all(
+            """
+            SELECT g.title , p.name AS platform, gp.release_date 
+            FROM game g JOIN game_platform gp ON g.game_id = gp.game_id 
+            JOIN platform p ON gp.platform_id = p.platform_id 
+            WHERE (gp.release_date > CURDATE() OR gp.release_date IS NULL) 
+            ORDER BY gp.release_date, g.title, p.name;
+            """
+        )
+    else:
+        return fetch_all(
+            """
+            SELECT g.title, p.name AS platform, gp.release_date
+            FROM user_platform up JOIN platform p ON 
+            up.platform_id = p.platform_id
+            JOIN game_platform gp ON p.platform_id = gp.platform_id
+            JOIN game g ON gp.game_id = g.game_id
+            WHERE up.user_id = %s
+            AND gp.release_date > CURDATE()
+            AND NOT EXISTS (
+            SELECT *
+            FROM library_entry le
+            WHERE le.user_id = up.user_id
+            AND le.game_id = g.game_id
+            )
+            ORDER BY gp.release_date, g.title, p.name;
+            """, (user_id)
+        )
 
 # Feature 3: view a user's library, add a game to it, and update an entry.
 @app.get("/api/users/{user_id}/library")
