@@ -136,3 +136,19 @@ def update_library_entry(user_id: int, game_id: int, e: EntryUpdate):
             WHERE user_id = %s AND game_id = %s""", (e.status, e.hours_played, user_id, game_id))
         if cur.rowcount == 0:
             raise HTTPException(404, "Game is not in this library")
+
+# Feature 4: View the top rated games of a specific genre
+@app.get("/api/genre/{genre_id}/top")
+def top_ten_genre(genre_id: int):
+    return fetch_all(
+        """
+        SELECT g.title, ROUND(AVG(r.score), 2) AS average_rating,
+        COUNT(r.score) AS rating_count
+        FROM game g JOIN game_genre gg ON g.game_id = gg.game_id
+        JOIN review r ON g.game_id = r.game_id
+        WHERE gg.genre_id = %s AND r.score IS NOT NULL
+        GROUP BY g.game_id, g.title
+        ORDER BY average_rating DESC, rating_count DESC, g.title LIMIT 10;
+        """, (genre_id)
+    )
+    
