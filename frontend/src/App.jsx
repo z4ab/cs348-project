@@ -75,6 +75,38 @@ function EntryRow({ entry, onSave }) {
   )
 }
 
+// Feature 2: view upcoming game releases
+// With no user chosen it lists every upcoming release; with a user, only releases on
+// that user's platforms, minus games already in their library.
+function Upcoming({ users }) {
+  const [userId, setUserId] = useState('')
+  const [releases, setReleases] = useState([])
+
+  useEffect(() => {
+    let stale = false
+    const url = userId ? `/api/upcoming?user_id=${userId}` : '/api/upcoming'
+    getJson(url).then((rows) => { if (!stale) setReleases(rows) })
+    return () => { stale = true }
+  }, [userId])
+
+  return (
+    <section>
+      <h2>Upcoming releases</h2>
+      <select value={userId} onChange={(e) => setUserId(e.target.value)}>
+        <option value="">all platforms</option>
+        {users.map((u) => <option key={u.user_id} value={u.user_id}>{u.username}'s platforms</option>)}
+      </select>
+      <p>{releases.length} releases</p>
+      <table>
+        <thead><tr><th>Title</th><th>Platform</th><th>Release date</th></tr></thead>
+        <tbody>{releases.map((r) => (
+          <tr key={`${r.title}|${r.platform}`}><td>{r.title}</td><td>{r.platform}</td><td>{r.release_date ?? 'TBA'}</td></tr>
+        ))}</tbody>
+      </table>
+    </section>
+  )
+}
+
 // Feature 3: view a user's library, add a game, and update an entry.
 function Library({ users, allGames }) {
   const [userId, setUserId] = useState('')
@@ -156,6 +188,7 @@ export default function App() {
     <>
       <h1>Video Game Tracker</h1>
       <Search platforms={platforms} genres={genres} />
+      <Upcoming users={users} />
       <Library users={users} allGames={allGames} />
     </>
   )
