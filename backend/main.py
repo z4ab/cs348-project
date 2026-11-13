@@ -51,7 +51,7 @@ SEARCH_PAGE_SIZE = 100
 def search_games(q: str = "", platform: int | None = None, genre: int | None = None,
                  page: int = Query(1, ge=1)):
     rows = fetch_all("""
-        SELECT DISTINCT g.game_id, g.title, p.name AS platform, gp.release_date
+        SELECT g.game_id, g.title, p.name AS platform, gp.release_date
         FROM game g
           JOIN game_platform gp ON g.game_id = gp.game_id
           JOIN platform p ON gp.platform_id = p.platform_id
