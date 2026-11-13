@@ -1,7 +1,7 @@
 from typing import Literal
 
 import pymysql
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
 
 app = FastAPI()
@@ -40,12 +40,18 @@ def list_games():
     return fetch_all("SELECT game_id, title FROM game ORDER BY title")
 
 
+SEARCH_PAGE_SIZE = 100
+
+
 # Feature 1: search games by title, with optional platform and genre filters.
-# One row per game and platform, with that platform's release date.
+# One row per game and platform, with that platform's release date, 100 rows per page.
+# It fetches one extra row to tell whether another page follows. game_id in the ORDER BY
+# makes the order total, so two games with the same title cannot swap between pages.
 @app.get("/api/search")
-def search_games(q: str = "", platform: int | None = None, genre: int | None = None):
-    return fetch_all("""
-        SELECT DISTINCT g.title, p.name AS platform, gp.release_date
+def search_games(q: str = "", platform: int | None = None, genre: int | None = None,
+                 page: int = Query(1, ge=1)):
+    rows = fetch_all("""
+        SELECT DISTINCT g.game_id, g.title, p.name AS platform, gp.release_date
         FROM game g
           JOIN game_platform gp ON g.game_id = gp.game_id
           JOIN platform p ON gp.platform_id = p.platform_id
@@ -53,7 +59,10 @@ def search_games(q: str = "", platform: int | None = None, genre: int | None = N
           AND (%s IS NULL OR p.platform_id = %s)
           AND (%s IS NULL OR EXISTS (SELECT * FROM game_genre gg
                                      WHERE gg.game_id = g.game_id AND gg.genre_id = %s))
-        ORDER BY g.title, gp.release_date, platform""", (q, platform, platform, genre, genre))
+        ORDER BY g.title, g.game_id, gp.release_date, platform
+        LIMIT %s OFFSET %s""",
+        (q, platform, platform, genre, genre, SEARCH_PAGE_SIZE + 1, (page - 1) * SEARCH_PAGE_SIZE))
+    return {"results": rows[:SEARCH_PAGE_SIZE], "has_next": len(rows) > SEARCH_PAGE_SIZE}
 
 # Feature 2: View upcoming games releases, with a way to filter on platforms that you own.
 # 2a: View all upcoming releases

@@ -15,19 +15,36 @@ async function send(method, url, body) {
 
 const STATUSES = ['backlog', 'playing', 'completed']
 
-// Feature 1: search games by title, platform and genre.
-function Search({ platforms, genres }) {
-  const [releases, setReleases] = useState([])
+// Feature 1: search games by title, platform and genre, one page of 100 releases at a time.
+const SEARCH_PAGE_SIZE = 100
 
-  async function search(e) {
-    e?.preventDefault()
-    const f = Object.fromEntries(new FormData(e?.target ?? document.getElementById('search')))
-    const params = new URLSearchParams({ q: f.q })
-    if (f.platform) params.set('platform', f.platform)
-    if (f.genre) params.set('genre', f.genre)
-    setReleases(await getJson(`/api/search?${params}`))
+function Search({ platforms, genres }) {
+  // filters holds the submitted form, so paging repeats the same search.
+  const [filters, setFilters] = useState({ q: '' })
+  const [page, setPage] = useState(1)
+  const [releases, setReleases] = useState([])
+  const [hasNext, setHasNext] = useState(false)
+
+  useEffect(() => {
+    const params = new URLSearchParams({ q: filters.q, page })
+    if (filters.platform) params.set('platform', filters.platform)
+    if (filters.genre) params.set('genre', filters.genre)
+    let stale = false
+    getJson(`/api/search?${params}`).then((res) => {
+      if (stale) return
+      setReleases(res.results)
+      setHasNext(res.has_next)
+    })
+    return () => { stale = true }
+  }, [filters, page])
+
+  function search(e) {
+    e.preventDefault()
+    setFilters(Object.fromEntries(new FormData(e.target)))
+    setPage(1)
   }
-  useEffect(() => { search() }, [])
+
+  const first = (page - 1) * SEARCH_PAGE_SIZE + 1
 
   return (
     <section>
@@ -44,11 +61,18 @@ function Search({ platforms, genres }) {
         </select>
         <button>Search</button>
       </form>
-      <p>{releases.length} releases</p>
+      <p>
+        {releases.length === 0
+          ? 'No releases'
+          : `Releases ${first}–${first + releases.length - 1}`}
+        {' '}
+        <button disabled={page === 1} onClick={() => setPage(page - 1)}>Previous</button>
+        <button disabled={!hasNext} onClick={() => setPage(page + 1)}>Next</button>
+      </p>
       <table>
         <thead><tr><th>Title</th><th>Platform</th><th>Release date</th></tr></thead>
         <tbody>{releases.map((r) => (
-          <tr key={`${r.title}|${r.platform}`}><td>{r.title}</td><td>{r.platform}</td><td>{r.release_date ?? '-'}</td></tr>
+          <tr key={`${r.game_id}|${r.platform}`}><td>{r.title}</td><td>{r.platform}</td><td>{r.release_date ?? '-'}</td></tr>
         ))}</tbody>
       </table>
     </section>
