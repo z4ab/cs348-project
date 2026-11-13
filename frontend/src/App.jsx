@@ -171,6 +171,38 @@ function Library({ users, allGames }) {
   )
 }
 
+// Feature 4: the 10 highest-rated games in a genre, by average review score.
+function Rankings({ genres }) {
+  const [genreId, setGenreId] = useState('')
+  const [games, setGames] = useState([])
+
+  useEffect(() => {
+    setGames([])
+    if (!genreId) return
+    let stale = false
+    getJson(`/api/genre/${genreId}/top`).then((rows) => { if (!stale) setGames(rows) })
+    return () => { stale = true }
+  }, [genreId])
+
+  return (
+    <section>
+      <h2>Top rated by genre</h2>
+      <select value={genreId} onChange={(e) => setGenreId(e.target.value)}>
+        <option value="">choose a genre</option>
+        {genres.map((g) => <option key={g.genre_id} value={g.genre_id}>{g.name}</option>)}
+      </select>
+      {genreId && (
+        <table>
+          <thead><tr><th>#</th><th>Title</th><th>Average rating</th><th>Ratings</th></tr></thead>
+          <tbody>{games.map((g, i) => (
+            <tr key={g.title}><td>{i + 1}</td><td>{g.title}</td><td>{g.average_rating.toFixed(2)}</td><td>{g.rating_count}</td></tr>
+          ))}</tbody>
+        </table>
+      )}
+    </section>
+  )
+}
+
 export default function App() {
   const [platforms, setPlatforms] = useState([])
   const [genres, setGenres] = useState([])
@@ -190,6 +222,7 @@ export default function App() {
       <Search platforms={platforms} genres={genres} />
       <Upcoming users={users} />
       <Library users={users} allGames={allGames} />
+      <Rankings genres={genres} />
     </>
   )
 }
