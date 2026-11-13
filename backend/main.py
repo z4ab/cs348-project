@@ -35,9 +35,19 @@ def list_users():
     return fetch_all("SELECT user_id, username FROM app_user ORDER BY username")
 
 
+# Game picker for adding to a library: up to `limit` games whose title contains q.
+# q can't be empty, so this never returns the whole table. year is the earliest release
+# on any platform (NULL if none is known), to tell apart games with the same title.
 @app.get("/api/games")
-def list_games():
-    return fetch_all("SELECT game_id, title FROM game ORDER BY title")
+def search_game_titles(q: str = Query(min_length=1), limit: int = Query(10, ge=1, le=50)):
+    return fetch_all("""
+        SELECT g.game_id, g.title, YEAR(MIN(gp.release_date)) AS year
+        FROM game g
+          LEFT JOIN game_platform gp ON g.game_id = gp.game_id
+        WHERE g.title LIKE CONCAT('%%', %s, '%%')
+        GROUP BY g.game_id, g.title
+        ORDER BY g.title, g.game_id
+        LIMIT %s""", (q, limit))
 
 
 SEARCH_PAGE_SIZE = 100
