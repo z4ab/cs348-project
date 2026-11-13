@@ -15,19 +15,36 @@ async function send(method, url, body) {
 
 const STATUSES = ['backlog', 'playing', 'completed']
 
-// Feature 1: search games by title, platform and genre.
-function Search({ platforms, genres }) {
-  const [releases, setReleases] = useState([])
+// Feature 1: search games by title, platform and genre, one page of 100 releases at a time.
+const SEARCH_PAGE_SIZE = 100
 
-  async function search(e) {
-    e?.preventDefault()
-    const f = Object.fromEntries(new FormData(e?.target ?? document.getElementById('search')))
-    const params = new URLSearchParams({ q: f.q })
-    if (f.platform) params.set('platform', f.platform)
-    if (f.genre) params.set('genre', f.genre)
-    setReleases(await getJson(`/api/search?${params}`))
+function Search({ platforms, genres }) {
+  // filters holds the submitted form, so paging repeats the same search.
+  const [filters, setFilters] = useState({ q: '' })
+  const [page, setPage] = useState(1)
+  const [releases, setReleases] = useState([])
+  const [hasNext, setHasNext] = useState(false)
+
+  useEffect(() => {
+    const params = new URLSearchParams({ q: filters.q, page })
+    if (filters.platform) params.set('platform', filters.platform)
+    if (filters.genre) params.set('genre', filters.genre)
+    let stale = false
+    getJson(`/api/search?${params}`).then((res) => {
+      if (stale) return
+      setReleases(res.results)
+      setHasNext(res.has_next)
+    })
+    return () => { stale = true }
+  }, [filters, page])
+
+  function search(e) {
+    e.preventDefault()
+    setFilters(Object.fromEntries(new FormData(e.target)))
+    setPage(1)
   }
-  useEffect(() => { search() }, [])
+
+  const first = (page - 1) * SEARCH_PAGE_SIZE + 1
 
   return (
     <section>
@@ -44,11 +61,18 @@ function Search({ platforms, genres }) {
         </select>
         <button>Search</button>
       </form>
-      <p>{releases.length} releases</p>
+      <p>
+        {releases.length === 0
+          ? 'No releases'
+          : `Releases ${first}–${first + releases.length - 1}`}
+        {' '}
+        <button disabled={page === 1} onClick={() => setPage(page - 1)}>Previous</button>
+        <button disabled={!hasNext} onClick={() => setPage(page + 1)}>Next</button>
+      </p>
       <table>
         <thead><tr><th>Title</th><th>Platform</th><th>Release date</th></tr></thead>
         <tbody>{releases.map((r) => (
-          <tr key={`${r.title}|${r.platform}`}><td>{r.title}</td><td>{r.platform}</td><td>{r.release_date ?? '-'}</td></tr>
+          <tr key={`${r.game_id}|${r.platform}`}><td>{r.title}</td><td>{r.platform}</td><td>{r.release_date ?? '-'}</td></tr>
         ))}</tbody>
       </table>
     </section>
@@ -107,11 +131,53 @@ function Upcoming({ users }) {
   )
 }
 
+// Game picker for the add form: type part of a title, then choose one of the first
+// GAME_PICKER_LIMIT matches. It waits until typing pauses before searching.
+const GAME_PICKER_LIMIT = 10
+const gameLabel = (g) => (g.year ? `${g.title} (${g.year})` : g.title)
+
+function GamePicker({ game, onChoose }) {
+  const [text, setText] = useState('')
+  const [matches, setMatches] = useState(null) // null until a search returns
+
+  useEffect(() => {
+    setMatches(null)
+    const q = text.trim()
+    if (!q || game) return
+    let stale = false
+    const timer = setTimeout(() => {
+      getJson(`/api/games?${new URLSearchParams({ q, limit: GAME_PICKER_LIMIT })}`)
+        .then((rows) => { if (!stale) setMatches(rows) })
+    }, 250)
+    return () => { stale = true; clearTimeout(timer) }
+  }, [text, game])
+
+  return (
+    <div>
+      <input value={text} placeholder="search for a game"
+        onChange={(e) => { setText(e.target.value); onChoose(null) }} />
+      {matches && (
+        <ul>
+          {matches.length === 0 && <li>No matches</li>}
+          {matches.map((g) => (
+            <li key={g.game_id}>
+              <button type="button" onClick={() => { onChoose(g); setText(gameLabel(g)) }}>{gameLabel(g)}</button>
+            </li>
+          ))}
+          {matches.length === GAME_PICKER_LIMIT && <li>Type more of the title to see other games.</li>}
+        </ul>
+      )}
+    </div>
+  )
+}
+
 // Feature 3: view a user's library, add a game, and update an entry.
-function Library({ users, allGames }) {
+function Library({ users }) {
   const [userId, setUserId] = useState('')
   const [entries, setEntries] = useState([])
   const [error, setError] = useState('')
+  const [game, setGame] = useState(null) // the game chosen in the picker
+  const [added, setAdded] = useState(0) // counts adds, to reset the picker after each one
 
   const load = (id) => getJson(`/api/users/${id}/library`).then(setEntries)
   useEffect(() => {
@@ -127,9 +193,13 @@ function Library({ users, allGames }) {
     e.preventDefault()
     const f = Object.fromEntries(new FormData(e.target))
     const err = await send('POST', `/api/users/${userId}/library`,
-      { game_id: f.game_id, status: f.status, hours_played: f.hours_played || 0 })
+      { game_id: game.game_id, status: f.status, hours_played: f.hours_played || 0 })
     setError(err)
-    if (!err) load(userId)
+    if (!err) {
+      load(userId)
+      setGame(null)
+      setAdded(added + 1)
+    }
   }
 
   async function update(gameId, status, hours) {
@@ -155,14 +225,12 @@ function Library({ users, allGames }) {
             ))}</tbody>
           </table>
           <form onSubmit={add}>
-            <select name="game_id" required>
-              {allGames.map((g) => <option key={g.game_id} value={g.game_id}>{g.title}</option>)}
-            </select>
+            <GamePicker key={added} game={game} onChoose={setGame} />
             <select name="status">
               {STATUSES.map((s) => <option key={s}>{s}</option>)}
             </select>
             <input name="hours_played" type="number" min="0" step="0.1" placeholder="hours played" />
-            <button>Add to library</button>
+            <button disabled={!game}>Add to library</button>
           </form>
           <p>{error}</p>
         </>
@@ -207,13 +275,11 @@ export default function App() {
   const [platforms, setPlatforms] = useState([])
   const [genres, setGenres] = useState([])
   const [users, setUsers] = useState([])
-  const [allGames, setAllGames] = useState([])
 
   useEffect(() => {
     getJson('/api/platforms').then(setPlatforms)
     getJson('/api/genres').then(setGenres)
     getJson('/api/users').then(setUsers)
-    getJson('/api/games').then(setAllGames)
   }, [])
 
   return (
@@ -221,7 +287,7 @@ export default function App() {
       <h1>Video Game Tracker</h1>
       <Search platforms={platforms} genres={genres} />
       <Upcoming users={users} />
-      <Library users={users} allGames={allGames} />
+      <Library users={users} />
       <Rankings genres={genres} />
     </>
   )
