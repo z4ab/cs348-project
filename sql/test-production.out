@@ -1,0 +1,106 @@
++-----------------------------------+
+| test                              |
++-----------------------------------+
+| Feature 1a: title contains "Soma" |
++-----------------------------------+
++-------------------------------------------------------------------+------------------------+--------------+
+| title                                                             | platform               | release_date |
++-------------------------------------------------------------------+------------------------+--------------+
+| Akane-iro ni Somaru Saka Parallels                                | PlayStation 2          | 2008-08-14   |
+| Akeiro ni Somaru, Utsukushiki Yashiro de                          | PC (Microsoft Windows) | 2024-08-24   |
+| Bleach Advance: Kurenai ni Somaru Soul Society                    | Game Boy Advance       | 2005-08-21   |
+| Daiva Story 5: The Cup of Soma                                    | MSX                    | 1987-02-01   |
+| Furusoma                                                          | iOS                    | 2016-12-31   |
+| Gulf of Aden - Task Force Somalia                                 | Linux                  | 2015-12-14   |
+| Gulf of Aden - Task Force Somalia                                 | Mac                    | 2015-12-14   |
+| Gulf of Aden - Task Force Somalia                                 | PC (Microsoft Windows) | 2015-12-14   |
+| Hayate no Gotoku! Ojousama Produce Daisakusen Boku Iro ni Somare! | Nintendo DS            | 2008-03-14   |
+| Hissatsu Pachinko Evolution 2: Osomatsu-kun                       | PlayStation 2          | NULL         |
++-------------------------------------------------------------------+------------------------+--------------+
++------------------------------------------------------+
+| test                                                 |
++------------------------------------------------------+
+| Feature 1b: PlayStation 4 (48), genre Adventure (31) |
++------------------------------------------------------+
++------------------------------------------+---------------+--------------+
+| title                                    | platform      | release_date |
++------------------------------------------+---------------+--------------+
+| .Hack//G.U. Last Recode: Premium Edition | PlayStation 4 | 2017-11-02   |
+| .T.E.S.T: Expected Behaviour             | PlayStation 4 | 2023-12-08   |
+| 'n Verlore Verstand                      | PlayStation 4 | 2018-06-12   |
+| #Blud                                    | PlayStation 4 | 2024-06-18   |
+| #SinucaAttack                            | PlayStation 4 | 2021-02-10   |
+| 1 CatLine                                | PlayStation 4 | 2026-03-11   |
+| 11-11: Memories Retold                   | PlayStation 4 | 2018-11-09   |
+| 112th Seed                               | PlayStation 4 | 2020-07-29   |
+| 13 Sentinels: Aegis Rim                  | PlayStation 4 | 2019-11-28   |
+| 13 Sentinels: Aegis Rim - Premium Box    | PlayStation 4 | 2019-11-28   |
++------------------------------------------+---------------+--------------+
++---------------------------------------------------------+
+| test                                                    |
++---------------------------------------------------------+
+| Feature 2: upcoming releases for pixelpanda after today |
++---------------------------------------------------------+
++------------------------------------------------------------------------------------------------+------------------------+--------------+
+| title                                                                                          | platform               | release_date |
++------------------------------------------------------------------------------------------------+------------------------+--------------+
+| Angel Investor Simulator                                                                       | PC (Microsoft Windows) | 2026-11-17   |
+| Arcade Warlord                                                                                 | PC (Microsoft Windows) | 2026-11-17   |
+| Australia Did It: End-of-the-World Railway Defense Business                                    | PC (Microsoft Windows) | 2026-11-17   |
+| Ball Picker: Clean Up the Golf Yard                                                            | PC (Microsoft Windows) | 2026-11-17   |
+| Burning Sword: Death Sun                                                                       | PC (Microsoft Windows) | 2026-11-17   |
+| Dravora                                                                                        | PC (Microsoft Windows) | 2026-11-17   |
+| Duck Side of the Moon                                                                          | PlayStation 5          | 2026-11-17   |
+| Futa: Beer & Sex                                                                               | PC (Microsoft Windows) | 2026-11-17   |
+| Game Shelver 99: I Must Organize My Steam Library and Defend It Against Pirates With a Shotgun | PC (Microsoft Windows) | 2026-11-17   |
+| Marbles: Tidy Up                                                                               | PC (Microsoft Windows) | 2026-11-17   |
++------------------------------------------------------------------------------------------------+------------------------+--------------+
++---------------------------------------------+
+| test                                        |
++---------------------------------------------+
+| Feature 3a: pixelpanda adds Soma to backlog |
++---------------------------------------------+
++------------+-------+---------+--------------+
+| username   | title | status  | hours_played |
++------------+-------+---------+--------------+
+| pixelpanda | Soma  | backlog |          0.0 |
++------------+-------+---------+--------------+
++------------------------------------------------------------+
+| test                                                       |
++------------------------------------------------------------+
+| Feature 3b: pixelpanda updates Soma to playing, 12.5 hours |
++------------------------------------------------------------+
++------------+-------+---------+--------------+
+| username   | title | status  | hours_played |
++------------+-------+---------+--------------+
+| pixelpanda | Soma  | playing |         12.5 |
++------------+-------+---------+--------------+
++--------------------------------------------------------+
+| test                                                   |
++--------------------------------------------------------+
+| Feature 3c: after ROLLBACK, pixelpanda library entries |
++--------------------------------------------------------+
++---------+
+| entries |
++---------+
+|       0 |
++---------+
++------------------------------------+
+| test                               |
++------------------------------------+
+| Feature 4: top-rated Shooter games |
++------------------------------------+
++-------------------------------+----------------+--------------+
+| title                         | average_rating | rating_count |
++-------------------------------+----------------+--------------+
+| 64.0                          |          10.00 |            2 |
+| Death Elevator                |          10.00 |            2 |
+| Huntdown                      |          10.00 |            2 |
+| Outbreak                      |          10.00 |            2 |
+| Rekkr: Sunken Land            |          10.00 |            2 |
+| Voxel Sword                   |          10.00 |            2 |
+| 500 Saints                    |          10.00 |            1 |
+| Absolute Insanity             |          10.00 |            1 |
+| Acceleration of Suguri 2      |          10.00 |            1 |
+| Age of ILCoin VR: Retribution |          10.00 |            1 |
++-------------------------------+----------------+--------------+
