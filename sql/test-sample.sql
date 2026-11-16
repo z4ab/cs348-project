@@ -1,4 +1,4 @@
--- SQL for the four Milestone 1 features, run over the sample database.
+-- SQL for Features 1-5, run over the sample database.
 -- Reload the sample first (schema.sql, then load_sample.sql), then run this file (see README).
 -- Each feature runs the sample query from the report. Features 1 and 3 also run their
 -- query template with other parameters. Features 1 and 3 are the queries the app sends.
@@ -84,3 +84,46 @@ WHERE ge.name = 'Shooter'
 GROUP BY g.game_id, g.title
 ORDER BY average_rating DESC, rating_count DESC, g.title
 LIMIT 10;
+
+-- Feature 5: Game reviews
+-- A user has at most one review per game. Writing a review the user already has replaces it,
+-- so one INSERT ... ON DUPLICATE KEY UPDATE covers both writing and editing.
+-- The app passes the current time as created_at. The samples use fixed times so the output
+-- is the same on every run. Writes are rolled back, as in Feature 3.
+
+SELECT 'Feature 5a: report sample, read the reviews of Lost Ark' AS test;
+SELECT u.username, r.score, r.body, r.created_at
+FROM review r
+  JOIN app_user u ON r.user_id = u.user_id
+WHERE r.game_id = (SELECT game_id FROM game WHERE title = 'Lost Ark')
+ORDER BY r.created_at DESC, u.username;
+
+SELECT 'Feature 5b: report sample, pixelpanda writes a new review of Lost Ark' AS test;
+START TRANSACTION;
+INSERT INTO review (user_id, game_id, score, body, created_at)
+VALUES ((SELECT user_id FROM app_user WHERE username = 'pixelpanda'),
+        (SELECT game_id FROM game WHERE title = 'Lost Ark'),
+        8, 'Great with friends.', '2026-11-01 12:00:00') AS new
+ON DUPLICATE KEY UPDATE score = new.score, body = new.body, created_at = new.created_at;
+SELECT u.username, r.score, r.body, r.created_at
+FROM review r
+  JOIN app_user u ON r.user_id = u.user_id
+WHERE r.game_id = (SELECT game_id FROM game WHERE title = 'Lost Ark')
+ORDER BY r.created_at DESC, u.username;
+ROLLBACK;
+
+SELECT 'Feature 5c: template, speedrunsam edits their Lost Ark review to add a score' AS test;
+START TRANSACTION;
+SET @user = (SELECT user_id FROM app_user WHERE username = 'speedrunsam'),
+    @game = (SELECT game_id FROM game WHERE title = 'Lost Ark'),
+    @score = 4, @body = 'Gave up halfway. The grind is too long.',
+    @created_at = '2026-11-02 12:00:00';
+INSERT INTO review (user_id, game_id, score, body, created_at)
+VALUES (@user, @game, @score, @body, @created_at) AS new
+ON DUPLICATE KEY UPDATE score = new.score, body = new.body, created_at = new.created_at;
+SELECT u.username, r.score, r.body, r.created_at
+FROM review r
+  JOIN app_user u ON r.user_id = u.user_id
+WHERE r.game_id = @game
+ORDER BY r.created_at DESC, u.username;
+ROLLBACK;
