@@ -3,58 +3,364 @@
 +-----------------------------------+
 | Feature 1a: title contains "Soma" |
 +-----------------------------------+
-+-------------------------------------------------------------------+-------------------------+--------------+
-| title                                                             | platform                | release_date |
-+-------------------------------------------------------------------+-------------------------+--------------+
-| Akeiro ni Somaru, Utsukushiki Yashiro de                          | PC (Microsoft Windows)  | 2024-08-24   |
-| Modern War: Somalian Pirates                                      | PC (Microsoft Windows)  | 2009-09-29   |
-| Osomatsu-kun Hachamecha Gekijou                                   | Sega Mega Drive/Genesis | 1988-12-24   |
-| Osomatsu-kun: Back to the Me no Deppa no Maki                     | Family Computer         | 1989-12-08   |
-| Osomatsu-san The Game: Hachamecha Shuushoku Advice - Dead or Work | PlayStation Vita        | 2017-06-29   |
-| Philosoma                                                         | PlayStation             | 1995-07-28   |
-| Philosoma                                                         | PlayStation 3           | 2007-04-26   |
-| Philosoma                                                         | PlayStation Portable    | 2007-04-26   |
-| Pirate Hunter: Somali Trap                                        | PC (Microsoft Windows)  | 2024-10-03   |
-| Soma                                                              | Linux                   | 2015-09-21   |
-+-------------------------------------------------------------------+-------------------------+--------------+
++---------+-------------------------------------------------------------------+-------------------------+--------------+
+| game_id | title                                                             | platform                | release_date |
++---------+-------------------------------------------------------------------+-------------------------+--------------+
+|  394791 | Akeiro ni Somaru, Utsukushiki Yashiro de                          | PC (Microsoft Windows)  | 2024-08-24   |
+|   64321 | Modern War: Somalian Pirates                                      | PC (Microsoft Windows)  | 2009-09-29   |
+|    4432 | Osomatsu-kun Hachamecha Gekijou                                   | Sega Mega Drive/Genesis | 1988-12-24   |
+|   48797 | Osomatsu-kun: Back to the Me no Deppa no Maki                     | Family Computer         | 1989-12-08   |
+|   83420 | Osomatsu-san The Game: Hachamecha Shuushoku Advice - Dead or Work | PlayStation Vita        | 2017-06-29   |
+|   20638 | Philosoma                                                         | PlayStation             | 1995-07-28   |
+|   20638 | Philosoma                                                         | PlayStation 3           | 2007-04-26   |
+|   20638 | Philosoma                                                         | PlayStation Portable    | 2007-04-26   |
+|  309850 | Pirate Hunter: Somali Trap                                        | PC (Microsoft Windows)  | 2024-10-03   |
+|    9727 | Soma                                                              | Linux                   | 2015-09-21   |
+|    9727 | Soma                                                              | Mac                     | 2015-09-21   |
+|    9727 | Soma                                                              | PC (Microsoft Windows)  | 2015-09-21   |
+|    9727 | Soma                                                              | PlayStation 4           | 2015-09-22   |
+|    9727 | Soma                                                              | Xbox One                | 2017-12-01   |
+|    9727 | Soma                                                              | Nintendo Switch         | 2025-07-24   |
+|   21468 | Soma Bringer                                                      | Nintendo DS             | 2008-02-28   |
+|   29590 | Soma Spirits: Rebalance                                           | PC (Microsoft Windows)  | 2017-04-14   |
+|  144855 | Soma Union                                                        | PC (Microsoft Windows)  | 2021-11-01   |
+|   45676 | Somari                                                            | Family Computer         | 1994-12-31   |
+|  331871 | Somari Insanity                                                   | PC (Microsoft Windows)  | NULL         |
+|  121481 | Tasomachi: Behind the Twilight                                    | Xbox One                | NULL         |
+|  121481 | Tasomachi: Behind the Twilight                                    | PC (Microsoft Windows)  | 2021-04-14   |
+|  121481 | Tasomachi: Behind the Twilight                                    | Nintendo Switch         | 2022-04-28   |
+|  121481 | Tasomachi: Behind the Twilight                                    | PlayStation 4           | 2022-04-28   |
++---------+-------------------------------------------------------------------+-------------------------+--------------+
 +------------------------------------------------------+
 | test                                                 |
 +------------------------------------------------------+
 | Feature 1b: PlayStation 4 (48), genre Adventure (31) |
 +------------------------------------------------------+
-+------------------------------------------+---------------+--------------+
-| title                                    | platform      | release_date |
-+------------------------------------------+---------------+--------------+
-| .Hack//G.U. Last Recode: Premium Edition | PlayStation 4 | 2017-11-02   |
-| .T.E.S.T: Expected Behaviour             | PlayStation 4 | 2023-12-08   |
-| 'n Verlore Verstand                      | PlayStation 4 | 2018-06-12   |
-| #Blud                                    | PlayStation 4 | 2024-06-18   |
-| #SinucaAttack                            | PlayStation 4 | 2021-02-10   |
-| 11-11: Memories Retold                   | PlayStation 4 | 2018-11-09   |
-| 112th Seed                               | PlayStation 4 | 2020-07-29   |
-| 13 Sentinels: Aegis Rim                  | PlayStation 4 | 2019-11-28   |
-| 1964 Operation Velvet Twins              | PlayStation 4 | 2026-08-28   |
-| 1979 Revolution: Black Friday            | PlayStation 4 | 2018-08-01   |
-+------------------------------------------+---------------+--------------+
-+---------------------------------------------------------+
-| test                                                    |
-+---------------------------------------------------------+
-| Feature 2: upcoming releases for pixelpanda after today |
-+---------------------------------------------------------+
-+------------------------------------------------------------------------------------------------+------------------------+--------------+
-| title                                                                                          | platform               | release_date |
-+------------------------------------------------------------------------------------------------+------------------------+--------------+
-| Angel Investor Simulator                                                                       | PC (Microsoft Windows) | 2026-11-17   |
-| Arcade Warlord                                                                                 | PC (Microsoft Windows) | 2026-11-17   |
-| Australia Did It: End-of-the-World Railway Defense Business                                    | PC (Microsoft Windows) | 2026-11-17   |
-| Ball Picker: Clean Up the Golf Yard                                                            | PC (Microsoft Windows) | 2026-11-17   |
-| Dravora                                                                                        | PC (Microsoft Windows) | 2026-11-17   |
-| Duck Side of the Moon                                                                          | PlayStation 5          | 2026-11-17   |
-| Futa: Beer & Sex                                                                               | PC (Microsoft Windows) | 2026-11-17   |
-| Game Shelver 99: I Must Organize My Steam Library and Defend It Against Pirates With a Shotgun | PC (Microsoft Windows) | 2026-11-17   |
-| Milki Delivery                                                                                 | PC (Microsoft Windows) | 2026-11-17   |
-| Moonlight Peaks                                                                                | PlayStation 5          | 2026-11-17   |
-+------------------------------------------------------------------------------------------------+------------------------+--------------+
++---------+-------------------------------------------------------+---------------+--------------+
+| game_id | title                                                 | platform      | release_date |
++---------+-------------------------------------------------------+---------------+--------------+
+|  166181 | .Hack//G.U. Last Recode: Premium Edition              | PlayStation 4 | 2017-11-02   |
+|   86524 | .T.E.S.T: Expected Behaviour                          | PlayStation 4 | 2023-12-08   |
+|   19055 | 'n Verlore Verstand                                   | PlayStation 4 | 2018-06-12   |
+|  117500 | #Blud                                                 | PlayStation 4 | 2024-06-18   |
+|  143494 | #SinucaAttack                                         | PlayStation 4 | 2021-02-10   |
+|  103249 | 11-11: Memories Retold                                | PlayStation 4 | 2018-11-09   |
+|  138458 | 112th Seed                                            | PlayStation 4 | 2020-07-29   |
+|   28337 | 13 Sentinels: Aegis Rim                               | PlayStation 4 | 2019-11-28   |
+|  376924 | 1964 Operation Velvet Twins                           | PlayStation 4 | 2026-08-28   |
+|   14360 | 1979 Revolution: Black Friday                         | PlayStation 4 | 2018-08-01   |
+|  100562 | 198X                                                  | PlayStation 4 | 2019-06-20   |
+|  278568 | 2045, Tsuki yori.                                     | PlayStation 4 | 2023-12-21   |
+|   13171 | 2064: Read Only Memories                              | PlayStation 4 | 2017-01-17   |
+|   17828 | 20XX                                                  | PlayStation 4 | 2018-07-10   |
+|  385472 | 28 Days Train Wreck Survivor                          | PlayStation 4 | 2025-12-18   |
+|   26847 | 2Dark                                                 | PlayStation 4 | 2017-03-10   |
+|   86657 | 3 Minutes to Midnight                                 | PlayStation 4 | 2024-09-25   |
+|   19396 | 35MM                                                  | PlayStation 4 | 2022-03-02   |
+|   51730 | 36 Fragments of Midnight                              | PlayStation 4 | 2017-12-19   |
+|   32125 | 39 Days to Mars                                       | PlayStation 4 | 2019-10-29   |
+|  219510 | 3D Don't Die Mr Robot                                 | PlayStation 4 | 2025-03-12   |
+|  212898 | 4 The Elements                                        | PlayStation 4 | 2026-04-30   |
+|   95069 | 428: Shibuya Scramble                                 | PlayStation 4 | 2018-09-04   |
+|   11710 | 60 Parsecs!                                           | PlayStation 4 | 2019-12-18   |
+|   11709 | 60 Seconds!                                           | PlayStation 4 | 2020-03-06   |
+|  296541 | 63 Days                                               | PlayStation 4 | 2024-09-26   |
+|  123954 | 6Souls                                                | PlayStation 4 | 2021-12-03   |
+|  206436 | 7 Days Heroes                                         | PlayStation 4 | 2024-03-29   |
+|    5574 | 7 Days to Die                                         | PlayStation 4 | 2016-06-28   |
+|  115336 | 7th Sector                                            | PlayStation 4 | 2020-02-05   |
+|   74653 | 8-Bit Adventures 2                                    | PlayStation 4 | 2024-10-16   |
+|  178792 | 890B                                                  | PlayStation 4 | 2021-11-10   |
+|  137635 | 8Doors: Arum's Afterlife Adventure                    | PlayStation 4 | 2023-04-28   |
+|   35265 | 9 Clues 2: The Ward                                   | PlayStation 4 | 2023-01-06   |
+|   17143 | 9 Clues: The Secret of Serpent Creek                  | PlayStation 4 | 2022-04-01   |
+|   94078 | 9 Monkeys of Shaolin                                  | PlayStation 4 | 2020-10-16   |
+|  143635 | 9 Years of Shadows                                    | PlayStation 4 | 2025-07-31   |
+|  139323 | 9th Dawn III                                          | PlayStation 4 | 2020-10-06   |
+|   19944 | A Bastard's Tale                                      | PlayStation 4 | 2016-10-04   |
+|  199237 | A Building Full of Cats                               | PlayStation 4 | 2023-06-01   |
+|  210901 | A Castle Full of Cats                                 | PlayStation 4 | 2023-06-01   |
+|  132291 | A Day Without Me                                      | PlayStation 4 | 2021-09-09   |
+|  340114 | A Dream About Parking Lots                            | PlayStation 4 | 2025-07-31   |
+|  104682 | A Fold Apart                                          | PlayStation 4 | 2020-05-19   |
+|  400419 | A Frog's Job 2: Froggina                              | PlayStation 4 | 2026-05-29   |
+|   29662 | A Gummy's Life                                        | PlayStation 4 | 2021-09-24   |
+|    6705 | A Hat in Time                                         | PlayStation 4 | 2017-12-05   |
+|   23883 | A Haunting: Witching Hour                             | PlayStation 4 | NULL         |
+|  137072 | A Hero and a Garden                                   | PlayStation 4 | 2020-08-28   |
+|   31557 | A Hole New World                                      | PlayStation 4 | 2017-09-05   |
+|  122050 | A Juggler's Tale                                      | PlayStation 4 | 2021-09-29   |
+|  109984 | A Knight's Quest                                      | PlayStation 4 | 2019-10-10   |
+|   87686 | A Light in the Dark                                   | PlayStation 4 | 2023-04-05   |
+|   33333 | A Little Lily Princess                                | PlayStation 4 | 2021-05-28   |
+|  274734 | A Little Walk in the Woods                            | PlayStation 4 | 2023-10-31   |
+|  226218 | A Matter of Principle                                 | PlayStation 4 | 2023-01-19   |
+|  106856 | A Memoir Blue                                         | PlayStation 4 | 2022-03-24   |
+|  131845 | A Monster's Expedition                                | PlayStation 4 | 2022-05-19   |
+|  144483 | A Musical Story                                       | PlayStation 4 | 2022-03-02   |
+|  266431 | A Night On The Farm                                   | PlayStation 4 | 2024-09-18   |
+|  143159 | A Painter's Tale: Curon, 1950                         | PlayStation 4 | 2023-06-08   |
+|   97271 | A Perfect Day                                         | PlayStation 4 | 2023-10-26   |
+|   18653 | A Place for the Unwilling                             | PlayStation 4 | 2022-03-23   |
+|   27316 | A Plague Tale: Innocence                              | PlayStation 4 | 2019-05-14   |
+|   89482 | A Purrtato Tail: By the Light of the Elderstar        | PlayStation 4 | NULL         |
+|  122733 | A Rat's Quest: The Way Back Home                      | PlayStation 4 | 2026-04-03   |
+|   51944 | A Robot Named Fight                                   | PlayStation 4 | 2023-09-07   |
+|  116753 | A Short Hike                                          | PlayStation 4 | 2021-11-16   |
+|  152682 | A Sketchbook About Her Sun                            | PlayStation 4 | 2022-04-15   |
+|  110039 | A Space for the Unbound                               | PlayStation 4 | 2023-01-19   |
+|  122056 | A Street Cat's Tale                                   | PlayStation 4 | 2022-04-28   |
+|  119229 | A Summer with the Shiba Inu                           | PlayStation 4 | 2020-06-24   |
+|  151043 | A Tale for Anna                                       | PlayStation 4 | 2023-06-30   |
+|  102803 | A Tale of Paper                                       | PlayStation 4 | 2020-10-14   |
+|  285882 | A Time Traveller's Guide to Past Delicacies           | PlayStation 4 | 2024-02-21   |
+|  234411 | A Tower Full of Cats                                  | PlayStation 4 | 2026-08-26   |
+|   36897 | A Way Out                                             | PlayStation 4 | 2018-03-23   |
+|  110460 | A Winter's Daydream                                   | PlayStation 4 | 2019-10-08   |
+|  117268 | A.D. 2047                                             | PlayStation 4 | NULL         |
+|    7171 | Aaru's Awakening                                      | PlayStation 4 | 2015-04-07   |
+|  237174 | Abathor                                               | PlayStation 4 | 2024-07-25   |
+|   86362 | Abo Khashem                                           | PlayStation 4 | 2018-02-23   |
+|  110070 | Aborigenus                                            | PlayStation 4 | 2021-01-12   |
+|  150562 | Above Snakes                                          | PlayStation 4 | NULL         |
+|  334239 | Absolum                                               | PlayStation 4 | 2025-10-09   |
+|  151385 | Absolute Tactics: Daughters of Mercy                  | PlayStation 4 | 2022-11-17   |
+|   19333 | Absolver                                              | PlayStation 4 | 2017-08-29   |
+|   52555 | Absolver: Deluxe Edition                              | PlayStation 4 | 2017-08-29   |
+|   74318 | Absolver: Special Reserve edition                     | PlayStation 4 | 2017-08-29   |
+|   14414 | Abyss Odyssey                                         | PlayStation 4 | 2015-07-28   |
+|   21110 | Abyss Odyssey: Extended Dream Edition                 | PlayStation 4 | 2015-07-28   |
+|  324893 | Abyss Seeker: What Do You See Deep in The Abyss       | PlayStation 4 | 2025-03-06   |
+|   17136 | Abyss: The Wraiths of Eden                            | PlayStation 4 | 2017-10-20   |
+|    7352 | Abzu                                                  | PlayStation 4 | 2016-08-02   |
+|   36796 | Accel World vs. Sword Art Online: Millennium Twilight | PlayStation 4 | 2017-03-16   |
+|  210902 | Acceptance                                            | PlayStation 4 | 2023-08-11   |
+|  240807 | Access Denied: Escape                                 | PlayStation 4 | 2024-11-15   |
+|   33309 | Ace of Seafood                                        | PlayStation 4 | 2017-11-09   |
+|  160293 | Achilles: Legends Untold                              | PlayStation 4 | 2024-09-18   |
+|  319802 | Achilles: Survivor                                    | PlayStation 4 | 2025-07-28   |
+|  106562 | Achtung! Cthulhu Tactics                              | PlayStation 4 | 2018-11-20   |
++---------+-------------------------------------------------------+---------------+--------------+
++-------------------------------------------------------------------+
+| test                                                              |
++-------------------------------------------------------------------+
+| Feature 2a: upcoming releases on any platform, undated (TBA) last |
++-------------------------------------------------------------------+
++---------+------------------------------------------------------------------------------------------------+------------------------+--------------+
+| game_id | title                                                                                          | platform               | release_date |
++---------+------------------------------------------------------------------------------------------------+------------------------+--------------+
+|  425791 | Angel Investor Simulator                                                                       | PC (Microsoft Windows) | 2026-11-17   |
+|  425580 | Arcade Warlord                                                                                 | PC (Microsoft Windows) | 2026-11-17   |
+|  365278 | Australia Did It: End-of-the-World Railway Defense Business                                    | PC (Microsoft Windows) | 2026-11-17   |
+|  412590 | Ball Picker: Clean Up the Golf Yard                                                            | Linux                  | 2026-11-17   |
+|  412590 | Ball Picker: Clean Up the Golf Yard                                                            | Mac                    | 2026-11-17   |
+|  412590 | Ball Picker: Clean Up the Golf Yard                                                            | PC (Microsoft Windows) | 2026-11-17   |
+|  423763 | Dravora                                                                                        | PC (Microsoft Windows) | 2026-11-17   |
+|  318167 | Duck Side of the Moon                                                                          | PlayStation 5          | 2026-11-17   |
+|  425217 | Futa: Beer & Sex                                                                               | PC (Microsoft Windows) | 2026-11-17   |
+|  422308 | Game Shelver 99: I Must Organize My Steam Library and Defend It Against Pirates With a Shotgun | PC (Microsoft Windows) | 2026-11-17   |
+|  385308 | Milki Delivery                                                                                 | Linux                  | 2026-11-17   |
+|  385308 | Milki Delivery                                                                                 | Mac                    | 2026-11-17   |
+|  385308 | Milki Delivery                                                                                 | PC (Microsoft Windows) | 2026-11-17   |
+|  237123 | Moonlight Peaks                                                                                | PlayStation 5          | 2026-11-17   |
+|  421040 | Muster                                                                                         | Linux                  | 2026-11-17   |
+|  421040 | Muster                                                                                         | Mac                    | 2026-11-17   |
+|  421040 | Muster                                                                                         | PC (Microsoft Windows) | 2026-11-17   |
+|  412204 | Night Train Simulator: Blackout                                                                | PC (Microsoft Windows) | 2026-11-17   |
+|  404154 | Okurek                                                                                         | PC (Microsoft Windows) | 2026-11-17   |
+|  366709 | Ranger’s Path: National Park Simulator                                                         | PlayStation 5          | 2026-11-17   |
+|  366709 | Ranger’s Path: National Park Simulator                                                         | Xbox Series X|S        | 2026-11-17   |
+|  427665 | Roomy                                                                                          | Mac                    | 2026-11-17   |
+|  427665 | Roomy                                                                                          | PC (Microsoft Windows) | 2026-11-17   |
+|  427346 | Rushmark                                                                                       | Android                | 2026-11-17   |
+|  417436 | Steel Gullet                                                                                   | PC (Microsoft Windows) | 2026-11-17   |
+|  422401 | Tomider                                                                                        | PC (Microsoft Windows) | 2026-11-17   |
+|  414076 | Uncosy                                                                                         | PC (Microsoft Windows) | 2026-11-17   |
+|  410966 | Unicorn Academy: Island of Magic                                                               | Nintendo Switch        | 2026-11-17   |
+|  410966 | Unicorn Academy: Island of Magic                                                               | PC (Microsoft Windows) | 2026-11-17   |
+|  410966 | Unicorn Academy: Island of Magic                                                               | PlayStation 4          | 2026-11-17   |
+|  410966 | Unicorn Academy: Island of Magic                                                               | PlayStation 5          | 2026-11-17   |
+|  410966 | Unicorn Academy: Island of Magic                                                               | Xbox One               | 2026-11-17   |
+|  410966 | Unicorn Academy: Island of Magic                                                               | Xbox Series X|S        | 2026-11-17   |
+|  406149 | Zero Sum                                                                                       | Linux                  | 2026-11-17   |
+|  406149 | Zero Sum                                                                                       | Mac                    | 2026-11-17   |
+|  406149 | Zero Sum                                                                                       | PC (Microsoft Windows) | 2026-11-17   |
+|  423808 | Bomb Them Ores                                                                                 | Linux                  | 2026-11-18   |
+|  423808 | Bomb Them Ores                                                                                 | Mac                    | 2026-11-18   |
+|  423808 | Bomb Them Ores                                                                                 | PC (Microsoft Windows) | 2026-11-18   |
+|  410670 | Dark Rail                                                                                      | PC (Microsoft Windows) | 2026-11-18   |
+|  410670 | Dark Rail                                                                                      | PlayStation 5          | 2026-11-18   |
+|  410670 | Dark Rail                                                                                      | Xbox Series X|S        | 2026-11-18   |
+|  318812 | Eletta                                                                                         | PC (Microsoft Windows) | 2026-11-18   |
+|  428580 | Frog Collector                                                                                 | PC (Microsoft Windows) | 2026-11-18   |
+|  420868 | Frog is Crime                                                                                  | PC (Microsoft Windows) | 2026-11-18   |
+|  407329 | Graveyard Orbit                                                                                | PC (Microsoft Windows) | 2026-11-18   |
+|  419163 | Let Me Die                                                                                     | PC (Microsoft Windows) | 2026-11-18   |
+|  412123 | Marque & Reprisal                                                                              | Linux                  | 2026-11-18   |
+|  412123 | Marque & Reprisal                                                                              | Mac                    | 2026-11-18   |
+|  412123 | Marque & Reprisal                                                                              | PC (Microsoft Windows) | 2026-11-18   |
+|  427305 | Tidy Mall Together                                                                             | PC (Microsoft Windows) | 2026-11-18   |
+|  428390 | Tiny Dwellings                                                                                 | PC (Microsoft Windows) | 2026-11-18   |
+|  331378 | Vice: Magic City Mayhem                                                                        | Nintendo Switch        | 2026-11-18   |
+|  331378 | Vice: Magic City Mayhem                                                                        | PC (Microsoft Windows) | 2026-11-18   |
+|  331378 | Vice: Magic City Mayhem                                                                        | PlayStation 5          | 2026-11-18   |
+|  331378 | Vice: Magic City Mayhem                                                                        | Xbox Series X|S        | 2026-11-18   |
+|  429653 | Age of Arca                                                                                    | Meta Quest 3           | 2026-11-19   |
+|  426119 | Beyond the Mist                                                                                | Nintendo Switch        | 2026-11-19   |
+|  425565 | Crumple Toss                                                                                   | PC (Microsoft Windows) | 2026-11-19   |
+|  415858 | CyberKitty: Neon Merge                                                                         | PC (Microsoft Windows) | 2026-11-19   |
+|  413476 | G.E.M. Grab & Exit                                                                             | Linux                  | 2026-11-19   |
+|  413476 | G.E.M. Grab & Exit                                                                             | PC (Microsoft Windows) | 2026-11-19   |
+|  395267 | Gently Packed                                                                                  | PC (Microsoft Windows) | 2026-11-19   |
+|   52189 | Grand Theft Auto VI                                                                            | PlayStation 5          | 2026-11-19   |
+|   52189 | Grand Theft Auto VI                                                                            | Xbox Series X|S        | 2026-11-19   |
+|  407999 | Grand Theft Auto VI: Ultimate Edition                                                          | PlayStation 5          | 2026-11-19   |
+|  407999 | Grand Theft Auto VI: Ultimate Edition                                                          | Xbox Series X|S        | 2026-11-19   |
+|  348658 | Iona's Island                                                                                  | PC (Microsoft Windows) | 2026-11-19   |
+|  425456 | Kuroshio: Neon Blood                                                                           | PC (Microsoft Windows) | 2026-11-19   |
+|  429369 | Loot Hole                                                                                      | Linux                  | 2026-11-19   |
+|  429369 | Loot Hole                                                                                      | Mac                    | 2026-11-19   |
+|  429369 | Loot Hole                                                                                      | PC (Microsoft Windows) | 2026-11-19   |
+|  389330 | Lord of Undead                                                                                 | PC (Microsoft Windows) | 2026-11-19   |
+|  429603 | Mageness                                                                                       | Android                | 2026-11-19   |
+|  429603 | Mageness                                                                                       | iOS                    | 2026-11-19   |
+|  427141 | Monopolize: Tech Empire                                                                        | Android                | 2026-11-19   |
+|  346810 | Phantom Streets                                                                                | PC (Microsoft Windows) | 2026-11-19   |
+|  417016 | Salt of the Earth                                                                              | Linux                  | 2026-11-19   |
+|  417016 | Salt of the Earth                                                                              | Mac                    | 2026-11-19   |
+|  417016 | Salt of the Earth                                                                              | PC (Microsoft Windows) | 2026-11-19   |
+|  371394 | Shrike                                                                                         | PC (Microsoft Windows) | 2026-11-19   |
+|  426960 | Tavern Clicker                                                                                 | PC (Microsoft Windows) | 2026-11-19   |
+|  286340 | The House of Tesla: Definitive Edition                                                         | PlayStation 4          | 2026-11-19   |
+|  286340 | The House of Tesla: Definitive Edition                                                         | PlayStation 5          | 2026-11-19   |
+|  429830 | Untitled Shop Game                                                                             | PC (Microsoft Windows) | 2026-11-19   |
+|  323369 | Volvy’s Adventure: Reslimed                                                                    | PC (Microsoft Windows) | 2026-11-19   |
+|  344669 | Warhammer 40,000: Boltgun 2                                                                    | Nintendo Switch 2      | 2026-11-19   |
+|  398388 | Witch the Showdown                                                                             | PC (Microsoft Windows) | 2026-11-19   |
+|  412422 | Chigusa's Diary                                                                                | PC (Microsoft Windows) | 2026-11-20   |
+|  429595 | Evil Maiden: The Noble Warrior and the Demon Armor                                             | PC (Microsoft Windows) | 2026-11-20   |
+|  429340 | Geo Book                                                                                       | PC (Microsoft Windows) | 2026-11-20   |
+|  429340 | Geo Book                                                                                       | PlayStation 4          | 2026-11-20   |
+|  429340 | Geo Book                                                                                       | PlayStation 5          | 2026-11-20   |
+|  429340 | Geo Book                                                                                       | Xbox One               | 2026-11-20   |
+|  428734 | Kintsugi Cottage                                                                               | Linux                  | 2026-11-20   |
+|  428734 | Kintsugi Cottage                                                                               | Mac                    | 2026-11-20   |
+|  428734 | Kintsugi Cottage                                                                               | PC (Microsoft Windows) | 2026-11-20   |
+|  425454 | Meifu Kanshiki-Ka: The Underworld Forensics Division                                           | PC (Microsoft Windows) | 2026-11-20   |
+|  429503 | Mystery of the Mysterious Futayuri Mystery Dungeon                                             | PC (Microsoft Windows) | 2026-11-20   |
+|  428427 | ReactorX 4                                                                                     | PC (Microsoft Windows) | 2026-11-20   |
+|  428427 | ReactorX 4                                                                                     | Xbox One               | 2026-11-20   |
++---------+------------------------------------------------------------------------------------------------+------------------------+--------------+
++----------------------------------------------------------+
+| test                                                     |
++----------------------------------------------------------+
+| Feature 2b: upcoming releases for pixelpanda after today |
++----------------------------------------------------------+
++---------+------------------------------------------------------------------------------------------------+------------------------+--------------+
+| game_id | title                                                                                          | platform               | release_date |
++---------+------------------------------------------------------------------------------------------------+------------------------+--------------+
+|  425791 | Angel Investor Simulator                                                                       | PC (Microsoft Windows) | 2026-11-17   |
+|  425580 | Arcade Warlord                                                                                 | PC (Microsoft Windows) | 2026-11-17   |
+|  365278 | Australia Did It: End-of-the-World Railway Defense Business                                    | PC (Microsoft Windows) | 2026-11-17   |
+|  412590 | Ball Picker: Clean Up the Golf Yard                                                            | PC (Microsoft Windows) | 2026-11-17   |
+|  423763 | Dravora                                                                                        | PC (Microsoft Windows) | 2026-11-17   |
+|  318167 | Duck Side of the Moon                                                                          | PlayStation 5          | 2026-11-17   |
+|  425217 | Futa: Beer & Sex                                                                               | PC (Microsoft Windows) | 2026-11-17   |
+|  422308 | Game Shelver 99: I Must Organize My Steam Library and Defend It Against Pirates With a Shotgun | PC (Microsoft Windows) | 2026-11-17   |
+|  385308 | Milki Delivery                                                                                 | PC (Microsoft Windows) | 2026-11-17   |
+|  237123 | Moonlight Peaks                                                                                | PlayStation 5          | 2026-11-17   |
+|  421040 | Muster                                                                                         | PC (Microsoft Windows) | 2026-11-17   |
+|  412204 | Night Train Simulator: Blackout                                                                | PC (Microsoft Windows) | 2026-11-17   |
+|  404154 | Okurek                                                                                         | PC (Microsoft Windows) | 2026-11-17   |
+|  366709 | Ranger’s Path: National Park Simulator                                                         | PlayStation 5          | 2026-11-17   |
+|  427665 | Roomy                                                                                          | PC (Microsoft Windows) | 2026-11-17   |
+|  417436 | Steel Gullet                                                                                   | PC (Microsoft Windows) | 2026-11-17   |
+|  422401 | Tomider                                                                                        | PC (Microsoft Windows) | 2026-11-17   |
+|  414076 | Uncosy                                                                                         | PC (Microsoft Windows) | 2026-11-17   |
+|  410966 | Unicorn Academy: Island of Magic                                                               | PC (Microsoft Windows) | 2026-11-17   |
+|  410966 | Unicorn Academy: Island of Magic                                                               | PlayStation 5          | 2026-11-17   |
+|  406149 | Zero Sum                                                                                       | PC (Microsoft Windows) | 2026-11-17   |
+|  423808 | Bomb Them Ores                                                                                 | PC (Microsoft Windows) | 2026-11-18   |
+|  410670 | Dark Rail                                                                                      | PC (Microsoft Windows) | 2026-11-18   |
+|  410670 | Dark Rail                                                                                      | PlayStation 5          | 2026-11-18   |
+|  318812 | Eletta                                                                                         | PC (Microsoft Windows) | 2026-11-18   |
+|  428580 | Frog Collector                                                                                 | PC (Microsoft Windows) | 2026-11-18   |
+|  420868 | Frog is Crime                                                                                  | PC (Microsoft Windows) | 2026-11-18   |
+|  407329 | Graveyard Orbit                                                                                | PC (Microsoft Windows) | 2026-11-18   |
+|  419163 | Let Me Die                                                                                     | PC (Microsoft Windows) | 2026-11-18   |
+|  412123 | Marque & Reprisal                                                                              | PC (Microsoft Windows) | 2026-11-18   |
+|  427305 | Tidy Mall Together                                                                             | PC (Microsoft Windows) | 2026-11-18   |
+|  428390 | Tiny Dwellings                                                                                 | PC (Microsoft Windows) | 2026-11-18   |
+|  331378 | Vice: Magic City Mayhem                                                                        | PC (Microsoft Windows) | 2026-11-18   |
+|  331378 | Vice: Magic City Mayhem                                                                        | PlayStation 5          | 2026-11-18   |
+|  425565 | Crumple Toss                                                                                   | PC (Microsoft Windows) | 2026-11-19   |
+|  415858 | CyberKitty: Neon Merge                                                                         | PC (Microsoft Windows) | 2026-11-19   |
+|  413476 | G.E.M. Grab & Exit                                                                             | PC (Microsoft Windows) | 2026-11-19   |
+|  395267 | Gently Packed                                                                                  | PC (Microsoft Windows) | 2026-11-19   |
+|   52189 | Grand Theft Auto VI                                                                            | PlayStation 5          | 2026-11-19   |
+|  407999 | Grand Theft Auto VI: Ultimate Edition                                                          | PlayStation 5          | 2026-11-19   |
+|  348658 | Iona's Island                                                                                  | PC (Microsoft Windows) | 2026-11-19   |
+|  425456 | Kuroshio: Neon Blood                                                                           | PC (Microsoft Windows) | 2026-11-19   |
+|  429369 | Loot Hole                                                                                      | PC (Microsoft Windows) | 2026-11-19   |
+|  389330 | Lord of Undead                                                                                 | PC (Microsoft Windows) | 2026-11-19   |
+|  346810 | Phantom Streets                                                                                | PC (Microsoft Windows) | 2026-11-19   |
+|  417016 | Salt of the Earth                                                                              | PC (Microsoft Windows) | 2026-11-19   |
+|  371394 | Shrike                                                                                         | PC (Microsoft Windows) | 2026-11-19   |
+|  426960 | Tavern Clicker                                                                                 | PC (Microsoft Windows) | 2026-11-19   |
+|  286340 | The House of Tesla: Definitive Edition                                                         | PlayStation 5          | 2026-11-19   |
+|  429830 | Untitled Shop Game                                                                             | PC (Microsoft Windows) | 2026-11-19   |
+|  323369 | Volvy’s Adventure: Reslimed                                                                    | PC (Microsoft Windows) | 2026-11-19   |
+|  398388 | Witch the Showdown                                                                             | PC (Microsoft Windows) | 2026-11-19   |
+|  412422 | Chigusa's Diary                                                                                | PC (Microsoft Windows) | 2026-11-20   |
+|  429595 | Evil Maiden: The Noble Warrior and the Demon Armor                                             | PC (Microsoft Windows) | 2026-11-20   |
+|  429340 | Geo Book                                                                                       | PC (Microsoft Windows) | 2026-11-20   |
+|  429340 | Geo Book                                                                                       | PlayStation 5          | 2026-11-20   |
+|  428734 | Kintsugi Cottage                                                                               | PC (Microsoft Windows) | 2026-11-20   |
+|  425454 | Meifu Kanshiki-Ka: The Underworld Forensics Division                                           | PC (Microsoft Windows) | 2026-11-20   |
+|  429503 | Mystery of the Mysterious Futayuri Mystery Dungeon                                             | PC (Microsoft Windows) | 2026-11-20   |
+|  428427 | ReactorX 4                                                                                     | PC (Microsoft Windows) | 2026-11-20   |
+|  379196 | Resequence: The Orchard                                                                        | PC (Microsoft Windows) | 2026-11-20   |
+|  417573 | Resettle                                                                                       | PC (Microsoft Windows) | 2026-11-20   |
+|  429702 | Ritebound                                                                                      | PC (Microsoft Windows) | 2026-11-20   |
+|  428329 | Snarkle!                                                                                       | PC (Microsoft Windows) | 2026-11-20   |
+|  429102 | Tidy Up the Flower Shop: Christmas                                                             | PC (Microsoft Windows) | 2026-11-20   |
+|  421309 | Wand Keeper                                                                                    | PC (Microsoft Windows) | 2026-11-20   |
+|  427229 | Whispering Eclipsia                                                                            | PC (Microsoft Windows) | 2026-11-20   |
+|  429302 | Etranger In the City of Doom                                                                   | PC (Microsoft Windows) | 2026-11-21   |
+|  419509 | Zombie Police: Midsummer Unhappy New Year                                                      | PC (Microsoft Windows) | 2026-11-22   |
+|  419157 | Blackout Route                                                                                 | PC (Microsoft Windows) | 2026-11-23   |
+|  407686 | Circuit Keep                                                                                   | PC (Microsoft Windows) | 2026-11-23   |
+|  428602 | Command at Your Own Risk                                                                       | PC (Microsoft Windows) | 2026-11-23   |
+|  391666 | Demon Eye                                                                                      | PC (Microsoft Windows) | 2026-11-23   |
+|  426487 | Heya! Sumo Manager                                                                             | PC (Microsoft Windows) | 2026-11-23   |
+|  414005 | Jaden Industries                                                                               | PC (Microsoft Windows) | 2026-11-23   |
+|  428884 | Terminus: Day Zero                                                                             | PC (Microsoft Windows) | 2026-11-23   |
+|  422441 | A Drop of Magenta                                                                              | PC (Microsoft Windows) | 2026-11-24   |
+|  428391 | Chop Loop                                                                                      | PC (Microsoft Windows) | 2026-11-24   |
+|  419955 | Ezalm: Magic's Memory                                                                          | PC (Microsoft Windows) | 2026-11-24   |
+|  210980 | Jurassic Architect                                                                             | PC (Microsoft Windows) | 2026-11-24   |
+|  429115 | Karakara 3                                                                                     | PC (Microsoft Windows) | 2026-11-24   |
+|  253915 | Light of Atlantis                                                                              | PC (Microsoft Windows) | 2026-11-24   |
+|  427422 | No Asteroids                                                                                   | PC (Microsoft Windows) | 2026-11-24   |
+|  425282 | Rally Point: 3030                                                                              | PC (Microsoft Windows) | 2026-11-24   |
+|  428018 | Zero Mass                                                                                      | PC (Microsoft Windows) | 2026-11-24   |
+|  370782 | Arctic Drive                                                                                   | PC (Microsoft Windows) | 2026-11-25   |
+|  396301 | Expelled from Paradise: The Stellar Angel                                                      | PC (Microsoft Windows) | 2026-11-25   |
+|  419580 | Fireworks Incremental                                                                          | PC (Microsoft Windows) | 2026-11-25   |
+|  376669 | Last Watchtower                                                                                | PC (Microsoft Windows) | 2026-11-25   |
+|  428313 | Needle in a Haystack Simulator in a Haystack of Needle in a Haystack Simulators                | PC (Microsoft Windows) | 2026-11-25   |
+|  428578 | Sort On The Ball                                                                               | PC (Microsoft Windows) | 2026-11-25   |
+|  409993 | Turbo Turkey                                                                                   | PC (Microsoft Windows) | 2026-11-25   |
+|  335232 | Appulse                                                                                        | PC (Microsoft Windows) | 2026-11-26   |
+|  427408 | Ashen Testament                                                                                | PC (Microsoft Windows) | 2026-11-26   |
+|  292809 | Azur Promilia                                                                                  | PC (Microsoft Windows) | 2026-11-26   |
+|  397955 | Everlasting Flowers: First Press Limited Special Edition                                       | PC (Microsoft Windows) | 2026-11-26   |
+|  422205 | Fool's Trigger                                                                                 | PC (Microsoft Windows) | 2026-11-26   |
+|  429345 | Gravity Switch                                                                                 | PC (Microsoft Windows) | 2026-11-26   |
+|  394580 | Koganei-sou to Konjiki no Agehachou                                                            | PC (Microsoft Windows) | 2026-11-26   |
+|  412114 | Marupoyo: The Round Chick's Adventure                                                          | PC (Microsoft Windows) | 2026-11-26   |
+|  412114 | Marupoyo: The Round Chick's Adventure                                                          | PlayStation 5          | 2026-11-26   |
++---------+------------------------------------------------------------------------------------------------+------------------------+--------------+
 +---------------------------------------------+
 | test                                        |
 +---------------------------------------------+

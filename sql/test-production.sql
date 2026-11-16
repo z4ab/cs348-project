@@ -1,5 +1,7 @@
 -- SQL for the four project features, run over the production database.
 -- Load sql/schema.sql and sql/load_production.sql before running this file.
+-- Features 1 and 2 are the queries the app sends. They return 100 rows per page and fetch
+-- 101 so the app can tell whether another page follows. These show page 1 (OFFSET 0).
 
 -- ============================================================
 -- Feature 1: Game search and filtering
@@ -8,6 +10,7 @@
 SELECT 'Feature 1a: title contains "Soma"' AS test;
 
 SELECT
+    g.game_id,
     g.title,
     p.name AS platform,
     gp.release_date
@@ -17,8 +20,8 @@ JOIN game_platform gp
 JOIN platform p
     ON gp.platform_id = p.platform_id
 WHERE g.title LIKE '%Soma%'
-ORDER BY g.title, gp.release_date, p.name
-LIMIT 10;
+ORDER BY g.title, g.game_id, gp.release_date, platform
+LIMIT 101 OFFSET 0;
 
 
 SELECT 'Feature 1b: PlayStation 4 (48), genre Adventure (31)' AS test;
@@ -27,7 +30,8 @@ SET @q = '';
 SET @platform = 48;
 SET @genre = 31;
 
-SELECT DISTINCT
+SELECT
+    g.game_id,
     g.title,
     p.name AS platform,
     gp.release_date
@@ -47,17 +51,35 @@ WHERE g.title LIKE CONCAT('%', @q, '%')
             AND gg.genre_id = @genre
       )
   )
-ORDER BY g.title, gp.release_date, platform
-LIMIT 10;
+ORDER BY g.title, g.game_id, gp.release_date, platform
+LIMIT 101 OFFSET 0;
 
 
 -- ============================================================
 -- Feature 2: Upcoming game releases
 -- ============================================================
 
-SELECT 'Feature 2: upcoming releases for pixelpanda after today' AS test;
+SELECT 'Feature 2a: upcoming releases on any platform, undated (TBA) last' AS test;
 
 SELECT
+    g.game_id,
+    g.title,
+    p.name AS platform,
+    gp.release_date
+FROM game g
+JOIN game_platform gp
+    ON g.game_id = gp.game_id
+JOIN platform p
+    ON gp.platform_id = p.platform_id
+WHERE gp.release_date > CURDATE() OR gp.release_date IS NULL
+ORDER BY gp.release_date IS NULL, gp.release_date, g.title, g.game_id, platform
+LIMIT 101 OFFSET 0;
+
+
+SELECT 'Feature 2b: upcoming releases for pixelpanda after today' AS test;
+
+SELECT
+    g.game_id,
     g.title,
     p.name AS platform,
     gp.release_date
@@ -75,13 +97,13 @@ WHERE up.user_id = (
 )
 AND gp.release_date > CURDATE()
 AND NOT EXISTS (
-    SELECT 1
+    SELECT *
     FROM library_entry le
     WHERE le.user_id = up.user_id
       AND le.game_id = g.game_id
 )
-ORDER BY gp.release_date, g.title, p.name
-LIMIT 10;
+ORDER BY gp.release_date, g.title, g.game_id, platform
+LIMIT 101 OFFSET 0;
 
 
 -- ============================================================
