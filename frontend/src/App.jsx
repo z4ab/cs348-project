@@ -289,7 +289,7 @@ function Rankings({ genres }) {
         <table>
           <thead><tr><th>#</th><th>Title</th><th>Average rating</th><th>Ratings</th></tr></thead>
           <tbody>{games.map((g, i) => (
-            <tr key={g.title}><td>{i + 1}</td><td>{g.title}</td><td>{g.average_rating.toFixed(2)}</td><td>{g.rating_count}</td></tr>
+            <tr key={g.game_id}><td>{i + 1}</td><td>{g.title}</td><td>{g.average_rating.toFixed(2)}</td><td>{g.rating_count}</td></tr>
           ))}</tbody>
         </table>
       )}
