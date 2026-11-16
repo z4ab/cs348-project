@@ -165,13 +165,13 @@ def update_library_entry(user_id: int, game_id: int, e: EntryUpdate):
 def top_ten_genre(genre_id: int):
     return fetch_all(
         """
-        SELECT g.title, ROUND(AVG(r.score), 2) AS average_rating,
+        SELECT g.game_id, g.title, ROUND(AVG(r.score), 2) AS average_rating,
         COUNT(r.score) AS rating_count
         FROM game g JOIN game_genre gg ON g.game_id = gg.game_id
         JOIN review r ON g.game_id = r.game_id
         WHERE gg.genre_id = %s AND r.score IS NOT NULL
         GROUP BY g.game_id, g.title
-        ORDER BY average_rating DESC, rating_count DESC, g.title LIMIT 10;
+        ORDER BY average_rating DESC, rating_count DESC, g.title, g.game_id LIMIT 10;
         """, (genre_id,)
     )
     
