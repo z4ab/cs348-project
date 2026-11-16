@@ -12,12 +12,16 @@ MySQL + FastAPI (raw SQL via `pymysql`) + React (Vite).
   - `load_production.sql`: loads `data/production/*.csv`
   - `test-sample.sql`, `test-sample.out`: feature queries and output on the sample database
   - `test-production.sql`, `test-production.out`: feature queries and output on the production database
+  - `assumptions-production.sql`, `assumptions-production.out`: tests each schema assumption on the production database. `assumptions-production-before-filter.out` is the output before games without a genre, developer or publisher were dropped.
 - `data/sample/`: small sample dataset, one CSV per table
-- `data/production/`: larger production dataset, one CSV per table
+- `data/production/`: production dataset, one CSV per table (built by `scripts/build_production.py`)
 - `data/raw/steamspy.json`: cached SteamSpy responses
+- `data/raw/igdb/`, `data/raw/steam/`: raw production pulls (generated, not committed)
 - `games.json`: saved IGDB pull of 20 games
 - `scripts/build_sample.py`: builds the sample dataset
-- `scripts/build_production.py`: builds the larger production dataset
+- `scripts/fetch_igdb.py`: downloads every main IGDB game with a release date into `data/raw/igdb/`
+- `scripts/fetch_steam_owners.py`: downloads Steam owner ranges into `data/raw/steam/`
+- `scripts/build_production.py`: builds the production dataset from the raw pulls
 - `backend/`: FastAPI application
 - `frontend/`: React application
 
@@ -60,20 +64,30 @@ python scripts/build_sample.py
 
 ## Create and load the production database
 
-The production dataset contains the same real game metadata together with a much larger generated set of users, libraries, platforms, and reviews for production testing.
+Game, platform, genre and company data is real. It comes from two sources:
 
-The current generated dataset contains approximately:
+- [IGDB API](https://api-docs.igdb.com/): every main game (`game_type = 0`) with at least one release date, including future releases.
+- [Steam Games Dataset](https://huggingface.co/datasets/FronkonGames/steam-games-dataset) on Hugging Face (MIT license), a copy of SteamSpy data, pinned to revision `6c21457`. It gives each Steam game's estimated owner range.
 
-- 5,000 users
-- 9,926 user-platform relationships
-- 49,816 library entries
-- 23,377 reviews
+The build keeps only games with at least one genre, developer and publisher, as the schema assumptions require. That drops 150,524 of the 268,184 IGDB games.
 
-Build the production CSV files:
+Users, platform ownership, library entries and reviews are synthetic, generated with a fixed seed. Row counts from the current build:
 
-```bash
-python scripts/build_production.py
-```
+| Table | Rows |
+|---|---|
+| game | 117,660 |
+| game_platform | 234,882 |
+| game_genre | 256,530 |
+| game_company | 178,617 |
+| company | 52,660 |
+| platform | 203 |
+| genre | 23 |
+| app_user | 25,000 |
+| user_platform | 77,107 |
+| library_entry | 125,339 |
+| review | 58,389 |
+
+The built CSVs are committed in `data/production/`, so loading them needs no API keys. Rebuilding them is optional, see [Rebuild the production CSVs](#rebuild-the-production-csvs-optional).
 
 ### Windows PowerShell
 
@@ -96,6 +110,18 @@ docker compose exec -T mysql mysql -u cs348_app -pcs348_pass cs348 < sql/schema.
 docker compose exec -T mysql mysql --local-infile=1 -u cs348_app -pcs348_pass cs348 < sql/load_production.sql
 ```
 
+### Rebuild the production CSVs (optional)
+
+Only needed to regenerate `data/production/`. The IGDB fetch needs a Twitch client id and secret ([IGDB getting started](https://api-docs.igdb.com/#getting-started)). Copy `.env.example` to `.env` and fill in `TWITCH_CLIENT_ID` and `TWITCH_CLIENT_SECRET`. Then run:
+
+```bash
+python scripts/fetch_igdb.py          # about 270,000 games, a few minutes. A rerun resumes.
+python scripts/fetch_steam_owners.py  # streams about 400 MB, keeps about 5 MB
+python scripts/build_production.py    # writes data/production/*.csv
+```
+
+`build_production.py` prints how many rows were dropped or changed while cleaning, and saves the counts to `data/production/build_counts.json`.
+
 ## Run the feature queries
 
 ### Sample database
@@ -111,6 +137,10 @@ Get-Content sql/test-sample.sql | docker compose exec -T mysql mysql -t -u cs348
 ```
 
 ### Production database
+
+```bash
+docker compose exec -T mysql mysql -t -u cs348_app -pcs348_pass cs348 < sql/test-production.sql > sql/test-production.out
+```
 
 On Windows PowerShell:
 
@@ -129,24 +159,22 @@ Transactions with `ROLLBACK` are used for the update and insert tests so that th
 
 ## Production query performance
 
-Production queries were inspected with MySQL `EXPLAIN` and `EXPLAIN ANALYZE`.
-
-Example execution times from local Docker testing were:
-
-- Feature 1 game search: approximately `0.213 ms`
-- Feature 2 upcoming releases: approximately `0.083 ms`
-- Feature 3 library lookup: approximately `0.037 ms`
-- Feature 4 top-rated games before optimization: approximately `7.27 ms`
-
-Feature 4 processes thousands of review rows to calculate averages and counts, so an additional covering index was added:
+Feature 4 averages review scores per game, so `sql/schema.sql` adds a covering index:
 
 ```sql
 CREATE INDEX idx_review_game_score ON review(game_id, score);
 ```
 
-After adding this index, Feature 4 used a covering index lookup and its measured execution time decreased from approximately `7.27 ms` to `3.07 ms` in the local test environment.
+On the production database, MySQL reads the scores from the index alone, without touching the table rows. `EXPLAIN` shows `idx_review_game_score` with `Using index`. Without it, the plan is `ref` on a `game_id` index with `Using where`.
 
-The index is included in `sql/schema.sql` so it is recreated whenever the database is rebuilt.
+Measured with `EXPLAIN ANALYZE` on the Shooter query in `sql/test-production.sql` (13,297 Shooter games), in local Docker with a warm cache. Each figure is the median of 5 runs:
+
+| Run | Without index | With index |
+|---|---|---|
+| 1 | 87.7 ms | 71.8 ms |
+| 2 | 75.9 ms | 70.8 ms |
+
+Times vary by about 20 ms between runs, so the gain is small. Right after a reload, with a cold cache, the indexed plan was slower.
 
 ## Run the app
 

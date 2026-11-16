@@ -106,3 +106,5 @@ CREATE TABLE review (
   CHECK (score BETWEEN 1 AND 10),
   CHECK (score IS NOT NULL OR body IS NOT NULL)
 );
+
+CREATE INDEX idx_review_game_score ON review(game_id, score);
