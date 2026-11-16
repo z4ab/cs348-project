@@ -76,6 +76,20 @@ def steam_id(game, owners):
     return min(ids, key=lambda i: (i not in owners, i)) if ids else None
 
 
+def complete(game):
+    """True if the game has a genre, a developer and a publisher, as the schema assumptions require.
+    Counts each missing part, so a game can be counted under more than one reason."""
+    credits = game.get("involved_companies", [])
+    missing = [what for what, ok in (("genre", game.get("genres")),
+                                     ("developer", any(ic.get("developer") for ic in credits)),
+                                     ("publisher", any(ic.get("publisher") for ic in credits))) if not ok]
+    for what in missing:
+        counts[f"game: no {what}"] += 1
+    if missing:
+        counts["game: no genre, developer or publisher, dropped"] += 1
+    return not missing
+
+
 def write(name, header, rows):
     """Writes a CSV for LOAD DATA, which treats backslash as an escape character."""
     with open(OUT / f"{name}.csv", "w", newline="", encoding="utf-8") as f:
@@ -92,6 +106,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     counts["input: IGDB games"] = len(games)
     counts["input: Steam Games Dataset apps"] = len(owners)
+    games = [g for g in games if complete(g)]
 
     # Steam app ids, keeping each id on the lowest IGDB game id that lists it (steam_app_id is UNIQUE).
     steam, holder = {}, {}
@@ -146,8 +161,6 @@ def main():
         for pid, d in sorted(dates.items()):
             gp_rows.append([g["id"], pid, d.isoformat() if d else NULL])
 
-        if not g.get("genres"):
-            counts["game: no genre"] += 1
         for ge in g.get("genres", []):
             genres[ge["id"]] = ge["name"]
             gg_rows.append([g["id"], ge["id"]])
@@ -160,10 +173,6 @@ def main():
             roles[c["id"]] = (dev or ic.get("developer", False), pub or ic.get("publisher", False))
         kept = {cid: r for cid, r in roles.items() if r[0] or r[1]}
         counts["game_company: credit with neither developer nor publisher role, dropped"] += len(roles) - len(kept)
-        if not any(dev for dev, _ in kept.values()):
-            counts["game: no developer"] += 1
-        if not any(pub for _, pub in kept.values()):
-            counts["game: no publisher"] += 1
         for cid, (dev, pub) in sorted(kept.items()):
             gc_rows.append([g["id"], cid, int(dev), int(pub)])
 

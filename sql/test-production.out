@@ -3,20 +3,20 @@
 +-----------------------------------+
 | Feature 1a: title contains "Soma" |
 +-----------------------------------+
-+-------------------------------------------------------------------+------------------------+--------------+
-| title                                                             | platform               | release_date |
-+-------------------------------------------------------------------+------------------------+--------------+
-| Akane-iro ni Somaru Saka Parallels                                | PlayStation 2          | 2008-08-14   |
-| Akeiro ni Somaru, Utsukushiki Yashiro de                          | PC (Microsoft Windows) | 2024-08-24   |
-| Bleach Advance: Kurenai ni Somaru Soul Society                    | Game Boy Advance       | 2005-08-21   |
-| Daiva Story 5: The Cup of Soma                                    | MSX                    | 1987-02-01   |
-| Furusoma                                                          | iOS                    | 2016-12-31   |
-| Gulf of Aden - Task Force Somalia                                 | Linux                  | 2015-12-14   |
-| Gulf of Aden - Task Force Somalia                                 | Mac                    | 2015-12-14   |
-| Gulf of Aden - Task Force Somalia                                 | PC (Microsoft Windows) | 2015-12-14   |
-| Hayate no Gotoku! Ojousama Produce Daisakusen Boku Iro ni Somare! | Nintendo DS            | 2008-03-14   |
-| Hissatsu Pachinko Evolution 2: Osomatsu-kun                       | PlayStation 2          | NULL         |
-+-------------------------------------------------------------------+------------------------+--------------+
++-------------------------------------------------------------------+-------------------------+--------------+
+| title                                                             | platform                | release_date |
++-------------------------------------------------------------------+-------------------------+--------------+
+| Akeiro ni Somaru, Utsukushiki Yashiro de                          | PC (Microsoft Windows)  | 2024-08-24   |
+| Modern War: Somalian Pirates                                      | PC (Microsoft Windows)  | 2009-09-29   |
+| Osomatsu-kun Hachamecha Gekijou                                   | Sega Mega Drive/Genesis | 1988-12-24   |
+| Osomatsu-kun: Back to the Me no Deppa no Maki                     | Family Computer         | 1989-12-08   |
+| Osomatsu-san The Game: Hachamecha Shuushoku Advice - Dead or Work | PlayStation Vita        | 2017-06-29   |
+| Philosoma                                                         | PlayStation             | 1995-07-28   |
+| Philosoma                                                         | PlayStation 3           | 2007-04-26   |
+| Philosoma                                                         | PlayStation Portable    | 2007-04-26   |
+| Pirate Hunter: Somali Trap                                        | PC (Microsoft Windows)  | 2024-10-03   |
+| Soma                                                              | Linux                   | 2015-09-21   |
++-------------------------------------------------------------------+-------------------------+--------------+
 +------------------------------------------------------+
 | test                                                 |
 +------------------------------------------------------+
@@ -30,11 +30,11 @@
 | 'n Verlore Verstand                      | PlayStation 4 | 2018-06-12   |
 | #Blud                                    | PlayStation 4 | 2024-06-18   |
 | #SinucaAttack                            | PlayStation 4 | 2021-02-10   |
-| 1 CatLine                                | PlayStation 4 | 2026-03-11   |
 | 11-11: Memories Retold                   | PlayStation 4 | 2018-11-09   |
 | 112th Seed                               | PlayStation 4 | 2020-07-29   |
 | 13 Sentinels: Aegis Rim                  | PlayStation 4 | 2019-11-28   |
-| 13 Sentinels: Aegis Rim - Premium Box    | PlayStation 4 | 2019-11-28   |
+| 1964 Operation Velvet Twins              | PlayStation 4 | 2026-08-28   |
+| 1979 Revolution: Black Friday            | PlayStation 4 | 2018-08-01   |
 +------------------------------------------+---------------+--------------+
 +---------------------------------------------------------+
 | test                                                    |
@@ -48,12 +48,12 @@
 | Arcade Warlord                                                                                 | PC (Microsoft Windows) | 2026-11-17   |
 | Australia Did It: End-of-the-World Railway Defense Business                                    | PC (Microsoft Windows) | 2026-11-17   |
 | Ball Picker: Clean Up the Golf Yard                                                            | PC (Microsoft Windows) | 2026-11-17   |
-| Burning Sword: Death Sun                                                                       | PC (Microsoft Windows) | 2026-11-17   |
 | Dravora                                                                                        | PC (Microsoft Windows) | 2026-11-17   |
 | Duck Side of the Moon                                                                          | PlayStation 5          | 2026-11-17   |
 | Futa: Beer & Sex                                                                               | PC (Microsoft Windows) | 2026-11-17   |
 | Game Shelver 99: I Must Organize My Steam Library and Defend It Against Pirates With a Shotgun | PC (Microsoft Windows) | 2026-11-17   |
-| Marbles: Tidy Up                                                                               | PC (Microsoft Windows) | 2026-11-17   |
+| Milki Delivery                                                                                 | PC (Microsoft Windows) | 2026-11-17   |
+| Moonlight Peaks                                                                                | PlayStation 5          | 2026-11-17   |
 +------------------------------------------------------------------------------------------------+------------------------+--------------+
 +---------------------------------------------+
 | test                                        |
@@ -90,17 +90,17 @@
 +------------------------------------+
 | Feature 4: top-rated Shooter games |
 +------------------------------------+
-+-------------------------------+----------------+--------------+
-| title                         | average_rating | rating_count |
-+-------------------------------+----------------+--------------+
-| 64.0                          |          10.00 |            2 |
-| Death Elevator                |          10.00 |            2 |
-| Huntdown                      |          10.00 |            2 |
-| Outbreak                      |          10.00 |            2 |
-| Rekkr: Sunken Land            |          10.00 |            2 |
-| Voxel Sword                   |          10.00 |            2 |
-| 500 Saints                    |          10.00 |            1 |
-| Absolute Insanity             |          10.00 |            1 |
-| Acceleration of Suguri 2      |          10.00 |            1 |
-| Age of ILCoin VR: Retribution |          10.00 |            1 |
-+-------------------------------+----------------+--------------+
++--------------------------------------+----------------+--------------+
+| title                                | average_rating | rating_count |
++--------------------------------------+----------------+--------------+
+| The Last Stand: Aftermath            |          10.00 |            3 |
+| Valfaris                             |          10.00 |            3 |
+| Wolfenstein II: The New Colossus     |          10.00 |            3 |
+| Crimzon Clover: World Ignition       |          10.00 |            2 |
+| Ctesiphon                            |          10.00 |            2 |
+| Metal Eden                           |          10.00 |            2 |
+| Relic Hunters Legend                 |          10.00 |            2 |
+| SAS: Zombie Assault 3                |          10.00 |            2 |
+| Sniper: Ghost Warrior                |          10.00 |            2 |
+| Western Outlaw: Wanted Dead or Alive |          10.00 |            2 |
++--------------------------------------+----------------+--------------+

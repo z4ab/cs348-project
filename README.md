@@ -12,6 +12,7 @@ MySQL + FastAPI (raw SQL via `pymysql`) + React (Vite).
   - `load_production.sql`: loads `data/production/*.csv`
   - `test-sample.sql`, `test-sample.out`: feature queries and output on the sample database
   - `test-production.sql`, `test-production.out`: feature queries and output on the production database
+  - `assumptions-production.sql`, `assumptions-production.out`: tests each schema assumption on the production database. `assumptions-production-before-filter.out` is the output before games without a genre, developer or publisher were dropped.
 - `data/sample/`: small sample dataset, one CSV per table
 - `data/production/`: production dataset, one CSV per table (generated, not committed)
 - `data/raw/steamspy.json`: cached SteamSpy responses
@@ -68,21 +69,23 @@ Game, platform, genre and company data is real. It comes from two sources:
 - [IGDB API](https://api-docs.igdb.com/): every main game (`game_type = 0`) with at least one release date, including future releases.
 - [Steam Games Dataset](https://huggingface.co/datasets/FronkonGames/steam-games-dataset) on Hugging Face (MIT license), a copy of SteamSpy data, pinned to revision `6c21457`. It gives each Steam game's estimated owner range.
 
+The build keeps only games with at least one genre, developer and publisher, as the schema assumptions require. That drops 150,524 of the 268,184 IGDB games.
+
 Users, platform ownership, library entries and reviews are synthetic, generated with a fixed seed. Row counts from the current build:
 
 | Table | Rows |
 |---|---|
-| game | 268,184 |
-| game_platform | 436,227 |
-| game_genre | 505,080 |
-| game_company | 218,667 |
-| company | 61,645 |
-| platform | 215 |
+| game | 117,660 |
+| game_platform | 234,882 |
+| game_genre | 256,530 |
+| game_company | 178,617 |
+| company | 52,660 |
+| platform | 203 |
 | genre | 23 |
 | app_user | 25,000 |
 | user_platform | 77,107 |
-| library_entry | 126,682 |
-| review | 59,102 |
+| library_entry | 125,339 |
+| review | 58,389 |
 
 The CSVs are too large to commit, so build them locally. The IGDB fetch needs a Twitch client id and secret ([IGDB getting started](https://api-docs.igdb.com/#getting-started)). Copy `.env.example` to `.env` and fill in `TWITCH_CLIENT_ID` and `TWITCH_CLIENT_SECRET`. Then run:
 
@@ -158,7 +161,16 @@ Feature 4 averages review scores per game, so `sql/schema.sql` adds a covering i
 CREATE INDEX idx_review_game_score ON review(game_id, score);
 ```
 
-On the production database, `EXPLAIN` shows the review lookup changing from `ref` on a `game_id` index with `Using where` to `ref` on `idx_review_game_score` with `Using index`. That means scores are read from the index without touching the table rows. The Shooter query in `sql/test-production.sql` (36,968 Shooter games) went from about 113 ms to about 100 ms with `EXPLAIN ANALYZE`, the median of 5 runs in local Docker. Most of the time goes to scanning the genre's `game_genre` rows, not the review lookup.
+On the production database, MySQL reads the scores from the index alone, without touching the table rows. `EXPLAIN` shows `idx_review_game_score` with `Using index`. Without it, the plan is `ref` on a `game_id` index with `Using where`.
+
+Measured with `EXPLAIN ANALYZE` on the Shooter query in `sql/test-production.sql` (13,297 Shooter games), in local Docker with a warm cache. Each figure is the median of 5 runs:
+
+| Run | Without index | With index |
+|---|---|---|
+| 1 | 87.7 ms | 71.8 ms |
+| 2 | 75.9 ms | 70.8 ms |
+
+Times vary by about 20 ms between runs, so the gain is small. Right after a reload, with a cold cache, the indexed plan was slower.
 
 ## Run the app
 
