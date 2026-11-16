@@ -14,7 +14,7 @@ MySQL + FastAPI (raw SQL via `pymysql`) + React (Vite).
   - `test-production.sql`, `test-production.out`: feature queries and output on the production database
   - `assumptions-production.sql`, `assumptions-production.out`: tests each schema assumption on the production database. `assumptions-production-before-filter.out` is the output before games without a genre, developer or publisher were dropped.
 - `data/sample/`: small sample dataset, one CSV per table
-- `data/production/`: production dataset, one CSV per table (generated, not committed)
+- `data/production/`: production dataset, one CSV per table (built by `scripts/build_production.py`)
 - `data/raw/steamspy.json`: cached SteamSpy responses
 - `data/raw/igdb/`, `data/raw/steam/`: raw production pulls (generated, not committed)
 - `games.json`: saved IGDB pull of 20 games
@@ -87,15 +87,7 @@ Users, platform ownership, library entries and reviews are synthetic, generated 
 | library_entry | 125,339 |
 | review | 58,389 |
 
-The CSVs are too large to commit, so build them locally. The IGDB fetch needs a Twitch client id and secret ([IGDB getting started](https://api-docs.igdb.com/#getting-started)). Copy `.env.example` to `.env` and fill in `TWITCH_CLIENT_ID` and `TWITCH_CLIENT_SECRET`. Then run:
-
-```bash
-python scripts/fetch_igdb.py          # about 270,000 games, a few minutes. A rerun resumes.
-python scripts/fetch_steam_owners.py  # streams about 400 MB, keeps about 5 MB
-python scripts/build_production.py    # writes data/production/*.csv
-```
-
-`build_production.py` prints how many rows were dropped or changed while cleaning, and saves the counts to `data/production/build_counts.json`.
+The built CSVs are committed in `data/production/`, so loading them needs no API keys. Rebuilding them is optional, see [Rebuild the production CSVs](#rebuild-the-production-csvs-optional).
 
 ### Windows PowerShell
 
@@ -117,6 +109,18 @@ Get-Content sql/load_production.sql | docker compose exec -T mysql mysql --local
 docker compose exec -T mysql mysql -u cs348_app -pcs348_pass cs348 < sql/schema.sql
 docker compose exec -T mysql mysql --local-infile=1 -u cs348_app -pcs348_pass cs348 < sql/load_production.sql
 ```
+
+### Rebuild the production CSVs (optional)
+
+Only needed to regenerate `data/production/`. The IGDB fetch needs a Twitch client id and secret ([IGDB getting started](https://api-docs.igdb.com/#getting-started)). Copy `.env.example` to `.env` and fill in `TWITCH_CLIENT_ID` and `TWITCH_CLIENT_SECRET`. Then run:
+
+```bash
+python scripts/fetch_igdb.py          # about 270,000 games, a few minutes. A rerun resumes.
+python scripts/fetch_steam_owners.py  # streams about 400 MB, keeps about 5 MB
+python scripts/build_production.py    # writes data/production/*.csv
+```
+
+`build_production.py` prints how many rows were dropped or changed while cleaning, and saves the counts to `data/production/build_counts.json`.
 
 ## Run the feature queries
 
