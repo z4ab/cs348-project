@@ -1,5 +1,5 @@
 -- SQL for the four project features, run over the production database.
--- Load schema.sql and load_production.sql before running this file.
+-- Load sql/schema.sql and sql/load_production.sql before running this file.
 
 -- ============================================================
 -- Feature 1: Game search and filtering
@@ -55,7 +55,7 @@ LIMIT 10;
 -- Feature 2: Upcoming game releases
 -- ============================================================
 
-SELECT 'Feature 2: upcoming releases for pixelpanda since 2025-01-01' AS test;
+SELECT 'Feature 2: upcoming releases for pixelpanda after today' AS test;
 
 SELECT
     g.title,
@@ -73,7 +73,7 @@ WHERE up.user_id = (
     FROM app_user
     WHERE username = 'pixelpanda'
 )
-AND gp.release_date >= '2025-01-01'
+AND gp.release_date > CURDATE()
 AND NOT EXISTS (
     SELECT 1
     FROM library_entry le
@@ -88,87 +88,50 @@ LIMIT 10;
 -- Feature 3: Personal game library management
 -- ============================================================
 
--- Feature 3a:
--- Update Darksiders temporarily.
--- ROLLBACK means the production database is not permanently changed.
+-- pixelpanda's generated library is empty, so the test adds a game and then updates it.
+-- Both steps run in one transaction. ROLLBACK leaves the production database unchanged.
+-- Soma is IGDB game 9727.
 
-SELECT 'Feature 3a: pixelpanda updates Darksiders to playing, 91.0 hours' AS test;
-
-START TRANSACTION;
-
-UPDATE library_entry
-SET status = 'playing',
-    hours_played = 91.0
-WHERE user_id = (
-    SELECT user_id
-    FROM app_user
-    WHERE username = 'pixelpanda'
-)
-AND game_id = (
-    SELECT game_id
-    FROM game
-    WHERE title = 'Darksiders'
-);
-
-SELECT
-    u.username,
-    g.title,
-    le.status,
-    le.hours_played
-FROM library_entry le
-JOIN app_user u
-    ON le.user_id = u.user_id
-JOIN game g
-    ON le.game_id = g.game_id
-WHERE u.username = 'pixelpanda'
-  AND g.title = 'Darksiders';
-
-ROLLBACK;
-
-
--- Feature 3b:
--- Add Soma temporarily.
--- ROLLBACK means Soma is removed again after the test.
-
-SELECT 'Feature 3b: pixelpanda adds Soma to backlog' AS test;
+SELECT 'Feature 3a: pixelpanda adds Soma to backlog' AS test;
 
 START TRANSACTION;
 
-INSERT INTO library_entry (
-    user_id,
-    game_id,
-    status,
-    hours_played
-)
+INSERT INTO library_entry (user_id, game_id, status, hours_played)
 VALUES (
-    (
-        SELECT user_id
-        FROM app_user
-        WHERE username = 'pixelpanda'
-    ),
-    (
-        SELECT game_id
-        FROM game
-        WHERE title = 'Soma'
-    ),
+    (SELECT user_id FROM app_user WHERE username = 'pixelpanda'),
+    9727,
     'backlog',
     0
 );
 
-SELECT
-    u.username,
-    g.title,
-    le.status,
-    le.hours_played
+SELECT u.username, g.title, le.status, le.hours_played
 FROM library_entry le
-JOIN app_user u
-    ON le.user_id = u.user_id
-JOIN game g
-    ON le.game_id = g.game_id
-WHERE u.username = 'pixelpanda'
-  AND g.title = 'Soma';
+JOIN app_user u ON le.user_id = u.user_id
+JOIN game g ON le.game_id = g.game_id
+WHERE u.username = 'pixelpanda';
+
+SELECT 'Feature 3b: pixelpanda updates Soma to playing, 12.5 hours' AS test;
+
+UPDATE library_entry
+SET status = 'playing',
+    hours_played = 12.5
+WHERE user_id = (SELECT user_id FROM app_user WHERE username = 'pixelpanda')
+  AND game_id = 9727;
+
+SELECT u.username, g.title, le.status, le.hours_played
+FROM library_entry le
+JOIN app_user u ON le.user_id = u.user_id
+JOIN game g ON le.game_id = g.game_id
+WHERE u.username = 'pixelpanda';
 
 ROLLBACK;
+
+SELECT 'Feature 3c: after ROLLBACK, pixelpanda library entries' AS test;
+
+SELECT COUNT(*) AS entries
+FROM library_entry le
+JOIN app_user u ON le.user_id = u.user_id
+WHERE u.username = 'pixelpanda';
 
 
 -- ============================================================
