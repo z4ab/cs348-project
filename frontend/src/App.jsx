@@ -15,9 +15,10 @@ async function send(method, url, body) {
 
 const STATUSES = ['backlog', 'playing', 'completed']
 
-// Feature 1: search games by title, platform and genre, one page of 100 releases at a time.
-const SEARCH_PAGE_SIZE = 100
+// Rows per page in Features 1 and 2. Matches PAGE_SIZE in backend/main.py.
+const PAGE_SIZE = 100
 
+// Feature 1: search games by title, platform and genre, one page of 100 releases at a time.
 function Search({ platforms, genres }) {
   // filters holds the submitted form, so paging repeats the same search.
   const [filters, setFilters] = useState({ q: '' })
@@ -44,7 +45,7 @@ function Search({ platforms, genres }) {
     setPage(1)
   }
 
-  const first = (page - 1) * SEARCH_PAGE_SIZE + 1
+  const first = (page - 1) * PAGE_SIZE + 1
 
   return (
     <section>
@@ -99,81 +100,109 @@ function EntryRow({ entry, onSave }) {
   )
 }
 
-// Feature 2: view upcoming game releases
-// With no user chosen it lists every upcoming release; with a user, only releases on
-// that user's platforms, minus games already in their library.
-function Upcoming({ users }) {
-  const [userId, setUserId] = useState('')
-  const [releases, setReleases] = useState([])
+// Search-as-you-type picker: type part of a name, then choose one of the first
+// PICKER_LIMIT matches from `url`. It waits until typing pauses before searching.
+// Used for games (title contains the text) and users (username starts with it).
+const PICKER_LIMIT = 10
 
-  useEffect(() => {
-    let stale = false
-    const url = userId ? `/api/upcoming?user_id=${userId}` : '/api/upcoming'
-    getJson(url).then((rows) => { if (!stale) setReleases(rows) })
-    return () => { stale = true }
-  }, [userId])
-
-  return (
-    <section>
-      <h2>Upcoming releases</h2>
-      <select value={userId} onChange={(e) => setUserId(e.target.value)}>
-        <option value="">all platforms</option>
-        {users.map((u) => <option key={u.user_id} value={u.user_id}>{u.username}'s platforms</option>)}
-      </select>
-      <p>{releases.length} releases</p>
-      <table>
-        <thead><tr><th>Title</th><th>Platform</th><th>Release date</th></tr></thead>
-        <tbody>{releases.map((r) => (
-          <tr key={`${r.title}|${r.platform}`}><td>{r.title}</td><td>{r.platform}</td><td>{r.release_date ?? 'TBA'}</td></tr>
-        ))}</tbody>
-      </table>
-    </section>
-  )
-}
-
-// Game picker for the add form: type part of a title, then choose one of the first
-// GAME_PICKER_LIMIT matches. It waits until typing pauses before searching.
-const GAME_PICKER_LIMIT = 10
-const gameLabel = (g) => (g.year ? `${g.title} (${g.year})` : g.title)
-
-function GamePicker({ game, onChoose }) {
+function Picker({ url, label, idOf, placeholder, chosen, onChoose }) {
   const [text, setText] = useState('')
   const [matches, setMatches] = useState(null) // null until a search returns
 
   useEffect(() => {
     setMatches(null)
     const q = text.trim()
-    if (!q || game) return
+    if (!q || chosen) return
     let stale = false
     const timer = setTimeout(() => {
-      getJson(`/api/games?${new URLSearchParams({ q, limit: GAME_PICKER_LIMIT })}`)
+      getJson(`${url}?${new URLSearchParams({ q, limit: PICKER_LIMIT })}`)
         .then((rows) => { if (!stale) setMatches(rows) })
     }, 250)
     return () => { stale = true; clearTimeout(timer) }
-  }, [text, game])
+  }, [url, text, chosen])
 
   return (
     <div>
-      <input value={text} placeholder="search for a game"
+      <input value={text} placeholder={placeholder}
         onChange={(e) => { setText(e.target.value); onChoose(null) }} />
       {matches && (
         <ul>
           {matches.length === 0 && <li>No matches</li>}
-          {matches.map((g) => (
-            <li key={g.game_id}>
-              <button type="button" onClick={() => { onChoose(g); setText(gameLabel(g)) }}>{gameLabel(g)}</button>
+          {matches.map((m) => (
+            <li key={idOf(m)}>
+              <button type="button" onClick={() => { onChoose(m); setText(label(m)) }}>{label(m)}</button>
             </li>
           ))}
-          {matches.length === GAME_PICKER_LIMIT && <li>Type more of the title to see other games.</li>}
+          {matches.length === PICKER_LIMIT && <li>Type more to see other matches.</li>}
         </ul>
       )}
     </div>
   )
 }
 
+const gameLabel = (g) => (g.year ? `${g.title} (${g.year})` : g.title)
+
+function GamePicker({ game, onChoose }) {
+  return <Picker url="/api/games" label={gameLabel} idOf={(g) => g.game_id}
+    placeholder="search for a game" chosen={game} onChoose={onChoose} />
+}
+
+function UserPicker({ user, onChoose, placeholder = 'search for a user' }) {
+  return <Picker url="/api/users" label={(u) => u.username} idOf={(u) => u.user_id}
+    placeholder={placeholder} chosen={user} onChoose={onChoose} />
+}
+
+// Feature 2: upcoming releases, one page of 100 at a time.
+// With no user chosen it lists every upcoming release, with undated (TBA) ones last.
+// With a user, only releases on that user's platforms, minus games already in their library.
+function Upcoming() {
+  const [user, setUser] = useState(null)
+  const [page, setPage] = useState(1)
+  const [releases, setReleases] = useState([])
+  const [hasNext, setHasNext] = useState(false)
+
+  useEffect(() => {
+    const params = new URLSearchParams({ page })
+    if (user) params.set('user_id', user.user_id)
+    let stale = false
+    getJson(`/api/upcoming?${params}`).then((res) => {
+      if (stale) return
+      setReleases(res.results)
+      setHasNext(res.has_next)
+    })
+    return () => { stale = true }
+  }, [user, page])
+
+  const first = (page - 1) * PAGE_SIZE + 1
+
+  return (
+    <section>
+      <h2>Upcoming releases</h2>
+      <p>{user ? `On ${user.username}'s platforms, not in their library` : 'On all platforms'}</p>
+      <UserPicker user={user} placeholder="filter by a user's platforms"
+        onChoose={(u) => { setUser(u); setPage(1) }} />
+      <p>
+        {releases.length === 0
+          ? 'No releases'
+          : `Releases ${first}–${first + releases.length - 1}`}
+        {' '}
+        <button disabled={page === 1} onClick={() => setPage(page - 1)}>Previous</button>
+        <button disabled={!hasNext} onClick={() => setPage(page + 1)}>Next</button>
+      </p>
+      <table>
+        <thead><tr><th>Title</th><th>Platform</th><th>Release date</th></tr></thead>
+        <tbody>{releases.map((r) => (
+          <tr key={`${r.game_id}|${r.platform}`}><td>{r.title}</td><td>{r.platform}</td><td>{r.release_date ?? 'TBA'}</td></tr>
+        ))}</tbody>
+      </table>
+    </section>
+  )
+}
+
 // Feature 3: view a user's library, add a game, and update an entry.
-function Library({ users }) {
-  const [userId, setUserId] = useState('')
+function Library() {
+  const [user, setUser] = useState(null)
+  const userId = user?.user_id
   const [entries, setEntries] = useState([])
   const [error, setError] = useState('')
   const [game, setGame] = useState(null) // the game chosen in the picker
@@ -211,10 +240,7 @@ function Library({ users }) {
   return (
     <section>
       <h2>Library</h2>
-      <select value={userId} onChange={(e) => setUserId(e.target.value)}>
-        <option value="">choose a user</option>
-        {users.map((u) => <option key={u.user_id} value={u.user_id}>{u.username}</option>)}
-      </select>
+      <UserPicker user={user} onChoose={setUser} />
       {userId && (
         <>
           <table>
@@ -274,20 +300,17 @@ function Rankings({ genres }) {
 export default function App() {
   const [platforms, setPlatforms] = useState([])
   const [genres, setGenres] = useState([])
-  const [users, setUsers] = useState([])
-
   useEffect(() => {
     getJson('/api/platforms').then(setPlatforms)
     getJson('/api/genres').then(setGenres)
-    getJson('/api/users').then(setUsers)
   }, [])
 
   return (
     <>
       <h1>Video Game Tracker</h1>
       <Search platforms={platforms} genres={genres} />
-      <Upcoming users={users} />
-      <Library users={users} />
+      <Upcoming />
+      <Library />
       <Rankings genres={genres} />
     </>
   )

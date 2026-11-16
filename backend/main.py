@@ -30,9 +30,16 @@ def list_genres():
     return fetch_all("SELECT genre_id, name FROM genre ORDER BY name")
 
 
+# User picker: up to `limit` users whose username starts with q. q can't be empty, so
+# this never returns all users. A prefix match can use the UNIQUE index on username.
 @app.get("/api/users")
-def list_users():
-    return fetch_all("SELECT user_id, username FROM app_user ORDER BY username")
+def search_users(q: str = Query(min_length=1), limit: int = Query(10, ge=1, le=50)):
+    return fetch_all("""
+        SELECT user_id, username
+        FROM app_user
+        WHERE username LIKE CONCAT(%s, '%%')
+        ORDER BY username
+        LIMIT %s""", (q, limit))
 
 
 # Game picker for adding to a library: up to `limit` games whose title contains q.
@@ -50,7 +57,7 @@ def search_game_titles(q: str = Query(min_length=1), limit: int = Query(10, ge=1
         LIMIT %s""", (q, limit))
 
 
-SEARCH_PAGE_SIZE = 100
+PAGE_SIZE = 100
 
 
 # Feature 1: search games by title, with optional platform and genre filters.
@@ -71,42 +78,39 @@ def search_games(q: str = "", platform: int | None = None, genre: int | None = N
                                      WHERE gg.game_id = g.game_id AND gg.genre_id = %s))
         ORDER BY g.title, g.game_id, gp.release_date, platform
         LIMIT %s OFFSET %s""",
-        (q, platform, platform, genre, genre, SEARCH_PAGE_SIZE + 1, (page - 1) * SEARCH_PAGE_SIZE))
-    return {"results": rows[:SEARCH_PAGE_SIZE], "has_next": len(rows) > SEARCH_PAGE_SIZE}
+        (q, platform, platform, genre, genre, PAGE_SIZE + 1, (page - 1) * PAGE_SIZE))
+    return {"results": rows[:PAGE_SIZE], "has_next": len(rows) > PAGE_SIZE}
 
-# Feature 2: View upcoming games releases, with a way to filter on platforms that you own.
-# 2a: View all upcoming releases
+# Feature 2: upcoming releases, 100 rows per page, paged the same way as Feature 1.
+# Without user_id: every upcoming release on any platform, with undated releases (TBA) last.
+# With user_id: releases on that user's platforms, leaving out games already in their library.
 @app.get("/api/upcoming")
-def upcoming_games(user_id: int | None = None):
-    if (user_id is None): 
-        return fetch_all(
-            """
-            SELECT g.title , p.name AS platform, gp.release_date 
-            FROM game g JOIN game_platform gp ON g.game_id = gp.game_id 
-            JOIN platform p ON gp.platform_id = p.platform_id 
-            WHERE (gp.release_date > CURDATE() OR gp.release_date IS NULL) 
-            ORDER BY gp.release_date, g.title, p.name;
-            """
-        )
+def upcoming_games(user_id: int | None = None, page: int = Query(1, ge=1)):
+    if user_id is None:
+        rows = fetch_all("""
+            SELECT g.game_id, g.title, p.name AS platform, gp.release_date
+            FROM game g
+              JOIN game_platform gp ON g.game_id = gp.game_id
+              JOIN platform p ON gp.platform_id = p.platform_id
+            WHERE gp.release_date > CURDATE() OR gp.release_date IS NULL
+            ORDER BY gp.release_date IS NULL, gp.release_date, g.title, g.game_id, platform
+            LIMIT %s OFFSET %s""",
+            (PAGE_SIZE + 1, (page - 1) * PAGE_SIZE))
     else:
-        return fetch_all(
-            """
-            SELECT g.title, p.name AS platform, gp.release_date
-            FROM user_platform up JOIN platform p ON 
-            up.platform_id = p.platform_id
-            JOIN game_platform gp ON p.platform_id = gp.platform_id
-            JOIN game g ON gp.game_id = g.game_id
+        rows = fetch_all("""
+            SELECT g.game_id, g.title, p.name AS platform, gp.release_date
+            FROM user_platform up
+              JOIN platform p ON up.platform_id = p.platform_id
+              JOIN game_platform gp ON p.platform_id = gp.platform_id
+              JOIN game g ON gp.game_id = g.game_id
             WHERE up.user_id = %s
-            AND gp.release_date > CURDATE()
-            AND NOT EXISTS (
-            SELECT *
-            FROM library_entry le
-            WHERE le.user_id = up.user_id
-            AND le.game_id = g.game_id
-            )
-            ORDER BY gp.release_date, g.title, p.name;
-            """, (user_id,)
-        )
+              AND gp.release_date > CURDATE()
+              AND NOT EXISTS (SELECT * FROM library_entry le
+                              WHERE le.user_id = up.user_id AND le.game_id = g.game_id)
+            ORDER BY gp.release_date, g.title, g.game_id, platform
+            LIMIT %s OFFSET %s""",
+            (user_id, PAGE_SIZE + 1, (page - 1) * PAGE_SIZE))
+    return {"results": rows[:PAGE_SIZE], "has_next": len(rows) > PAGE_SIZE}
 
 # Feature 3: view a user's library, add a game to it, and update an entry.
 @app.get("/api/users/{user_id}/library")
