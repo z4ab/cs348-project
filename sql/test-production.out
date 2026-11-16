@@ -396,17 +396,73 @@
 +------------------------------------+
 | Feature 4: top-rated Shooter games |
 +------------------------------------+
-+--------------------------------------+----------------+--------------+
-| title                                | average_rating | rating_count |
-+--------------------------------------+----------------+--------------+
-| The Last Stand: Aftermath            |          10.00 |            3 |
-| Valfaris                             |          10.00 |            3 |
-| Wolfenstein II: The New Colossus     |          10.00 |            3 |
-| Crimzon Clover: World Ignition       |          10.00 |            2 |
-| Ctesiphon                            |          10.00 |            2 |
-| Metal Eden                           |          10.00 |            2 |
-| Relic Hunters Legend                 |          10.00 |            2 |
-| SAS: Zombie Assault 3                |          10.00 |            2 |
-| Sniper: Ghost Warrior                |          10.00 |            2 |
-| Western Outlaw: Wanted Dead or Alive |          10.00 |            2 |
-+--------------------------------------+----------------+--------------+
++---------+--------------------------------------+----------------+--------------+
+| game_id | title                                | average_rating | rating_count |
++---------+--------------------------------------+----------------+--------------+
+|  133375 | The Last Stand: Aftermath            |          10.00 |            3 |
+|   37145 | Valfaris                             |          10.00 |            3 |
+|   36952 | Wolfenstein II: The New Colossus     |          10.00 |            3 |
+|    8763 | Crimzon Clover: World Ignition       |          10.00 |            2 |
+|  349420 | Ctesiphon                            |          10.00 |            2 |
+|  331214 | Metal Eden                           |          10.00 |            2 |
+|   72497 | Relic Hunters Legend                 |          10.00 |            2 |
+|  188396 | SAS: Zombie Assault 3                |          10.00 |            2 |
+|    1367 | Sniper: Ghost Warrior                |          10.00 |            2 |
+|   71096 | Western Outlaw: Wanted Dead or Alive |          10.00 |            2 |
++---------+--------------------------------------+----------------+--------------+
++--------------------------------------+
+| test                                 |
++--------------------------------------+
+| Feature 5a: read the reviews of Soma |
++--------------------------------------+
++------------------+-------+-------------------------------------+---------------------+
+| username         | score | body                                | created_at          |
++------------------+-------+-------------------------------------+---------------------+
+| luckyranger5002  |     9 | Gave up halfway.                    | 2026-08-03 23:38:10 |
+| chillraven3943   |  NULL | Performance is rough on my machine. | 2026-07-20 03:34:22 |
+| quietgolem9029   |  NULL | Grindy after the first few hours.   | 2026-07-12 11:58:16 |
+| sleepygamer5445  |     8 | NULL                                | 2026-07-04 10:07:12 |
+| cozyrogue7959    |     6 | NULL                                | 2025-11-29 23:43:54 |
+| saltywizard1766  |  NULL | Grindy after the first few hours.   | 2025-09-13 01:00:23 |
+| retropilot5357   |  NULL | Not my genre, still enjoyed it.     | 2025-04-26 03:31:19 |
+| turbofox6537     |     8 | Loved it.                           | 2025-04-20 08:50:46 |
+| rapidpanda6194   |     8 | Gave up halfway.                    | 2025-03-19 18:35:42 |
+| lazyrobot4450    |     7 | NULL                                | 2025-01-21 18:39:49 |
+| mightywizard6618 |     7 | Gave up halfway.                    | 2024-12-10 08:10:02 |
+| saltyranger4542  |  NULL | Performance is rough on my machine. | 2024-06-12 05:59:46 |
+| quietgamer613    |  NULL | The story carried it.               | 2024-02-09 16:49:35 |
++------------------+-------+-------------------------------------+---------------------+
++----------------------------------------------------+
+| test                                               |
++----------------------------------------------------+
+| Feature 5b: pixelpanda writes a new review of Soma |
++----------------------------------------------------+
++-----------------+-------+-------------------------------------+---------------------+
+| username        | score | body                                | created_at          |
++-----------------+-------+-------------------------------------+---------------------+
+| pixelpanda      |     8 | Great atmosphere.                   | 2026-11-01 12:00:00 |
+| luckyranger5002 |     9 | Gave up halfway.                    | 2026-08-03 23:38:10 |
+| chillraven3943  |  NULL | Performance is rough on my machine. | 2026-07-20 03:34:22 |
++-----------------+-------+-------------------------------------+---------------------+
++-----------------------------------------------------+
+| test                                                |
++-----------------------------------------------------+
+| Feature 5c: luckyranger5002 edits their Soma review |
++-----------------------------------------------------+
++-----------------+-------+-------------------------------------+---------------------+
+| username        | score | body                                | created_at          |
++-----------------+-------+-------------------------------------+---------------------+
+| luckyranger5002 |     6 | Finished it on a second try.        | 2026-11-02 12:00:00 |
+| pixelpanda      |     8 | Great atmosphere.                   | 2026-11-01 12:00:00 |
+| chillraven3943  |  NULL | Performance is rough on my machine. | 2026-07-20 03:34:22 |
++-----------------+-------+-------------------------------------+---------------------+
++-----------------------------------------------+
+| test                                          |
++-----------------------------------------------+
+| Feature 5d: after ROLLBACK, Soma review count |
++-----------------------------------------------+
++---------+
+| reviews |
++---------+
+|      13 |
++---------+

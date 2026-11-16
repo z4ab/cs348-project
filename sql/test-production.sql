@@ -1,4 +1,4 @@
--- SQL for the four project features, run over the production database.
+-- SQL for the five project features, run over the production database.
 -- Load sql/schema.sql and sql/load_production.sql before running this file.
 -- Features 1 and 2 are the queries the app sends. They return 100 rows per page and fetch
 -- 101 so the app can tell whether another page follows. These show page 1 (OFFSET 0).
@@ -163,6 +163,7 @@ WHERE u.username = 'pixelpanda';
 SELECT 'Feature 4: top-rated Shooter games' AS test;
 
 SELECT
+    g.game_id,
     g.title,
     ROUND(AVG(r.score), 2) AS average_rating,
     COUNT(r.score) AS rating_count
@@ -179,5 +180,77 @@ GROUP BY g.game_id, g.title
 ORDER BY
     average_rating DESC,
     rating_count DESC,
-    g.title
+    g.title,
+    g.game_id
 LIMIT 10;
+
+
+-- ============================================================
+-- Feature 5: Game reviews
+-- ============================================================
+
+-- A user has at most one review per game. One INSERT ... ON DUPLICATE KEY UPDATE covers
+-- writing and editing. The app passes NOW() as created_at. These use fixed times so the
+-- output is the same on every run. Writes are rolled back, as in Feature 3.
+-- Soma (9727) has 13 reviews. pixelpanda has none of it, luckyranger5002 has the newest.
+
+SELECT 'Feature 5a: read the reviews of Soma' AS test;
+
+SELECT u.username, r.score, r.body, r.created_at
+FROM review r
+JOIN app_user u
+    ON r.user_id = u.user_id
+WHERE r.game_id = 9727
+ORDER BY r.created_at DESC, u.username;
+
+
+SELECT 'Feature 5b: pixelpanda writes a new review of Soma' AS test;
+
+START TRANSACTION;
+
+INSERT INTO review (user_id, game_id, score, body, created_at)
+VALUES (
+    (SELECT user_id FROM app_user WHERE username = 'pixelpanda'),
+    9727,
+    8,
+    'Great atmosphere.',
+    '2026-11-01 12:00:00'
+) AS new
+ON DUPLICATE KEY UPDATE score = new.score, body = new.body, created_at = new.created_at;
+
+SELECT u.username, r.score, r.body, r.created_at
+FROM review r
+JOIN app_user u
+    ON r.user_id = u.user_id
+WHERE r.game_id = 9727
+ORDER BY r.created_at DESC, u.username
+LIMIT 3;
+
+
+SELECT 'Feature 5c: luckyranger5002 edits their Soma review' AS test;
+
+INSERT INTO review (user_id, game_id, score, body, created_at)
+VALUES (
+    (SELECT user_id FROM app_user WHERE username = 'luckyranger5002'),
+    9727,
+    6,
+    'Finished it on a second try.',
+    '2026-11-02 12:00:00'
+) AS new
+ON DUPLICATE KEY UPDATE score = new.score, body = new.body, created_at = new.created_at;
+
+SELECT u.username, r.score, r.body, r.created_at
+FROM review r
+JOIN app_user u
+    ON r.user_id = u.user_id
+WHERE r.game_id = 9727
+ORDER BY r.created_at DESC, u.username
+LIMIT 3;
+
+ROLLBACK;
+
+SELECT 'Feature 5d: after ROLLBACK, Soma review count' AS test;
+
+SELECT COUNT(*) AS reviews
+FROM review
+WHERE game_id = 9727;
