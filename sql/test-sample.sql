@@ -1,21 +1,24 @@
 -- SQL for Features 1-5, run over the sample database.
 -- Reload the sample first (schema.sql, then load_sample.sql), then run this file (see README).
--- Each feature runs the sample query from the report. Features 1 and 3 also run their
--- query template with other parameters. Features 1 and 3 are the queries the app sends.
+-- Each feature runs the sample query from the report. Features 1, 3 and 5 also run their
+-- query template with other parameters. Features 1-4 are the queries the app sends.
+-- Features 1 and 2 return 100 rows per page. They fetch 101 so the app can tell whether
+-- another page follows. The samples show page 1 (OFFSET 0).
 
 -- Feature 1: Game search and filtering
 
 SELECT 'Feature 1a: report sample, title contains "Soma"' AS test;
-SELECT g.title, p.name AS platform, gp.release_date
+SELECT g.game_id, g.title, p.name AS platform, gp.release_date
 FROM game g
   JOIN game_platform gp ON g.game_id = gp.game_id
   JOIN platform p ON gp.platform_id = p.platform_id
 WHERE g.title LIKE '%Soma%'
-ORDER BY g.title, gp.release_date, p.name;
+ORDER BY g.title, g.game_id, gp.release_date, platform
+LIMIT 101 OFFSET 0;
 
 SELECT 'Feature 1b: template, any title, on PlayStation 4 (48), genre Adventure (31)' AS test;
 SET @q = '', @platform = 48, @genre = 31;
-SELECT DISTINCT g.title, p.name AS platform, gp.release_date
+SELECT g.game_id, g.title, p.name AS platform, gp.release_date
 FROM game g
   JOIN game_platform gp ON g.game_id = gp.game_id
   JOIN platform p ON gp.platform_id = p.platform_id
@@ -23,21 +26,25 @@ WHERE g.title LIKE CONCAT('%', @q, '%')
   AND (@platform IS NULL OR p.platform_id = @platform)
   AND (@genre IS NULL OR EXISTS (SELECT * FROM game_genre gg
                                  WHERE gg.game_id = g.game_id AND gg.genre_id = @genre))
-ORDER BY g.title, gp.release_date, platform;
+ORDER BY g.title, g.game_id, gp.release_date, platform
+LIMIT 101 OFFSET 0;
 
 -- Feature 2: Upcoming game releases
 
-SELECT 'Feature 2: report sample, pixelpanda, releases since 2025-01-01' AS test;
-SELECT g.title, p.name AS platform, gp.release_date
+-- The app compares release_date with CURDATE(). No sample release is in the future, so the
+-- sample fixes "today" at 2015-01-01 to return rows.
+SELECT 'Feature 2: report sample, pixelpanda, releases after 2015-01-01' AS test;
+SELECT g.game_id, g.title, p.name AS platform, gp.release_date
 FROM user_platform up
   JOIN platform p ON up.platform_id = p.platform_id
   JOIN game_platform gp ON p.platform_id = gp.platform_id
   JOIN game g ON gp.game_id = g.game_id
 WHERE up.user_id = (SELECT user_id FROM app_user WHERE username = 'pixelpanda')
-  AND gp.release_date >= '2025-01-01'
-  AND NOT EXISTS (SELECT 1 FROM library_entry le
+  AND gp.release_date > '2015-01-01'
+  AND NOT EXISTS (SELECT * FROM library_entry le
                   WHERE le.user_id = up.user_id AND le.game_id = g.game_id)
-ORDER BY gp.release_date, g.title, p.name;
+ORDER BY gp.release_date, g.title, g.game_id, platform
+LIMIT 101 OFFSET 0;
 
 -- Feature 3: Personal game library management
 -- Each change runs in a transaction that is rolled back, so this file leaves the data unchanged.
