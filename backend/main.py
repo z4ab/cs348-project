@@ -105,7 +105,7 @@ def upcoming_games(user_id: int | None = None):
             AND le.game_id = g.game_id
             )
             ORDER BY gp.release_date, g.title, p.name;
-            """, (user_id)
+            """, (user_id))
         )
 
 # Feature 3: view a user's library, add a game to it, and update an entry.
