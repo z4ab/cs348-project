@@ -12,6 +12,7 @@ MySQL + FastAPI (raw SQL via `pymysql`) + React (Vite).
   - `load_production.sql`: loads `data/production/*.csv`
   - `test-sample.sql`, `test-sample.out`: feature queries and output on the sample database
   - `test-production.sql`, `test-production.out`: feature queries and output on the production database
+  - `perf-production.sql`, `perf-production.out`: query plans and timings for all five features, the index before/after comparisons and the too-many-indexes test on the production database (R-c, Task 8)
   - `assumptions-production.sql`, `assumptions-production.out`: tests each schema assumption on the production database. `assumptions-production-before-filter.out` is the output before games without a genre, developer or publisher were dropped.
 - `data/sample/`: small sample dataset, one CSV per table
 - `data/production/`: production dataset, one CSV per table (built by `scripts/build_production.py`)
@@ -155,27 +156,45 @@ The production tests cover:
 2. Finding upcoming releases on a user's platforms that are not already in their library
 3. Adding and updating personal library entries
 4. Ranking games in a genre using average review scores
+5. Reading, writing and editing a game's reviews
 
 Transactions with `ROLLBACK` are used for the update and insert tests so that the production database is not permanently modified.
 
 ## Production query performance
 
-Feature 4 averages review scores per game, so `sql/schema.sql` adds a covering index:
+`sql/perf-production.sql` runs `EXPLAIN ANALYZE` and times all five features on the production database. It then compares Features 2 and 4 with and without their indexes and runs a too-many-indexes test. As in the spec appendix, each time is read back in the same `mysql` session from `performance_schema.events_statements_history`, and the reported figure is the median of five runs after one warm-up. The output is in `sql/perf-production.out`.
+
+`sql/schema.sql` adds two indexes based on these measurements:
 
 ```sql
-CREATE INDEX idx_review_game_score ON review(game_id, score);
+CREATE INDEX idx_gp_platform_date ON game_platform(platform_id, release_date);  -- Feature 2
+CREATE INDEX idx_review_game_score ON review(game_id, score);                   -- Feature 4
 ```
 
-On the production database, MySQL reads the scores from the index alone, without touching the table rows. `EXPLAIN` shows `idx_review_game_score` with `Using index`. Without it, the plan is `ref` on a `game_id` index with `Using where`.
+### Rerun the measurements
 
-Measured with `EXPLAIN ANALYZE` on the Shooter query in `sql/test-production.sql` (13,297 Shooter games), in local Docker with a warm cache. Each figure is the median of 5 runs:
+1. Load the production database as above.
+2. Allow `cs348_app` to read `performance_schema`. Only root can grant this, and Docker generated a random root password on the container's first start:
 
-| Run | Without index | With index |
-|---|---|---|
-| 1 | 87.7 ms | 71.8 ms |
-| 2 | 75.9 ms | 70.8 ms |
+   ```bash
+   ROOT_PW=$(docker compose logs mysql | grep -o 'GENERATED ROOT PASSWORD: .*' | cut -d' ' -f4)
+   docker compose exec mysql mysql -uroot -p"$ROOT_PW" -e "GRANT SELECT ON performance_schema.* TO 'cs348_app'@'%'"
+   ```
 
-Times vary by about 20 ms between runs, so the gain is small. Right after a reload, with a cold cache, the indexed plan was slower.
+   If the log no longer has the password, run `docker compose down -v`, then `docker compose up -d`, and load the production database again.
+3. Run the measurements:
+
+   ```bash
+   docker compose exec -T mysql mysql -t -u cs348_app -pcs348_pass cs348 < sql/perf-production.sql > sql/perf-production.out
+   ```
+
+   On Windows PowerShell:
+
+   ```powershell
+   Get-Content sql/perf-production.sql | docker compose exec -T mysql mysql -t -u cs348_app -pcs348_pass cs348 | Out-File -Encoding utf8 sql/perf-production.out
+   ```
+
+The file changes indexes while it runs and finishes with the `sql/schema.sql` indexes.
 
 ## Run the app
 
