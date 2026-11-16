@@ -13,11 +13,14 @@ MySQL + FastAPI (raw SQL via `pymysql`) + React (Vite).
   - `test-sample.sql`, `test-sample.out`: feature queries and output on the sample database
   - `test-production.sql`, `test-production.out`: feature queries and output on the production database
 - `data/sample/`: small sample dataset, one CSV per table
-- `data/production/`: larger production dataset, one CSV per table
+- `data/production/`: production dataset, one CSV per table (generated, not committed)
 - `data/raw/steamspy.json`: cached SteamSpy responses
+- `data/raw/igdb/`, `data/raw/steam/`: raw production pulls (generated, not committed)
 - `games.json`: saved IGDB pull of 20 games
 - `scripts/build_sample.py`: builds the sample dataset
-- `scripts/build_production.py`: builds the larger production dataset
+- `scripts/fetch_igdb.py`: downloads every main IGDB game with a release date into `data/raw/igdb/`
+- `scripts/fetch_steam_owners.py`: downloads Steam owner ranges into `data/raw/steam/`
+- `scripts/build_production.py`: builds the production dataset from the raw pulls
 - `backend/`: FastAPI application
 - `frontend/`: React application
 
@@ -60,20 +63,36 @@ python scripts/build_sample.py
 
 ## Create and load the production database
 
-The production dataset contains the same real game metadata together with a much larger generated set of users, libraries, platforms, and reviews for production testing.
+Game, platform, genre and company data is real. It comes from two sources:
 
-The current generated dataset contains approximately:
+- [IGDB API](https://api-docs.igdb.com/): every main game (`game_type = 0`) with at least one release date, including future releases.
+- [Steam Games Dataset](https://huggingface.co/datasets/FronkonGames/steam-games-dataset) on Hugging Face (MIT license), a copy of SteamSpy data, pinned to revision `6c21457`. It gives each Steam game's estimated owner range.
 
-- 5,000 users
-- 9,926 user-platform relationships
-- 49,816 library entries
-- 23,377 reviews
+Users, platform ownership, library entries and reviews are synthetic, generated with a fixed seed. Row counts from the current build:
 
-Build the production CSV files:
+| Table | Rows |
+|---|---|
+| game | 268,184 |
+| game_platform | 436,227 |
+| game_genre | 505,080 |
+| game_company | 218,667 |
+| company | 61,645 |
+| platform | 215 |
+| genre | 23 |
+| app_user | 25,000 |
+| user_platform | 77,107 |
+| library_entry | 126,682 |
+| review | 59,102 |
+
+The CSVs are too large to commit, so build them locally. The IGDB fetch needs a Twitch client id and secret ([IGDB getting started](https://api-docs.igdb.com/#getting-started)). Copy `.env.example` to `.env` and fill in `TWITCH_CLIENT_ID` and `TWITCH_CLIENT_SECRET`. Then run:
 
 ```bash
-python scripts/build_production.py
+python scripts/fetch_igdb.py          # about 270,000 games, a few minutes. A rerun resumes.
+python scripts/fetch_steam_owners.py  # streams about 400 MB, keeps about 5 MB
+python scripts/build_production.py    # writes data/production/*.csv
 ```
+
+`build_production.py` prints how many rows were dropped or changed while cleaning, and saves the counts to `data/production/build_counts.json`.
 
 ### Windows PowerShell
 
@@ -112,6 +131,10 @@ Get-Content sql/test-sample.sql | docker compose exec -T mysql mysql -t -u cs348
 
 ### Production database
 
+```bash
+docker compose exec -T mysql mysql -t -u cs348_app -pcs348_pass cs348 < sql/test-production.sql > sql/test-production.out
+```
+
 On Windows PowerShell:
 
 ```powershell
@@ -129,24 +152,13 @@ Transactions with `ROLLBACK` are used for the update and insert tests so that th
 
 ## Production query performance
 
-Production queries were inspected with MySQL `EXPLAIN` and `EXPLAIN ANALYZE`.
-
-Example execution times from local Docker testing were:
-
-- Feature 1 game search: approximately `0.213 ms`
-- Feature 2 upcoming releases: approximately `0.083 ms`
-- Feature 3 library lookup: approximately `0.037 ms`
-- Feature 4 top-rated games before optimization: approximately `7.27 ms`
-
-Feature 4 processes thousands of review rows to calculate averages and counts, so an additional covering index was added:
+Feature 4 averages review scores per game, so `sql/schema.sql` adds a covering index:
 
 ```sql
 CREATE INDEX idx_review_game_score ON review(game_id, score);
 ```
 
-After adding this index, Feature 4 used a covering index lookup and its measured execution time decreased from approximately `7.27 ms` to `3.07 ms` in the local test environment.
-
-The index is included in `sql/schema.sql` so it is recreated whenever the database is rebuilt.
+On the production database, `EXPLAIN` shows the review lookup changing from `ref` on a `game_id` index with `Using where` to `ref` on `idx_review_game_score` with `Using index`. That means scores are read from the index without touching the table rows. The Shooter query in `sql/test-production.sql` (36,968 Shooter games) went from about 113 ms to about 100 ms with `EXPLAIN ANALYZE`, the median of 5 runs in local Docker. Most of the time goes to scanning the genre's `game_genre` rows, not the review lookup.
 
 ## Run the app
 
