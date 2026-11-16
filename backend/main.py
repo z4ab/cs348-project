@@ -168,6 +168,6 @@ def top_ten_genre(genre_id: int):
         WHERE gg.genre_id = %s AND r.score IS NOT NULL
         GROUP BY g.game_id, g.title
         ORDER BY average_rating DESC, rating_count DESC, g.title LIMIT 10;
-        """, (genre_id)
+        """, (genre_id,))
     )
     
