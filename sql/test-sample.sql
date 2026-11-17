@@ -89,7 +89,7 @@ FROM game g
 WHERE ge.name = 'Shooter'
   AND r.score IS NOT NULL
 GROUP BY g.game_id, g.title
-ORDER BY average_rating DESC, rating_count DESC, g.title
+ORDER BY average_rating DESC, rating_count DESC, g.title, g.game_id
 LIMIT 10;
 
 -- Feature 5: Game reviews

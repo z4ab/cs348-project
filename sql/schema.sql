@@ -107,4 +107,11 @@ CREATE TABLE review (
   CHECK (score IS NOT NULL OR body IS NOT NULL)
 );
 
+-- Indexes chosen from the E4 measurements (sql/perf-production.sql, sql/perf-production.out).
+-- Feature 2: a user's upcoming releases look up game_platform by platform_id and filter on
+-- release_date. With release_date in the index, MySQL reads both from the index alone.
+-- It replaces the index MySQL creates for the platform_id foreign key.
+CREATE INDEX idx_gp_platform_date ON game_platform(platform_id, release_date);
+-- Feature 4: the average reads score for each game_id in the genre from the index alone.
+-- It replaces the index MySQL creates for the review game_id foreign key.
 CREATE INDEX idx_review_game_score ON review(game_id, score);
