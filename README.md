@@ -25,7 +25,7 @@ MySQL + FastAPI (raw SQL via `pymysql`) + React (Vite).
 - `scripts/build_production.py`: builds the production dataset from the raw pulls
 - `backend/`: FastAPI application
 - `frontend/`: React application
-- `docs/feature-tests.md`, `docs/screenshots/`: test steps and screenshots for Features 1-4 on the production database
+- `docs/feature-tests.md`, `docs/screenshots/`: test steps and screenshots for Features 1-5 on the production database
 
 ## Create and load the sample database
 
@@ -229,10 +229,11 @@ On macOS/Linux, use `.venv/bin/` instead of `.venv/Scripts/`.
 | 2. Upcoming releases on my platforms, excluding games already in my library | Yes | Yes | Yes |
 | 3. View a library, add a game, and update status/hours | Yes | Yes | Yes |
 | 4. Top-rated games in a genre by average review score | Yes | Yes | Yes |
+| 5. Read a game's reviews, and write or edit a user's review | Yes | Yes | Yes |
 
-All four features are implemented in two files:
+All five features are implemented in two files:
 
-- `backend/main.py`: one endpoint per feature, marked with a `# Feature N` comment. Feature 1 is `GET /api/search`, Feature 2 is `GET /api/upcoming`, Feature 3 is the three `/api/users/{user_id}/library` endpoints, and Feature 4 is `GET /api/genre/{genre_id}/top`.
-- `frontend/src/App.jsx`: one component per feature, `Search`, `Upcoming`, `Library` and `Rankings`.
+- `backend/main.py`: one endpoint per feature, marked with a `# Feature N` comment. Feature 1 is `GET /api/search`, Feature 2 is `GET /api/upcoming`, Feature 3 is the three `/api/users/{user_id}/library` endpoints, Feature 4 is `GET /api/genre/{genre_id}/top`, and Feature 5 is `GET /api/games/{game_id}/reviews` and `PUT /api/users/{user_id}/reviews/{game_id}`.
+- `frontend/src/App.jsx`: one component per feature, `Search`, `Upcoming`, `Library`, `Rankings` and `Reviews`.
 
 Test steps and screenshots for each feature on the production database are in `docs/feature-tests.md`.

@@ -1,6 +1,6 @@
 # Feature tests on the production database
 
-Features 1-4 were run in the app against the production database (`sql/load_production.sql`, 117,660 games, 25,000 users) on 2026-11-16. Screenshots are in `docs/screenshots/`. Feature 2 compares release dates with `CURDATE()`, so its rows change with the date the app is run.
+Features 1-4 were run in the app against the production database (`sql/load_production.sql`, 117,660 games, 25,000 users) on 2026-11-16, and Feature 5 on 2026-11-23. Screenshots are in `docs/screenshots/`. Feature 2 compares release dates with `CURDATE()`, so its rows change with the date the app is run.
 
 To repeat these tests, load the production database, start the backend and frontend (see the README), and open `http://localhost:5173`.
 
@@ -68,6 +68,41 @@ Steps:
 Expected: 10 games, ranked by average rating, then number of ratings, then title. All 10 average 10.00. The first three ("The Last Stand: Aftermath", "Valfaris", "Wolfenstein II: The New Colossus") have 3 ratings each, and the other seven have 2.
 
 ![Feature 4](screenshots/feature4-top-rated.png)
+
+## Feature 5: Game reviews
+
+Before the test, luckyranger5002's (user 5735) review of Soma was `(5735, 9727, 9, 'Gave up halfway.', '2026-08-03 23:38:10')`. pixelpanda (user 1) had no review of it.
+
+Steps:
+
+1. In the Reviews section, type `Soma` in the game box and choose "Soma (2015)".
+2. Type `pixelpanda` in the user box and choose `pixelpanda`. Leave the score and text empty and press Save.
+3. Enter `8` as the score and `Great atmosphere.` as the text, then press Save.
+4. Type `luckyranger5002` in the user box and choose `luckyranger5002`. Change the score to `6` and the text to `Finished it on a second try.`, then press "Update review".
+
+Expected:
+
+- Step 1: Soma's 13 reviews, newest first, from luckyranger5002 (9, "Gave up halfway.", 2026-08-03) to quietgamer613 (no score, "The story carried it.", 2024-02-09). A review with no score shows `-` in the Score column.
+- Step 2: the form is empty and its button says Save, because pixelpanda has no review of Soma. Saving shows "A review needs a score, text, or both" and nothing is added.
+- Step 3: pixelpanda's review appears at the top with today's date, the list has 14 reviews, and the button changes to "Update review".
+- Step 4: the form starts with luckyranger5002's saved review (9, "Gave up halfway."). After saving, their row shows 6 and the new text with today's date and moves to the top. The list still has 14 reviews, so the edit replaced the review instead of adding a second one.
+- Choosing a game with no reviews, such as "Zzzz-Zzzz-Zzzz (2017)", shows "No reviews yet".
+
+After the test, pixelpanda's review was removed and luckyranger5002's was restored, so the production data matches `data/production/`:
+
+```sql
+DELETE FROM review WHERE user_id = 1 AND game_id = 9727;
+UPDATE review SET score = 9, body = 'Gave up halfway.', created_at = '2026-08-03 23:38:10'
+WHERE user_id = 5735 AND game_id = 9727;
+```
+
+![Feature 5, Soma's reviews](screenshots/feature5-reviews-list.png)
+
+![Feature 5, saving an empty review](screenshots/feature5-reviews-empty.png)
+
+![Feature 5, pixelpanda's new review](screenshots/feature5-reviews-new.png)
+
+![Feature 5, luckyranger5002's edited review](screenshots/feature5-reviews-edit.png)
 
 ## Problems found on production data and their fixes
 

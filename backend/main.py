@@ -174,4 +174,52 @@ def top_ten_genre(genre_id: int):
         ORDER BY average_rating DESC, rating_count DESC, g.title, g.game_id LIMIT 10;
         """, (genre_id,)
     )
-    
+
+
+# Feature 5: read a game's reviews, and write or edit a user's review of it.
+# Newest first. user_id lets the frontend find and prefill a user's existing review.
+@app.get("/api/games/{game_id}/reviews")
+def get_reviews(game_id: int):
+    return fetch_all("""
+        SELECT r.user_id, u.username, r.score, r.body, r.created_at
+        FROM review r
+        JOIN app_user u ON r.user_id = u.user_id
+        WHERE r.game_id = %s
+        ORDER BY r.created_at DESC, u.username""", (game_id,))
+
+
+class ReviewIn(BaseModel):
+    score: int | None = None
+    body: str | None = None
+
+
+REVIEW_BODY_MAX = 2000  # review.body is VARCHAR(2000)
+
+
+# Writes a new review, or replaces the user's existing one, since a user has at most one
+# review per game. Saving sets created_at to now. The checks below match the review
+# table's limits, so bad input gets a 400 with a message, not a database error.
+@app.put("/api/users/{user_id}/reviews/{game_id}")
+def save_review(user_id: int, game_id: int, r: ReviewIn):
+    body = r.body.strip() if r.body else None
+    if not body:
+        body = None
+    if r.score is not None and not 1 <= r.score <= 10:
+        raise HTTPException(400, "Score must be between 1 and 10")
+    if body is not None and len(body) > REVIEW_BODY_MAX:
+        raise HTTPException(400, f"Review text must be at most {REVIEW_BODY_MAX} characters")
+    if r.score is None and body is None:
+        raise HTTPException(400, "A review needs a score, text, or both")
+    try:
+        with connect() as conn, conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO review (user_id, game_id, score, body, created_at)
+                VALUES (%s, %s, %s, %s, NOW()) AS new
+                ON DUPLICATE KEY UPDATE score = new.score, body = new.body,
+                                        created_at = new.created_at""",
+                (user_id, game_id, r.score, body))
+    except (pymysql.IntegrityError, pymysql.DataError) as err:
+        # 1452: no such user_id or game_id. 1264: an id too large for INT, so also unknown.
+        if err.args[0] in (1452, 1264):
+            raise HTTPException(404, "Unknown user or game")
+        raise
