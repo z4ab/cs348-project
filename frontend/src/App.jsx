@@ -297,6 +297,80 @@ function Rankings({ genres }) {
   )
 }
 
+// The write/edit form for one user's review of a game. It starts from their existing
+// review, if any. An empty score box sends no score.
+function ReviewForm({ review, onSave }) {
+  const [score, setScore] = useState(review?.score == null ? '' : String(review.score))
+  const [body, setBody] = useState(review?.body ?? '')
+
+  function save(e) {
+    e.preventDefault()
+    onSave(score === '' ? null : Number(score), body)
+  }
+
+  return (
+    <form onSubmit={save}>
+      <input type="number" min="1" max="10" step="1" placeholder="score"
+        value={score} onChange={(e) => setScore(e.target.value)} />
+      <textarea maxLength={2000} rows={3} cols={60} placeholder="review (optional)"
+        value={body} onChange={(e) => setBody(e.target.value)} />
+      <button>{review ? 'Update review' : 'Save'}</button>
+    </form>
+  )
+}
+
+// Feature 5: read a game's reviews, newest first, and write or edit a user's review of it.
+function Reviews() {
+  const [game, setGame] = useState(null)
+  const gameId = game?.game_id
+  const [user, setUser] = useState(null)
+  const [reviews, setReviews] = useState([])
+  const [error, setError] = useState('')
+
+  const load = (id) => getJson(`/api/games/${id}/reviews`).then(setReviews)
+  useEffect(() => {
+    setReviews([])
+    setError('')
+    if (!gameId) return
+    let stale = false
+    getJson(`/api/games/${gameId}/reviews`).then((rows) => { if (!stale) setReviews(rows) })
+    return () => { stale = true }
+  }, [gameId])
+
+  const own = user && reviews.find((r) => r.user_id === user.user_id)
+
+  async function save(score, body) {
+    const err = await send('PUT', `/api/users/${user.user_id}/reviews/${gameId}`, { score, body })
+    setError(err)
+    if (!err) load(gameId)
+  }
+
+  return (
+    <section>
+      <h2>Reviews</h2>
+      <GamePicker game={game} onChoose={setGame} />
+      {gameId && (
+        <>
+          {reviews.length === 0
+            ? <p>No reviews yet</p>
+            : (
+              <table>
+                <thead><tr><th>User</th><th>Score</th><th>Review</th><th>Date</th></tr></thead>
+                <tbody>{reviews.map((r) => (
+                  <tr key={r.user_id}><td>{r.username}</td><td>{r.score ?? '-'}</td><td>{r.body ?? ''}</td><td>{r.created_at}</td></tr>
+                ))}</tbody>
+              </table>
+            )}
+          <UserPicker user={user} onChoose={(u) => { setUser(u); setError('') }} placeholder="write as a user" />
+          {/* The key resets the form to the saved review after each save or user change. */}
+          {user && <ReviewForm key={`${user.user_id}|${own?.created_at}|${own?.score}|${own?.body}`} review={own} onSave={save} />}
+          <p>{error}</p>
+        </>
+      )}
+    </section>
+  )
+}
+
 export default function App() {
   const [platforms, setPlatforms] = useState([])
   const [genres, setGenres] = useState([])
@@ -312,6 +386,7 @@ export default function App() {
       <Upcoming />
       <Library />
       <Rankings genres={genres} />
+      <Reviews />
     </>
   )
 }
