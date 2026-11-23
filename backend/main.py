@@ -196,10 +196,9 @@ class ReviewIn(BaseModel):
 REVIEW_BODY_MAX = 2000  # review.body is VARCHAR(2000)
 
 
-# A user has at most one review per game, so one INSERT ... ON DUPLICATE KEY UPDATE
-# covers writing and editing. An edit replaces the score and text and moves created_at
-# to now. The checks mirror the review table's CHECK constraints, so a bad review gets
-# a 400 with a message instead of a database error.
+# Writes a new review, or replaces the user's existing one, since a user has at most one
+# review per game. Saving sets created_at to now. The checks below match the review
+# table's limits, so bad input gets a 400 with a message, not a database error.
 @app.put("/api/users/{user_id}/reviews/{game_id}")
 def save_review(user_id: int, game_id: int, r: ReviewIn):
     body = r.body.strip() if r.body else None
